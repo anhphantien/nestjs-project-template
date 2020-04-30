@@ -41,7 +41,16 @@ export class AuthService {
     }
     try {
       await this.otpService.send(user, Number(config.OTP_4_DIGIT));
+      return {
+        otpTimeToLive: Number(config.OTP_TIME_TO_LIVE),
+        otpTimeToResend: Number(config.OTP_TIME_TO_RESEND),
+        recipient: user.email || user.phone,
+        message: 'OTP has been sent!',
+      };
     } catch (error) {
+      if (error.response.message === ERROR_CODE.TEMPLATE_NOT_FOUND) {
+        throw new NotFoundException(ERROR_CODE.TEMPLATE_NOT_FOUND);
+      }
       if (error.message.includes('No recipients defined')) {
         throw new BadRequestException(ERROR_CODE.INVALID_EMAIL_ADDRESS);
       }
@@ -49,12 +58,6 @@ export class AuthService {
         throw new BadRequestException(ERROR_CODE.INVALID_PHONE_NUMBER);
       }
     }
-    return {
-      otpTimeToLive: Number(config.OTP_TIME_TO_LIVE),
-      otpTimeToResend: Number(config.OTP_TIME_TO_RESEND),
-      recipient: user.email || user.phone,
-      message: 'OTP has been sent!',
-    };
   }
 
   async otpVerification(usernameOrEmail: string, otp: string) {
@@ -102,7 +105,15 @@ export class AuthService {
     const temporaryPassword = passwordGenerator.generate({ length: 10, numbers: true });
     try {
       await this.notificationService.temporaryPasswordNotification({ email: user.email, phone: user.phone }, temporaryPassword);
+      await this.userRepository.update({ id: user.id }, { temporaryPassword: bcrypt.hashSync(temporaryPassword, 10) });
+      return {
+        recipient: emailOrPhone,
+        message: 'Temporary password has been sent!',
+      };
     } catch (error) {
+      if (error.response.message === ERROR_CODE.TEMPLATE_NOT_FOUND) {
+        throw new NotFoundException(ERROR_CODE.TEMPLATE_NOT_FOUND);
+      }
       if (error.message.includes('No recipients defined')) {
         throw new BadRequestException(ERROR_CODE.INVALID_EMAIL_ADDRESS);
       }
@@ -110,11 +121,6 @@ export class AuthService {
         throw new BadRequestException(ERROR_CODE.INVALID_PHONE_NUMBER);
       }
     }
-    await this.userRepository.update({ id: user.id }, { temporaryPassword: bcrypt.hashSync(temporaryPassword, 10) });
-    return {
-      recipient: emailOrPhone,
-      message: 'Temporary password has been sent!',
-    };
   }
 
   async loginWithTemporaryPassword(usernameOrEmail: string, temporaryPassword: string) {

@@ -1,11 +1,10 @@
 import { Entity, Index, BeforeInsert, BeforeUpdate } from 'typeorm';
 import {
-  ColumnUnsignedPrimaryKey, Column32Char,
-  Column255Char, ColumnTinyInt,
-  Column64Char, ColumnTime,
+  ColumnUnsignedPrimaryKey, Column32Char, Column255Char,
+  ColumnTinyInt, Column64Char, ColumnTime, Column8Char,
 } from './customColumns';
 
-@Entity('users')
+@Entity('user')
 export class User {
   @ColumnUnsignedPrimaryKey()
   id: number;
@@ -30,6 +29,9 @@ export class User {
   @Column32Char()
   @Index('phone', { unique: true })
   phone: string;
+
+  @Column8Char()
+  languageCode: string;
 
   @Column255Char()
   temporaryPassword: string;

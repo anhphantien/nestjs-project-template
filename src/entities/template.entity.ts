@@ -1,14 +1,16 @@
 import { Entity, Index } from 'typeorm';
 import {
-  ColumnUnsignedPrimaryKey, Column64Char,
-  Column255Char, ColumnText,
-  Column512Char, ColumnTime,
+  ColumnUnsignedPrimaryKey, Column8Char, Column64Char,
+  Column255Char, ColumnText, Column512Char, ColumnTime,
 } from './customColumns';
 
-@Entity('templates')
+@Entity('template')
 export class Template {
   @ColumnUnsignedPrimaryKey()
   id: number;
+
+  @Column8Char()
+  languageCode: string;
 
   @Column64Char()
   @Index('templateCode', { unique: true })
