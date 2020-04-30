@@ -57,7 +57,7 @@ export class AuthService {
     };
   }
 
-  async loginOtpVerification(usernameOrEmail: string, otp: string) {
+  async otpVerification(usernameOrEmail: string, otp: string) {
     const user = await this.userRepository.findOne({
       where: [{ username: usernameOrEmail }, { email: usernameOrEmail }],
     });
@@ -66,11 +66,17 @@ export class AuthService {
     if (!validOtp) {
       throw new BadRequestException(ERROR_CODE.INVALID_OTP);
     }
-    return this.tokenService.createToken({
+    let payload: any = {
       id: user.id,
       username: user.username,
       role: user.role,
-    });
+    };
+    if (user.email) {
+      payload.email = user.email;
+    } else {
+      payload.phone = user.phone;
+    }
+    return this.tokenService.createToken(payload);
   }
 
   async refreshToken(oldRefreshToken: string) {
@@ -137,9 +143,6 @@ export class AuthService {
     }
     if (user.status === USER.STATUS.INACTIVE) {
       throw new UnauthorizedException(ERROR_CODE.INACTIVE_USER);
-    }
-    if (user.terminationDate && new Date(user.terminationDate).getTime() < new Date().getTime()) {
-      throw new UnauthorizedException(ERROR_CODE.TERMINATED_USER);
     }
   }
 }

@@ -1,7 +1,7 @@
 import { IsString, IsNotEmpty } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
-export class LoginDto {
+export class LoginBody {
   @IsString()
   @IsNotEmpty()
   @ApiProperty({ example: 'superadmin' })
@@ -13,7 +13,7 @@ export class LoginDto {
   password: string;
 }
 
-export class LoginOtpVerificationDto {
+export class LoginOtpVerificationBody {
   @IsString()
   @IsNotEmpty()
   @ApiProperty({ example: 'superadmin' })
@@ -25,21 +25,21 @@ export class LoginOtpVerificationDto {
   otp: string;
 }
 
-export class RefreshTokenDto {
+export class RefreshTokenBody {
   @IsString()
   @IsNotEmpty()
   @ApiProperty({ example: '' })
   refreshToken: string;
 }
 
-export class ForgotPasswordDto {
+export class ForgotPasswordBody {
   @IsString()
   @IsNotEmpty()
   @ApiProperty({ example: '' })
   emailOrPhone: string;
 }
 
-export class LoginWithTemporaryPasswordDto {
+export class LoginWithTemporaryPasswordBody {
   @IsString()
   @IsNotEmpty()
   @ApiProperty({ example: '' })
@@ -51,7 +51,7 @@ export class LoginWithTemporaryPasswordDto {
   temporaryPassword: string;
 }
 
-export class ResetPasswordDto {
+export class ResetPasswordBody {
   @IsString()
   @IsNotEmpty()
   @ApiProperty({ example: '' })

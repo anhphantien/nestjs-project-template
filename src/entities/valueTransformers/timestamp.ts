@@ -1,9 +1,12 @@
 import { ValueTransformer } from 'typeorm';
 
-export const DateTimestamp: ValueTransformer = {
+export const Timestamp: ValueTransformer = {
   to: (value: Date) => {
-    if (value) {
+    if (value instanceof Date) {
       return value.getTime();
+    }
+    if (typeof value === 'number') {
+      return value;
     }
   },
   from: (value: string) => {

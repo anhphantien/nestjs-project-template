@@ -2,7 +2,7 @@ import { Entity, Index, BeforeInsert, BeforeUpdate } from 'typeorm';
 import {
   ColumnUnsignedPrimaryKey, Column32Char,
   Column255Char, ColumnTinyInt,
-  Column64Char, ColumnDate, ColumnTime,
+  Column64Char, ColumnTime,
 } from './customColumns';
 
 @Entity('users')
@@ -34,12 +34,6 @@ export class User {
   @Column255Char()
   temporaryPassword: string;
 
-  @ColumnDate()
-  joinDate: string;
-
-  @ColumnDate()
-  terminationDate: string;
-
   @ColumnTime()
   createdTime: Date;
 
@@ -50,12 +44,12 @@ export class User {
 
   // Events
   @BeforeInsert()
-  updateCreatedTime() {
+  setCreatedTime() {
     this.createdTime = new Date();
   }
 
   @BeforeUpdate()
-  updateUpdatedTime() {
+  setUpdatedTime() {
     this.updatedTime = new Date();
   }
 }

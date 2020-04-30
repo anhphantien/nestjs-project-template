@@ -8,7 +8,7 @@ import { TEMPLATE, ERROR_CODE } from '../../../constants';
 export class NotificationService {
   constructor(
     private readonly templateRepository: TemplateRepository,
-    private readonly nodemailerService: NodeMailerService,
+    private readonly nodeMailerService: NodeMailerService,
     private readonly twilioService: TwilioService,
   ) { }
 
@@ -18,7 +18,7 @@ export class NotificationService {
       throw new NotFoundException(ERROR_CODE.TEMPLATE_NOT_FOUND);
     }
     if (email) {
-      await this.nodemailerService.send(email,
+      await this.nodeMailerService.send(email,
         {
           subject: template.subject,
           html: template.content.replace(TEMPLATE.KEYWORD.TWO_FACTOR_AUTHENTICATION.OTP, otp),
@@ -35,7 +35,7 @@ export class NotificationService {
       throw new NotFoundException(ERROR_CODE.TEMPLATE_NOT_FOUND);
     }
     if (email) {
-      await this.nodemailerService.send(email,
+      await this.nodeMailerService.send(email,
         {
           subject: template.subject,
           html: template.content.replace(TEMPLATE.KEYWORD.FORGOT_PASSWORD.TEMPORARY_PASSWORD, temporaryPassword),

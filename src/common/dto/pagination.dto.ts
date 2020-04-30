@@ -1,11 +1,11 @@
-export class PaginationQuery {
+export class PagingQuery {
   offset: number;
   limit: number;
   keyword: string;
-  sorts: { field: string, order: 'ASC' | 'DESC' };
-  filters: { [name: string]: any };
+  filter: { [field: string]: any };
+  sort: { field: string, order: 'ASC' | 'DESC' };
 }
 
-export class PaginationResponse<T> {
+export class PaginatedData<T> {
   constructor(private items: T[], private total: number = 0) { }
 }

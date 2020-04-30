@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import config from './config';
 import * as entities from './entities';
 import { PassportModule } from '@nestjs/passport';
 import { AuthModule } from './components/auth/auth.module';
@@ -14,14 +15,14 @@ import { JwtStrategy } from './common/strategies/jwt.strategy';
   imports: [
     TypeOrmModule.forRoot({
       type: 'mariadb',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: '1',
-      database: 'hrm',
+      host: config.DATABASE_HOST,
+      port: Number(config.DATABASE_PORT),
+      username: config.DATABASE_USER,
+      password: config.DATABASE_PASS,
+      database: config.DATABASE_NAME,
       entities: Object.values(entities),
-      synchronize: false, // không đồng bộ CSDL mỗi khi khởi động ứng dụng
-      keepConnectionAlive: true, // không tạo kết nối mới mỗi khi khởi động lại ứng dụng
+      synchronize: JSON.parse(config.DATABASE_SYNC), // không đồng bộ CSDL mỗi khi khởi động ứng dụng
+      keepConnectionAlive: JSON.parse(config.DATABASE_KCA), // không tạo kết nối mới mỗi khi khởi động lại ứng dụng
     }),
     PassportModule, // exports AuthGuard
 

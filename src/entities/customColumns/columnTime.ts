@@ -1,9 +1,9 @@
 import { Column } from 'typeorm';
-import { DateTimestamp } from '../valueTransformers/dateTimestamp';
+import { Timestamp } from '../valueTransformers/timestamp';
 
 export const ColumnTime = () => Column({
   type: 'bigint',
   unsigned: true,
   nullable: true,
-  transformer: DateTimestamp,
+  transformer: Timestamp,
 });

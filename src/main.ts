@@ -6,13 +6,11 @@ import config from './config';
 declare const module: any;
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { cors: true });
 
   const options = new DocumentBuilder()
     .addBearerAuth() // tạo ô nhập bearer token
-    .setTitle('Human Resource Management')
-    .setDescription('The API description')
-    .setVersion('1.0')
+    .setTitle('Standard Project Template')
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document);

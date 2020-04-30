@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import * as redis from 'redis';
 import * as bluebird from 'bluebird';
+import * as redis from 'redis';
 import config from '../../config';
 
 bluebird.promisifyAll(redis.RedisClient.prototype);

@@ -1,7 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy, ExtractJwt } from 'passport-jwt';
 import config from '../../config';
+import { ERROR_CODE } from '../../constants';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -13,10 +14,10 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  async validate(payload: any) {
-    // if (payload.exp * 1000 < new Date().getTime()) {
-    //   throw new UnauthorizedException(ERROR_CODE.EXPIRED_TOKEN);
-    // }
+  async validateUser(payload: any) {
+    if (payload.exp * 1000 < new Date().getTime()) {
+      throw new UnauthorizedException(ERROR_CODE.EXPIRED_TOKEN);
+    }
     return {
       id: payload.id,
       username: payload.username,
