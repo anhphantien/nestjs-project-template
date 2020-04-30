@@ -1,8 +1,7 @@
 {
-  "name": "backend-admin",
-  "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "name": "standard-project-template",
+  "version": "1.0.0",
+  "author": "Anh Phan",
   "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist",
