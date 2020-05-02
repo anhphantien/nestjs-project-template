@@ -1,12 +1,20 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { ValidationPipe } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import config from './config';
 
 declare const module: any;
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { cors: true });
+  const app = await NestFactory.create(AppModule, { cors: true }); // cho phép gọi API từ một địa chỉ URL khác
+
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true, // biến đổi các thuộc tính theo quy định trong DTO
+      whitelist: true, // loại bỏ các thuộc tính nằm ngoài phạm vi DTO
+    }),
+  );
 
   const options = new DocumentBuilder()
     .addBearerAuth() // tạo ô nhập bearer token
