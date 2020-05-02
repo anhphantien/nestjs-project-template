@@ -69,7 +69,7 @@ export class AuthService {
     if (!validOtp) {
       throw new BadRequestException(ERROR_CODE.INVALID_OTP);
     }
-    let payload: any = {
+    const payload: any = {
       id: user.id,
       username: user.username,
       role: user.role,

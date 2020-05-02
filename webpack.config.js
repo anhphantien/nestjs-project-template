@@ -27,7 +27,7 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.WatchIgnorePlugin([/\.js$/, /\.d\.ts$/])
+    new webpack.WatchIgnorePlugin([/\.js$/, /\.d\.ts$/]),
   ],
   output: {
     path: path.join(__dirname, 'dist'),
