@@ -5,7 +5,7 @@
  Source Server Type    : MariaDB
  Source Server Version : 100322
  Source Host           : 127.0.0.1:3306
- Source Schema         : hrm2
+ Source Schema         : test
 
  Target Server Type    : MariaDB
  Target Server Version : 100322
