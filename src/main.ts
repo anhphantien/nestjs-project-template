@@ -17,8 +17,8 @@ async function bootstrap() {
   );
 
   const options = new DocumentBuilder()
-    .addBearerAuth() // tạo ô nhập bearer token
     .setTitle('Standard Project Template')
+    .addBearerAuth() // tạo ô nhập bearer token
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document);

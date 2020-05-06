@@ -3,12 +3,12 @@ import * as _ from 'lodash';
 export const PaginationMiddleware = (config: {
   defaultSize?: number,
   maxSize?: number,
-  filterable?: string[],
-  sortable: string[],
+  filterFields?: string[],
+  sortFields: string[],
   defaultSort: { field: string, order: 'ASC' | 'DESC' },
 }) => (req, res, next) => {
-  const defaultConfig = { defaultSize: 10, maxSize: 100, filterable: [] };
-  const { defaultSize, maxSize, filterable, sortable, defaultSort } = { ...defaultConfig, ...config };
+  const defaultConfig = { defaultSize: 10, maxSize: 100, filterFields: [] };
+  const { defaultSize, maxSize, filterFields, sortFields, defaultSort } = { ...defaultConfig, ...config };
 
   const pagination: any = {};
 
@@ -24,12 +24,12 @@ export const PaginationMiddleware = (config: {
 
   try {
     const filter = JSON.parse(req.query.filter);
-    pagination.filter = _.pick(filter, filterable);
+    pagination.filter = _.pick(filter, filterFields);
   } catch (error) { }
 
   try {
     const sort = JSON.parse(req.query.sort);
-    if (sortable.includes(sort.field) && ['ASC', 'DESC'].includes(sort.order)) {
+    if (sortFields.includes(sort.field) && ['ASC', 'DESC'].includes(sort.order)) {
       pagination.sort = sort;
     } else {
       pagination.sort = defaultSort;
