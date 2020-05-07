@@ -2,7 +2,7 @@ import { Injectable, BadRequestException } from '@nestjs/common';
 import { RedisService } from '../../global_modules/redis/redis.service';
 import { JwtService } from '@nestjs/jwt';
 import { IUser } from '../../common/interfaces';
-import * as uuidv4 from 'uuid/v4';
+import { v4 as uuidv4 } from 'uuid';
 import config from '../../config';
 import { ERROR_CODE } from '../../constants';
 
