@@ -9,16 +9,23 @@ export class AllExceptionsFilter extends BaseExceptionFilter {
 
     try {
       const { response, status } = exception;
-      const messages = [];
-      const properties = [];
-      for (const message of response.message) {
-        properties.push(message.property);
-        for (const constraint of Object.values(message.constraints)) {
-          messages.push(constraint);
+
+      if (Array.isArray(response.message)) {
+        const messages = [];
+        const properties = [];
+
+        for (const message of response.message) {
+          for (const constraint of Object.values(message.constraints)) {
+            messages.push(constraint);
+          }
+          if (message.property) {
+            properties.push(message.property);
+          }
         }
+
+        response.message = messages.join(' & ');
+        response.properties = properties;
       }
-      response.properties = properties;
-      response.message = messages;
 
       res.status(status).json(response);
     } catch (error) {
