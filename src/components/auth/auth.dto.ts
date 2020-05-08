@@ -1,5 +1,5 @@
 import { IsString, IsNotEmpty } from 'class-validator';
-import { TransformIntoString } from 'src/utils/transform';
+import { TransformIntoString } from '../../utils/transform';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class LoginBody {
