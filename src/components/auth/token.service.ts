@@ -20,7 +20,7 @@ export class TokenService {
     }
     const refreshToken = uuidv4();
     await this.redisService.setAsync(
-      `${refreshToken}`,
+      refreshToken,
       accessToken,
       'ex', // lưu trữ với thời gian giảm dần là giây
       // 'px', // lưu trữ với thời gian giảm dần là mili giây
@@ -31,7 +31,7 @@ export class TokenService {
 
   async decodeAccessTokenByRefreshToken(refreshToken: string) {
     const accessToken = await this.redisService.getAsync(
-      `${refreshToken}`,
+      refreshToken,
     );
     if (!accessToken) {
       throw new BadRequestException(ERROR_CODE.INVALID_REFRESH_TOKEN);
