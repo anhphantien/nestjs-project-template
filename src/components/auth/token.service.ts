@@ -40,6 +40,6 @@ export class TokenService {
   }
 
   async deleteRefreshToken(refreshToken: string) {
-    return this.redisService.delAsync(`${refreshToken}`);
+    return this.redisService.delAsync(refreshToken);
   }
 }
