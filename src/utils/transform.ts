@@ -5,3 +5,7 @@ export const TransformIntoString = () => Transform(value => {
     return value = value.trim();
   }
 });
+
+export const TransformIntoNumber = () => Transform(value => Number(value));
+
+export const TransformIntoBoolean = () => Transform(value => JSON.parse(value));
