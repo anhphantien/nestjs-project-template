@@ -1,4 +1,4 @@
-import { Catch, ArgumentsHost, HttpStatus } from '@nestjs/common';
+import { Catch, ArgumentsHost } from '@nestjs/common';
 import { BaseExceptionFilter } from '@nestjs/core';
 
 @Catch()
@@ -15,23 +15,28 @@ export class AllExceptionsFilter extends BaseExceptionFilter {
         const properties = [];
 
         for (const message of response.message) {
-          for (const constraint of Object.values(message.constraints)) {
-            messages.push(constraint);
+          if (Array.isArray(message.constraints)) {
+            for (const constraint of Object.values(message.constraints)) {
+              messages.push(constraint);
+            }
           }
           if (message.property) {
             properties.push(message.property);
           }
         }
 
-        response.message = messages.join(' & ');
-        response.properties = properties;
+        if (messages.length) {
+          response.message = messages;
+        }
+        response.properties = properties.length ? properties : undefined;
       }
 
       res.status(status).json(response);
     } catch (error) {
-      res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
-        statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
-        messages: exception,
+      res.status(exception.status).json({
+        statusCode: exception.response.statusCode,
+        messages: exception.response.message,
+        error: exception.response.error,
       });
     }
   }
