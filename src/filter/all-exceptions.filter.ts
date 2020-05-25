@@ -10,11 +10,12 @@ export class AllExceptionsFilter extends BaseExceptionFilter {
     const { response, status } = exception;
     if (exception.response || exception.status) {
       res.status(status).json(response);
+    } else {
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
+        statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
+        message: exception.message,
+        error: 'Internal Server Error',
+      });
     }
-    res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
-      statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
-      message: exception.message,
-      error: 'Internal Server Error',
-    });
   }
 }
