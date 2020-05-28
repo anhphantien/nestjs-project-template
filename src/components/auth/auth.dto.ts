@@ -1,5 +1,6 @@
 import { IsString, IsNotEmpty } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import { Trim } from '../../utils/customTransformers';
 
 export class LoginBody {
   @IsString()
@@ -21,6 +22,7 @@ export class LoginOtpVerificationBody {
 
   @IsString()
   @IsNotEmpty()
+  @Trim()
   @ApiProperty({ example: '1234' })
   otp: string;
 }
@@ -35,6 +37,7 @@ export class RefreshTokenBody {
 export class ForgotPasswordBody {
   @IsString()
   @IsNotEmpty()
+  @Trim()
   @ApiProperty({ example: '' })
   emailOrPhone: string;
 }

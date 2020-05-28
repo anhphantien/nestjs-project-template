@@ -8,7 +8,7 @@ import { OtpModule } from './global_modules/otp/otp.module';
 import { RedisModule } from './global_modules/redis/redis.module';
 import { RepositoryModule } from './global_modules/repository/repository.module';
 import { TwilioModule } from './global_modules/twilio/twilio.module';
-import { JwtStrategy } from './common/strategy';
+import { JwtStrategy } from './common/strategies';
 
 @Module({
   imports: [
