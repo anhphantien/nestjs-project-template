@@ -8,7 +8,7 @@ export class IsUsername implements ValidatorConstraintInterface {
     }
   }
 
-  defaultMessage(value: any) {
-    return `${value} must be a string conforming to the specified constraints`;
+  defaultMessage({ property }) {
+    return `${property} must be a string conforming to the specified constraints`;
   }
 }
