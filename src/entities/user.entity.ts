@@ -2,7 +2,7 @@ import { Entity, Index, BeforeInsert, BeforeUpdate } from 'typeorm';
 import {
   ColumnUnsignedPrimaryKey, Column32Char, Column255Char,
   ColumnTinyInt, Column64Char, ColumnTime, Column8Char,
-} from './customColumns';
+} from '../utils/customColumns';
 
 @Entity('user')
 export class User {
