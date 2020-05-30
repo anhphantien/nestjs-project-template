@@ -1,11 +1,11 @@
 import * as _ from 'lodash';
 
 export const PaginationMiddleware = (config: {
-  defaultSize?: number,
-  maxSize?: number,
-  filterFields?: string[],
-  sortFields: string[],
-  defaultSort: { field: string, order: 'ASC' | 'DESC' },
+  defaultSize?: number;
+  maxSize?: number;
+  filterFields?: string[];
+  sortFields: string[];
+  defaultSort: { field: string, order: 'ASC' | 'DESC' };
 }) => (req, res, next) => {
   const defaultConfig = { defaultSize: 10, maxSize: 100, filterFields: [] };
   const { defaultSize, maxSize, filterFields, sortFields, defaultSort } = { ...defaultConfig, ...config };
