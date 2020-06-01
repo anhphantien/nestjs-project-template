@@ -12,6 +12,12 @@ export const Trim = () => Transform(value => {
   }
 });
 
+export const Search = () => Transform(value => {
+  if (typeof value === 'string') {
+    return value.trim();
+  }
+});
+
 export const TransformIntoNumber = () => Transform(value => Number(value));
 
 export const TransformIntoBoolean = () => Transform(value => JSON.parse(value));
