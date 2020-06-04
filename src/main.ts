@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { ValidationPipe } from '@nestjs/common';
+import { ValidationPipe, ValidationError, BadRequestException } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import config from './config';
 
@@ -14,7 +14,17 @@ async function bootstrap() {
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true, // biến đổi các thuộc tính theo quy định trong DTO
-      whitelist: true, // loại bỏ các thuộc tính nằm ngoài phạm vi DTO
+      whitelist: true, // loại bỏ các thuộc tính nằm ngoài phạm vi DTO'
+      exceptionFactory: (errors: ValidationError[]) => {
+        const message = [];
+        for (const error of errors) {
+          message.push({
+            property: error.property,
+            constraints: error.constraints,
+          });
+        }
+        return new BadRequestException(message);
+      },
     }),
   );
 
