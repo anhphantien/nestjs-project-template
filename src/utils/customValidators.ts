@@ -1,7 +1,7 @@
 import { ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator';
 
 @ValidatorConstraint()
-export class IsUsername implements ValidatorConstraintInterface {
+export class isUsername implements ValidatorConstraintInterface {
   validate(value: any) {
     if (typeof value === 'string') {
       return Boolean(value.match(/^[a-z0-9_.]{4,32}$/g));

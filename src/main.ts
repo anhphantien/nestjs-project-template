@@ -13,7 +13,7 @@ async function bootstrap() {
 
   app.useGlobalPipes(
     new ValidationPipe({
-      transform: true, // biến đổi các thuộc tính theo quy định trong DTO
+      transform: true, // biến đổi các thuộc tính nằm trong phạm vi DTO
       whitelist: true, // loại bỏ các thuộc tính nằm ngoài phạm vi DTO'
       exceptionFactory: (errors: ValidationError[]) => {
         const message = [];
