@@ -1200,9 +1200,9 @@ acorn@^6.4.1:
   integrity sha512-ZVA9k326Nwrj3Cj9jlh3wGFutC2ZornPNARZwsNYqQYgN0EsV2d53w5RN/co65Ohn4sUAUtb1rSUAOD6XN9idA==
 
 acorn@^7.1.1, acorn@^7.2.0:
-  version "7.2.0"
-  resolved "https://registry.yarnpkg.com/acorn/-/acorn-7.2.0.tgz#17ea7e40d7c8640ff54a694c889c26f31704effe"
-  integrity sha512-apwXVmYVpQ34m/i71vrApRrRKCWQnZZF1+npOD0WV5xZFfwWOmKGQ2RWlfdy9vWITsenisM8M0Qeq8agcFHNiQ==
+  version "7.3.1"
+  resolved "https://registry.yarnpkg.com/acorn/-/acorn-7.3.1.tgz#85010754db53c3fbaf3b9ea3e083aa5c5d147ffd"
+  integrity sha512-tLc0wSnatxAQHVHUapaHdz72pi9KUyHjq5KyHjGg9Y8Ifdc79pTh2XvI6I1/chZbnM7QtNKzh66ooDogPZSleA==
 
 ajv-errors@^1.0.0:
   version "1.0.1"
@@ -2779,10 +2779,10 @@ eslint-module-utils@^2.6.0:
     debug "^2.6.9"
     pkg-dir "^2.0.0"
 
-eslint-plugin-import@^2.21.1:
-  version "2.21.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-import/-/eslint-plugin-import-2.21.1.tgz#3398318e5e4abbd23395c4964ce61538705154c8"
-  integrity sha512-qYOOsgUv63vHof7BqbzuD+Ud34bXHxFJxntuAC1ZappFZXYbRIek3aJ7jc9i2dHDGDyZ/0zlO0cpioES265Lsw==
+eslint-plugin-import@^2.21.2:
+  version "2.21.2"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-import/-/eslint-plugin-import-2.21.2.tgz#8fef77475cc5510801bedc95f84b932f7f334a7c"
+  integrity sha512-FEmxeGI6yaz+SnEB6YgNHlQK1Bs2DKLM+YF+vuTk5H8J9CLbJLtlPvRFgZZ2+sXiKAlN5dpdlrWOjK8ZoZJpQA==
   dependencies:
     array-includes "^3.1.1"
     array.prototype.flat "^1.2.3"
@@ -7103,9 +7103,9 @@ supports-hyperlinks@^2.0.0:
     supports-color "^7.0.0"
 
 swagger-ui-dist@^3.18.1:
-  version "3.26.0"
-  resolved "https://registry.yarnpkg.com/swagger-ui-dist/-/swagger-ui-dist-3.26.0.tgz#6dccd492bf9c97fe508d8438c754991277a6164f"
-  integrity sha512-z58RlRUk//dTg6jwgFBVv0JNyfDpoRNUgEyoA9cRheNvUuklMTKMY3hgDfXSZpmnGgZEG8iA/SAZGE56hvRuug==
+  version "3.26.1"
+  resolved "https://registry.yarnpkg.com/swagger-ui-dist/-/swagger-ui-dist-3.26.1.tgz#4acc5606c7fa2e2c1d29a5d53e99d0c8fe8bbdfa"
+  integrity sha512-QXk1eKHgTSCgQE1Xlo8lcQKB/ouwDiJKBGHI9jHPCMy5TCQtQdUJOr29rTYD5XUDmew7Y9YPM1TI6PLcwJKWmA==
 
 swagger-ui-express@^4.1.4:
   version "4.1.4"
@@ -7424,10 +7424,10 @@ tweetnacl@^0.14.3, tweetnacl@~0.14.0:
   resolved "https://registry.yarnpkg.com/tweetnacl/-/tweetnacl-0.14.5.tgz#5ae68177f192d4456269d108afa93ff8743f4f64"
   integrity sha1-WuaBd/GS1EViadEIr6k/+HQ/T2Q=
 
-twilio@^3.45.0:
-  version "3.45.0"
-  resolved "https://registry.yarnpkg.com/twilio/-/twilio-3.45.0.tgz#182c6a75b73e95419552f564745d97f006cfd6ae"
-  integrity sha512-YIo9jYJQponfK9G9+1oqdcCZqqOQr28U6EJOOtd1OvEjPonO4JhuqcI5QG2mKBpKgQZYlN4wD810sIlQG8JWBQ==
+twilio@^3.46.0:
+  version "3.46.0"
+  resolved "https://registry.yarnpkg.com/twilio/-/twilio-3.46.0.tgz#ad5c7e65b64ac6a2962f7c4400205a39ae9483b6"
+  integrity sha512-A/BLN9Ml0+eQZ/cmeOG2AuTqUcP/berxooVturbDNt6LWr89xko2rUr32o3M/tEmOeWYqDw+VEngDlP3XatvIQ==
   dependencies:
     "@types/express" "^4.17.3"
     axios "^0.19.2"
