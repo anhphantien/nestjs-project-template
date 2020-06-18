@@ -37,21 +37,21 @@ export class User {
   temporaryPassword: string;
 
   @ColumnTime()
-  createdTime: Date;
+  creationTime: Date;
 
   @ColumnTime()
-  updatedTime: Date;
+  updateTime: Date;
 
   // Relationship(s)
 
   // Events
   @BeforeInsert()
-  setCreatedTime() {
-    this.createdTime = new Date();
+  setCreationTime() {
+    this.creationTime = new Date();
   }
 
   @BeforeUpdate()
-  setUpdatedTime() {
-    this.updatedTime = new Date();
+  setUpdateTime() {
+    this.updateTime = new Date();
   }
 }
