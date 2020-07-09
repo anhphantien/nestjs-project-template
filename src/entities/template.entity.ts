@@ -1,4 +1,4 @@
-import { Entity, Index } from 'typeorm';
+import { Entity, Index, BeforeInsert, BeforeUpdate } from 'typeorm';
 import {
   ColumnUnsignedPrimaryKey, Column8Char, Column64Char,
   Column255Char, ColumnText, Column512Char, ColumnTime,
@@ -26,8 +26,18 @@ export class Template {
   description: string;
 
   @ColumnTime()
-  createdTime: Date;
+  creationTime: Date;
 
   @ColumnTime()
-  updatedTime: Date;
+  updateTime: Date;
+
+  @BeforeInsert()
+  setCreationTime() {
+    this.creationTime = new Date();
+  }
+
+  @BeforeUpdate()
+  setUpdateTime() {
+    this.updateTime = new Date();
+  }
 }

@@ -28,8 +28,8 @@ CREATE TABLE `template` (
   `subject` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `content` text COLLATE utf8_unicode_ci DEFAULT NULL,
   `description` varchar(512) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `createdTime` bigint(20) unsigned DEFAULT NULL,
-  `updatedTime` bigint(20) unsigned DEFAULT NULL,
+  `creationTime` bigint(20) unsigned DEFAULT NULL,
+  `updateTime` bigint(20) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `templateCode` (`templateCode`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -55,8 +55,8 @@ CREATE TABLE `user` (
   `phone` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL,
   `languageCode` varchar(8) COLLATE utf8_unicode_ci DEFAULT NULL,
   `temporaryPassword` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `createdTime` bigint(20) unsigned DEFAULT NULL,
-  `updatedTime` bigint(20) unsigned DEFAULT NULL,
+  `creationTime` bigint(20) unsigned DEFAULT NULL,
+  `updateTime` bigint(20) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`),
