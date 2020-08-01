@@ -15,7 +15,7 @@ export class LoginBody {
   password: string;
 }
 
-export class LoginOtpVerificationBody {
+export class OtpVerificationBody {
   @IsString()
   @IsNotEmpty()
   @Trim()

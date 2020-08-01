@@ -4,11 +4,11 @@ import { TokenService } from './token.service';
 import { OtpService } from '../../global_modules/otp/otp.service';
 import { NotificationService } from '../../common/modules/notification/notification.service';
 import { User } from '../../entities';
-import * as bcrypt from 'bcrypt';
+import bcrypt = require('bcrypt');
 import { ERROR_CODE } from '../../constants/error';
 import { USER } from '../../constants';
 import config from '../../config';
-import * as passwordGenerator from 'generate-password';
+import passwordGenerator = require('generate-password');
 
 @Injectable()
 export class AuthService {
@@ -120,15 +120,6 @@ export class AuthService {
       if (error.message.includes('not a valid phone number')) {
         throw new BadRequestException(ERROR_CODE.INVALID_PHONE_NUMBER);
       }
-    }
-  }
-
-  async loginWithTemporaryPassword(usernameOrEmail: string, temporaryPassword: string) {
-    const user = await this.userRepository.findOne({ where: [{ username: usernameOrEmail }, { email: usernameOrEmail }] });
-    this.checkUser(user);
-    const validPassword = bcrypt.compareSync(temporaryPassword, user.temporaryPassword);
-    if (!validPassword) {
-      throw new UnauthorizedException(ERROR_CODE.INVALID_PASSWORD);
     }
   }
 

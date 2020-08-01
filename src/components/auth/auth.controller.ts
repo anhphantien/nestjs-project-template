@@ -1,11 +1,7 @@
 import { ApiTags } from '@nestjs/swagger';
 import { Controller, Post, Body } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import {
-  LoginBody, LoginOtpVerificationBody,
-  RefreshTokenBody, ForgotPasswordBody,
-  LoginWithTemporaryPasswordBody, ResetPasswordBody,
-} from './auth.dto';
+import { LoginBody, OtpVerificationBody, RefreshTokenBody, ForgotPasswordBody, ResetPasswordBody } from './auth.dto';
 
 @ApiTags('auth')
 @Controller('api/auth')
@@ -19,7 +15,7 @@ export class AuthController {
   }
 
   @Post('otpVerification')
-  async otpVerification(@Body() body: LoginOtpVerificationBody) {
+  async otpVerification(@Body() body: OtpVerificationBody) {
     const { usernameOrEmail, otp } = body;
     return this.authService.otpVerification(usernameOrEmail, otp);
   }
@@ -34,12 +30,6 @@ export class AuthController {
   async forgotPassword(@Body() body: ForgotPasswordBody) {
     const { emailOrPhone } = body;
     return this.authService.forgotPassword(emailOrPhone);
-  }
-
-  @Post('loginWithTemporaryPassword')
-  async loginWithTemporaryPassword(@Body() body: LoginWithTemporaryPasswordBody) {
-    const { usernameOrEmail, temporaryPassword } = body;
-    await this.authService.loginWithTemporaryPassword(usernameOrEmail, temporaryPassword);
   }
 
   @Post('resetPassword')

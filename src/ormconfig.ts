@@ -1,5 +1,5 @@
 import config from './config';
-import * as entities from './entities';
+import entities = require('./entities');
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 
 const ormconfig: TypeOrmModuleOptions = {

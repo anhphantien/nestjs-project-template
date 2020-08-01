@@ -1,10 +1,7 @@
-import { Entity, Index, BeforeInsert, BeforeUpdate } from 'typeorm';
-import {
-  ColumnUnsignedPrimaryKey, Column32Char, Column255Char,
-  ColumnTinyInt, Column64Char, ColumnTime, Column8Char,
-} from '../utils/customColumns';
+import { Entity, Index } from 'typeorm';
+import { ColumnUnsignedPrimaryKey, Column32Char, Column255Char, ColumnTinyInt, Column64Char, CreatedAt, UpdatedAt } from '../utils';
 
-@Entity('user')
+@Entity('User')
 export class User {
   @ColumnUnsignedPrimaryKey()
   id: number;
@@ -30,28 +27,12 @@ export class User {
   @Index('phone', { unique: true })
   phone: string;
 
-  @Column8Char()
-  languageCode: string;
-
   @Column255Char()
   temporaryPassword: string;
 
-  @ColumnTime()
-  creationTime: Date;
+  @CreatedAt()
+  createdAt: Date;
 
-  @ColumnTime()
-  updateTime: Date;
-
-  // Relationship(s)
-
-  // Events
-  @BeforeInsert()
-  setCreationTime() {
-    this.creationTime = new Date();
-  }
-
-  @BeforeUpdate()
-  setUpdateTime() {
-    this.updateTime = new Date();
-  }
+  @UpdatedAt()
+  updatedAt: Date;
 }

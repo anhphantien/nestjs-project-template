@@ -6,5 +6,4 @@ import { NodeMailerService } from './nodemailer.service';
   providers: [NodeMailerService],
   exports: [NodeMailerService],
 })
-
 export class NodeMailerModule { }

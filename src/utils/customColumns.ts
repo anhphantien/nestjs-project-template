@@ -1,4 +1,4 @@
-import { Column, PrimaryGeneratedColumn, ValueTransformer } from 'typeorm';
+import { Column, PrimaryGeneratedColumn, ValueTransformer, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
 export const Column4Char = () => Column({
   type: 'varchar',
@@ -42,12 +42,6 @@ export const Column255Char = () => Column({
   nullable: true,
 });
 
-export const Column512Char = () => Column({
-  type: 'varchar',
-  length: 512,
-  nullable: true,
-});
-
 export const ColumnBlob = () => Column({
   type: 'mediumblob',
   nullable: true,
@@ -63,16 +57,27 @@ export const ColumnDate = () => Column({
   nullable: true,
 });
 
-export const ColumnText = () => Column({
-  type: 'text',
+export const ColumnDateTime = () => Column({
+  type: 'datetime',
+  precision: 0,
   nullable: true,
 });
 
-export const ColumnTime = () => Column({
-  type: 'bigint',
-  unsigned: true,
+export const ColumnDecimal = () => Column({
+  type: 'double',
   nullable: true,
-  transformer: Timestamp,
+  scale: 2,
+});
+
+export const ColumnJSON = () => Column({
+  type: 'text',
+  nullable: true,
+  transformer: StringObject,
+});
+
+export const ColumnText = () => Column({
+  type: 'text',
+  nullable: true,
 });
 
 export const ColumnTinyInt = () => Column({
@@ -89,18 +94,30 @@ export const ColumnUnsignedPrimaryKey = () => PrimaryGeneratedColumn({
   unsigned: true,
 });
 
-export const Timestamp: ValueTransformer = {
-  to: (value: Date) => {
+export const CreatedAt = () => CreateDateColumn({
+  type: 'datetime',
+  nullable: true,
+  precision: 0,
+});
+
+export const UpdatedAt = () => UpdateDateColumn({
+  type: 'datetime',
+  nullable: true,
+  precision: 0,
+});
+
+export const StringObject: ValueTransformer = {
+  to: (value: string) => {
     if (value) {
-      if (typeof value === 'number') {
-        return value;
+      if (typeof value === 'string') {
+        return JSON.stringify(JSON.parse(value));
       }
-      return value.getTime();
+      return JSON.stringify(value);
     }
   },
   from: (value: string) => {
     if (value) {
-      return new Date(Number(value));
+      return JSON.parse(value);
     }
   },
 };

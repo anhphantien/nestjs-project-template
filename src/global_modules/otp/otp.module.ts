@@ -8,5 +8,4 @@ import { OtpService } from './otp.service';
   providers: [OtpService],
   exports: [OtpService],
 })
-
 export class OtpModule { }

@@ -6,6 +6,5 @@ export const USER = {
   ROLE: {
     SUPER_ADMIN: 0,
     ADMIN: 1,
-    HR: 2,
   },
 };

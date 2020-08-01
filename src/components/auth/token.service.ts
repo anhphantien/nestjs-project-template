@@ -13,11 +13,8 @@ export class TokenService {
     private readonly jwtService: JwtService,
   ) { }
 
-  async createToken(payload: IUser, requireRefreshToken = true) {
+  async createToken(payload: IUser) {
     const accessToken = this.jwtService.sign(payload);
-    if (!requireRefreshToken) {
-      return { accessToken, refreshToken: null };
-    }
     const refreshToken = uuidv4();
     await this.redisService.setAsync(
       refreshToken,

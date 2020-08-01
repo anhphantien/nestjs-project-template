@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import * as ormconfig from './ormconfig';
+import ormconfig = require( './ormconfig');
 import { PassportModule } from '@nestjs/passport';
 import { AuthModule } from './components/auth/auth.module';
 import { NodeMailerModule } from './global_modules/nodemailer/nodemailer.module';

@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import * as twilio from 'twilio';
+import twilio = require('twilio');
 import config from '../../config';
 
 @Injectable()
 export class TwilioService {
-  private client;
+  private client: twilio.Twilio;
   private phone: string;
   constructor() {
     this.client = twilio(config.TWILIO_ACCOUNT_SID, config.TWILIO_AUTH_TOKEN);

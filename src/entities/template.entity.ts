@@ -1,10 +1,7 @@
-import { Entity, Index, BeforeInsert, BeforeUpdate } from 'typeorm';
-import {
-  ColumnUnsignedPrimaryKey, Column8Char, Column64Char,
-  Column255Char, ColumnText, Column512Char, ColumnTime,
-} from '../utils';
+import { Entity, Index } from 'typeorm';
+import { ColumnUnsignedPrimaryKey, Column8Char, Column64Char, Column255Char, ColumnText, CreatedAt, UpdatedAt } from '../utils';
 
-@Entity('template')
+@Entity('Template')
 export class Template {
   @ColumnUnsignedPrimaryKey()
   id: number;
@@ -22,22 +19,9 @@ export class Template {
   @ColumnText()
   content: string;
 
-  @Column512Char()
-  description: string;
+  @CreatedAt()
+  createdAt: Date;
 
-  @ColumnTime()
-  creationTime: Date;
-
-  @ColumnTime()
-  updateTime: Date;
-
-  @BeforeInsert()
-  setCreationTime() {
-    this.creationTime = new Date();
-  }
-
-  @BeforeUpdate()
-  setUpdateTime() {
-    this.updateTime = new Date();
-  }
+  @UpdatedAt()
+  updatedAt: Date;
 }

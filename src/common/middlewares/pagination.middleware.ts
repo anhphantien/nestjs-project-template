@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+import _ = require('lodash');
 
 export const PaginationMiddleware = (config: {
   defaultSize?: number;
