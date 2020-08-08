@@ -14,10 +14,6 @@ export class RedisService {
       host: config.REDIS_HOST,
       port: Number(config.REDIS_PORT),
     });
-
-    this.client.on('error', () => {
-      this.client.quit();
-    });
   }
 
   setAsync(...params) {
