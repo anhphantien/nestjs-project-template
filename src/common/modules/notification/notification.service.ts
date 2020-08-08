@@ -36,7 +36,7 @@ export class NotificationService {
     }
   }
 
-  async temporaryPasswordNotification({ email, phone }, temporaryPassword: string) {
+  async newPasswordNotification({ email, phone }, newPassword: string) {
     const template = await this.templateRepository.findOne({ templateCode: TEMPLATE.CODE.FORGOT_PASSWORD });
     if (!template) {
       throw new NotFoundException(ERROR_CODE.TEMPLATE_NOT_FOUND);
@@ -45,11 +45,11 @@ export class NotificationService {
       await this.nodeMailerService.send(email,
         {
           subject: template.subject,
-          html: template.content.replace(TEMPLATE.KEYWORDS.FORGOT_PASSWORD.TEMPORARY_PASSWORD, temporaryPassword),
+          html: template.content.replace(TEMPLATE.KEYWORDS.FORGOT_PASSWORD.NEW_PASSWORD, newPassword),
         }
       );
     } else {
-      await this.twilioService.send(phone, template.content.replace(TEMPLATE.KEYWORDS.FORGOT_PASSWORD.TEMPORARY_PASSWORD, temporaryPassword));
+      await this.twilioService.send(phone, template.content.replace(TEMPLATE.KEYWORDS.FORGOT_PASSWORD.NEW_PASSWORD, newPassword));
     }
   }
 }

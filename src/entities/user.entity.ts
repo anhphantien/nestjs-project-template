@@ -27,9 +27,6 @@ export class User {
   @Index('phone', { unique: true })
   phone: string;
 
-  @Column255Char()
-  temporaryPassword: string;
-
   @CreatedAt()
   createdAt: Date;
 

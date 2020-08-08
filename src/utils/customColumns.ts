@@ -100,16 +100,18 @@ export const ColumnUnsignedPrimaryKey = () => PrimaryGeneratedColumn({
   unsigned: true,
 });
 
-export const CreatedAt = () => CreateDateColumn({
+export const CreatedAt = (option = { select: false }) => CreateDateColumn({
   type: 'datetime',
   nullable: true,
   precision: 0,
+  select: option.select,
 });
 
-export const UpdatedAt = () => UpdateDateColumn({
+export const UpdatedAt = (option = { select: false }) => UpdateDateColumn({
   type: 'datetime',
   nullable: true,
   precision: 0,
+  select: option.select,
 });
 
 export const StringObject: ValueTransformer = {

@@ -21,6 +21,7 @@ export class AuthService {
 
   async login(usernameOrEmail: string, password: string) {
     const user = await this.userRepository.findOne({
+      select: ['id', 'username', 'passwordHash', 'status', 'role', 'email', 'phone'],
       where: [{ username: usernameOrEmail }, { email: usernameOrEmail }],
     });
     this.checkUser(user);
@@ -69,17 +70,7 @@ export class AuthService {
     if (!validOtp) {
       throw new BadRequestException(ERROR_CODE.INVALID_OTP);
     }
-    const payload: any = {
-      id: user.id,
-      username: user.username,
-      role: user.role,
-    };
-    if (user.email) {
-      payload.email = user.email;
-    } else {
-      payload.phone = user.phone;
-    }
-    return this.tokenService.createToken(payload);
+    return this.tokenService.createToken({ id: user.id, username: user.username, role: user.role });
   }
 
   async refreshToken(oldRefreshToken: string) {
@@ -90,11 +81,7 @@ export class AuthService {
     const user = await this.userRepository.findOne({ id: data.id });
     this.checkUser(user);
     await this.tokenService.deleteRefreshToken(oldRefreshToken);
-    return this.tokenService.createToken({
-      id: user.id,
-      username: user.username,
-      role: user.role,
-    });
+    return this.tokenService.createToken({ id: user.id, username: user.username, role: user.role });
   }
 
   async forgotPassword(emailOrPhone: string) {
@@ -102,13 +89,13 @@ export class AuthService {
       where: [{ email: emailOrPhone }, { phone: emailOrPhone }],
     });
     this.checkUser(user);
-    const temporaryPassword = passwordGenerator.generate({ length: 10, numbers: true });
+    const newPassword = passwordGenerator.generate({ length: 10, numbers: true });
     try {
-      await this.notificationService.temporaryPasswordNotification({ email: user.email, phone: user.phone }, temporaryPassword);
-      await this.userRepository.update({ id: user.id }, { temporaryPassword: bcrypt.hashSync(temporaryPassword, 10) });
+      await this.notificationService.newPasswordNotification({ email: user.email, phone: user.phone }, newPassword);
+      await this.userRepository.update({ id: user.id }, { passwordHash: bcrypt.hashSync(newPassword, 10) });
       return {
         recipient: emailOrPhone,
-        message: 'Temporary password has been sent!',
+        message: 'New password has been sent!',
       };
     } catch (error) {
       if (error.response.message === ERROR_CODE.TEMPLATE_NOT_FOUND) {
@@ -123,14 +110,17 @@ export class AuthService {
     }
   }
 
-  async resetPassword(usernameOrEmail: string, temporaryPassword: string, newPassword: string) {
-    const user = await this.userRepository.findOne({ where: [{ username: usernameOrEmail }, { email: usernameOrEmail }] });
+  async resetPassword(usernameOrEmail: string, currentPassword: string, newPassword: string) {
+    const user = await this.userRepository.findOne({
+      select: ['id', 'passwordHash', 'status'],
+      where: [{ username: usernameOrEmail }, { email: usernameOrEmail }],
+    });
     this.checkUser(user);
-    const validPassword = bcrypt.compareSync(temporaryPassword, user.temporaryPassword);
+    const validPassword = bcrypt.compareSync(currentPassword, user.passwordHash);
     if (!validPassword) {
       throw new UnauthorizedException(ERROR_CODE.INVALID_PASSWORD);
     }
-    await this.userRepository.update({ id: user.id }, { passwordHash: bcrypt.hashSync(newPassword, 10), temporaryPassword: null });
+    await this.userRepository.update({ id: user.id }, { passwordHash: bcrypt.hashSync(newPassword, 10) });
     return { message: 'Password has been reset successfully!' };
   }
 

@@ -44,19 +44,6 @@ export class ForgotPasswordBody {
   emailOrPhone: string;
 }
 
-export class LoginWithTemporaryPasswordBody {
-  @IsString()
-  @IsNotEmpty()
-  @Trim()
-  @ApiProperty({ example: '' })
-  usernameOrEmail: string;
-
-  @IsString()
-  @IsNotEmpty()
-  @ApiProperty({ example: '' })
-  temporaryPassword: string;
-}
-
 export class ResetPasswordBody {
   @IsString()
   @IsNotEmpty()
@@ -67,7 +54,7 @@ export class ResetPasswordBody {
   @IsString()
   @IsNotEmpty()
   @ApiProperty({ example: '' })
-  temporaryPassword: string;
+  currentPassword: string;
 
   @IsString()
   @IsNotEmpty()

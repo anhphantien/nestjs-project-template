@@ -1,5 +1,6 @@
 import nodemailer = require('nodemailer');
 import config from '../../config';
+import { Attachment } from 'nodemailer/lib/mailer';
 
 export class NodeMailerService {
   private transporter: nodemailer.Transporter;
@@ -15,7 +16,7 @@ export class NodeMailerService {
     });
   }
 
-  async send(receiver: string, data: { subject: string, html: string, attachments?: any }) {
+  async send(receiver: string, data: { subject: string, html: string, attachments?: Attachment[] }) {
     return this.transporter.sendMail({
       to: receiver,
       subject: data.subject,
