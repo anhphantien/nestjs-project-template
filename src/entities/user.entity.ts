@@ -10,7 +10,7 @@ export class User {
   @Index('username', { unique: true })
   username: string;
 
-  @Column255Char()
+  @Column255Char({ select: false })
   passwordHash: string;
 
   @ColumnTinyInt()

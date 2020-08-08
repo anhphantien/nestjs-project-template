@@ -36,10 +36,11 @@ export const Column128Char = () => Column({
   nullable: true,
 });
 
-export const Column255Char = () => Column({
+export const Column255Char = (option = { select: true }) => Column({
   type: 'varchar',
   length: 255,
   nullable: true,
+  select: option.select,
 });
 
 export const ColumnBlob = () => Column({
@@ -73,6 +74,11 @@ export const ColumnJSON = () => Column({
   type: 'text',
   nullable: true,
   transformer: StringObject,
+});
+
+export const ColumnSmallInt = () => Column({
+  type: 'smallint',
+  nullable: true,
 });
 
 export const ColumnText = () => Column({

@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException, UnauthorizedException, HttpException, BadRequestException } from '@nestjs/common';
 import { UserRepository } from '../../repositories';
 import { TokenService } from './token.service';
-import { OtpService } from '../../global_modules/otp/otp.service';
+import { OtpService } from '../../common/modules/otp/otp.service';
 import { NotificationService } from '../../common/modules/notification/notification.service';
 import { User } from '../../entities';
 import bcrypt = require('bcrypt');

@@ -1,16 +1,15 @@
 import { ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator';
+import currencyCodes = require('currency-codes');
 import moment = require('moment');
 
 @ValidatorConstraint()
-export class isUsername implements ValidatorConstraintInterface {
+export class isCurrency implements ValidatorConstraintInterface {
   validate(value: any) {
-    if (typeof value === 'string') {
-      return Boolean(value.match(/[a-z0-9_.]{4,32}$/g));
-    }
+    return Boolean(currencyCodes.codes().includes(value));
   }
 
   defaultMessage({ property }) {
-    return `${property} must be a string conforming to the specified constraints`;
+    return `${property} must be a currency`;
   }
 }
 
@@ -37,5 +36,34 @@ export class isDateTime implements ValidatorConstraintInterface {
 
   defaultMessage({ property }) {
     return `${property} must be a datetime`;
+  }
+}
+
+@ValidatorConstraint()
+export class isIntegerArray implements ValidatorConstraintInterface {
+  validate(arr: any[]) {
+    for (const ele of arr) {
+      if (!Number.isInteger(Number(ele))) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  defaultMessage({ property }) {
+    return `${property} must be an integer array`;
+  }
+}
+
+@ValidatorConstraint()
+export class isUsername implements ValidatorConstraintInterface {
+  validate(value: any) {
+    if (typeof value === 'string') {
+      return Boolean(value.match(/[a-z0-9_.]{4,32}$/g));
+    }
+  }
+
+  defaultMessage({ property }) {
+    return `${property} must be a string conforming to the specified constraints`;
   }
 }
