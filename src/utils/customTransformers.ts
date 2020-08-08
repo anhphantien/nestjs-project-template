@@ -1,5 +1,4 @@
 import { Transform } from 'class-transformer';
-import _ = require('lodash');
 
 export const Search = () => Transform(value => {
   if (typeof value === 'string') {
