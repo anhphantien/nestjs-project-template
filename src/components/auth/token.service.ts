@@ -1,6 +1,6 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
-import { RedisService } from '../../global_modules/redis/redis.service';
 import { JwtService } from '@nestjs/jwt';
+import { RedisService } from '../../global_modules/redis/redis.service';
 import { IUser } from '../../common/interfaces';
 import { v4 as uuidv4 } from 'uuid';
 import config from '../../config';
@@ -9,12 +9,15 @@ import { ERROR_CODE } from '../../constants';
 @Injectable()
 export class TokenService {
   constructor(
-    private readonly redisService: RedisService,
     private readonly jwtService: JwtService,
+    private readonly redisService: RedisService,
   ) { }
 
-  async createToken(payload: IUser) {
+  async createToken(payload: IUser, requireRefreshToken = true) {
     const accessToken = this.jwtService.sign(payload);
+    if (!requireRefreshToken) {
+      return { accessToken };
+    }
     const refreshToken = uuidv4();
     await this.redisService.setAsync(
       refreshToken,
