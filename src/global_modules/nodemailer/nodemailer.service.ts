@@ -16,9 +16,9 @@ export class NodeMailerService {
     });
   }
 
-  async send(receiver: string, data: { subject: string, html: string, attachments?: Attachment[] }) {
+  async send(recipient: string, data: { subject: string, html: string, attachments?: Attachment[] }) {
     return this.transporter.sendMail({
-      to: receiver,
+      to: recipient,
       subject: data.subject,
       html: data.html,
       attachments: data.attachments,
