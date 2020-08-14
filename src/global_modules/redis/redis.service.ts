@@ -8,7 +8,7 @@ bluebird.promisifyAll(redis.Multi.prototype);
 
 @Injectable()
 export class RedisService {
-  private client;
+  private client: redis.RedisClient | any;
   constructor() {
     this.client = redis.createClient({
       host: config.REDIS_HOST,
@@ -16,19 +16,19 @@ export class RedisService {
     });
   }
 
-  setAsync(...params) {
-    return this.client.setAsync(...params);
+  setAsync(key: string, value: string, mode: 'EX' | 'PX', duration: number) {
+    return this.client.setAsync(key, value, mode, duration);
   }
 
-  getAsync(...params) {
-    return this.client.getAsync(...params);
+  getAsync(key: string) {
+    return this.client.getAsync(key);
   }
 
-  delAsync(...params) {
-    return this.client.delAsync(...params);
+  delAsync(key: string) {
+    return this.client.delAsync(key);
   }
 
-  ttlAsync(...params) {
-    return this.client.ttlAsync(...params);
+  ttlAsync(key: string) {
+    return this.client.ttlAsync(key);
   }
 }

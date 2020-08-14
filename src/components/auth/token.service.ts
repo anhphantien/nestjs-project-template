@@ -22,8 +22,8 @@ export class TokenService {
     await this.redisService.setAsync(
       refreshToken,
       accessToken,
-      'ex', // lưu trữ với thời gian giảm dần là giây
-      // 'px', // lưu trữ với thời gian giảm dần là mili giây
+      'EX', // lưu trữ với thời gian giảm dần là giây
+      // 'PX', // lưu trữ với thời gian giảm dần là mili giây
       Number(config.REFRESH_TOKEN_TTL),
     );
     return { accessToken, refreshToken };

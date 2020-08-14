@@ -12,7 +12,6 @@ export class OtpService {
   ) { }
 
   async canSend(recipient: string) {
-    console.log(recipient);
     const currentTimeToLive = await this.redisService.ttlAsync(recipient); // thời gian tồn tại giảm dần
     if (Number(config.OTP_TIME_TO_LIVE) - currentTimeToLive > Number(config.OTP_TIME_TO_RESEND)) {
       return true;
@@ -24,7 +23,7 @@ export class OtpService {
     const otp = (Math.trunc(Math.random() * initValue * 9 + initValue)).toString(); // tạo otp
     const recipient = user.email ? user.email : user.phone;
     await this.notificationService.otpNotification({ email: user.email, phone: user.phone }, otp);
-    await this.redisService.setAsync(recipient, otp, 'ex', Number(config.OTP_TIME_TO_LIVE)); // thời gian tồn tại giảm dần
+    await this.redisService.setAsync(recipient, otp, 'EX', Number(config.OTP_TIME_TO_LIVE)); // thời gian tồn tại giảm dần
   }
 
   async verify(recipient: string, otp: string) {
