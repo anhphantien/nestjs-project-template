@@ -11,7 +11,7 @@ export class TwilioService {
     this.phone = config.TWILIO_PHONE;
   }
 
-  async send(recipient: string, body: string) {
-    return this.client.messages.create({ body, from: this.phone, to: recipient });
+  async send(recipient: string, body: string, mediaUrl?: string | string[]) {
+    return this.client.messages.create({ from: this.phone, to: recipient, body, mediaUrl });
   }
 }

@@ -5,7 +5,7 @@ import moment = require('moment');
 @ValidatorConstraint()
 export class isCurrency implements ValidatorConstraintInterface {
   validate(value: any) {
-    return Boolean(currencyCodes.codes().includes(value));
+    return currencyCodes.codes().includes(value);
   }
 
   defaultMessage({ property }) {
