@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { TemplateRepository } from '../../../repositories';
-import { NodeMailerService } from '../../../global_modules/nodemailer/nodemailer.service';
+import { NodemailerService } from '../../../global_modules/nodemailer/nodemailer.service';
 import { TwilioService } from '../../../global_modules/twilio/twilio.service';
 import { TEMPLATE, ERROR_CODE } from '../../../constants';
 import config from '../../../config';
@@ -9,7 +9,7 @@ import config from '../../../config';
 export class NotificationService {
   constructor(
     private readonly templateRepository: TemplateRepository,
-    private readonly nodeMailerService: NodeMailerService,
+    private readonly nodemailerService: NodemailerService,
     private readonly twilioService: TwilioService,
   ) { }
 
@@ -19,7 +19,7 @@ export class NotificationService {
       throw new NotFoundException(ERROR_CODE.TEMPLATE_NOT_FOUND);
     }
     if (email) {
-      await this.nodeMailerService.send(email,
+      await this.nodemailerService.send(email,
         {
           subject: template.subject,
           html: template.content
@@ -42,7 +42,7 @@ export class NotificationService {
       throw new NotFoundException(ERROR_CODE.TEMPLATE_NOT_FOUND);
     }
     if (email) {
-      await this.nodeMailerService.send(email,
+      await this.nodemailerService.send(email,
         {
           subject: template.subject,
           html: template.content.replace(TEMPLATE.KEYWORDS.FORGOT_PASSWORD.NEW_PASSWORD, newPassword),

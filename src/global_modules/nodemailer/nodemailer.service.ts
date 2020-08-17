@@ -2,7 +2,7 @@ import nodemailer = require('nodemailer');
 import config from '../../config';
 import { Attachment } from 'nodemailer/lib/mailer';
 
-export class NodeMailerService {
+export class NodemailerService {
   private transporter: nodemailer.Transporter;
   constructor() {
     this.transporter = nodemailer.createTransport({
