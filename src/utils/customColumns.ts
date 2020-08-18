@@ -71,8 +71,14 @@ export const ColumnDecimal = () => Column({
   scale: 2,
 });
 
-export const ColumnJSON = () => Column({
+export const ColumnJsonText = () => Column({
   type: 'text',
+  nullable: true,
+  transformer: StringObject,
+});
+
+export const ColumnJsonVarchar = () => Column({
+  type: 'varchar',
   nullable: true,
   transformer: StringObject,
 });
@@ -87,9 +93,10 @@ export const ColumnText = () => Column({
   nullable: true,
 });
 
-export const ColumnTinyInt = () => Column({
+export const ColumnTinyInt = (option = { default: null }) => Column({
   type: 'tinyint',
   nullable: true,
+  default: option.default,
 });
 
 export const ColumnUnsignedForeignKey = () => Column({
