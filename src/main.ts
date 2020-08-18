@@ -6,7 +6,7 @@ import config from './config';
 
 declare const module: any;
 
-async function bootstrap() {
+const bootstrap = async () => {
   const app = await NestFactory.create(AppModule);
 
   app.enableCors(); // cho phép gọi API từ một địa chỉ URL khác
