@@ -4,8 +4,6 @@ import { ValidationPipe, ValidationError, BadRequestException } from '@nestjs/co
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import config from './config';
 
-declare const module: any;
-
 const bootstrap = async () => {
   const app = await NestFactory.create(AppModule);
 
@@ -36,10 +34,5 @@ const bootstrap = async () => {
   SwaggerModule.setup('api', app, document);
 
   await app.listen(config.PORT);
-
-  if (module.hot) {
-    module.hot.accept();
-    module.hot.dispose(() => app.close());
-  }
 }
 bootstrap();
