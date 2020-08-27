@@ -1,8 +1,8 @@
 import { ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator';
-import currencyCodes = require('currency-codes');
+// import currencyCodes = require('currency-codes');
 import moment = require('moment');
 
-@ValidatorConstraint()
+/* @ValidatorConstraint()
 export class isCurrency implements ValidatorConstraintInterface {
   validate(value: any) {
     return currencyCodes.codes().includes(value);
@@ -11,7 +11,7 @@ export class isCurrency implements ValidatorConstraintInterface {
   defaultMessage({ property }) {
     return `${property} must be a currency`;
   }
-}
+} */
 
 @ValidatorConstraint()
 export class isDate implements ValidatorConstraintInterface {
