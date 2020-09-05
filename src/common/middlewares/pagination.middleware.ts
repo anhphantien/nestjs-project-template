@@ -1,4 +1,4 @@
-import { NextFunction } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import _ = require('lodash');
 
 export const PaginationMiddleware = (config: {
@@ -7,7 +7,7 @@ export const PaginationMiddleware = (config: {
   filterFields?: string[];
   sortFields: string[];
   defaultSort: { field: string, order: 'ASC' | 'DESC' };
-}) => (req: any, res: any, next: NextFunction) => {
+}) => (req: Request | any, res: Response | any, next: NextFunction) => {
   const defaultConfig = { defaultSize: 10, maxSize: 100, filterFields: [] };
   const { defaultSize, maxSize, filterFields, sortFields, defaultSort } = { ...defaultConfig, ...config };
 
