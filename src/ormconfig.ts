@@ -18,6 +18,5 @@ const ormconfig: TypeOrmModuleOptions = {
   cli: {
     migrationsDir: 'migrations',
   },
-  // multipleStatements: true, // cho phép thực thi nhiều câu lệnh SQL trong mỗi truy vấn
 };
 export = ormconfig;
