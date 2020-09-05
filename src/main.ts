@@ -16,12 +16,34 @@ const bootstrap = async () => {
       exceptionFactory: (errors: ValidationError[]) => {
         const message = [];
         for (const error of errors) {
-          message.push({
-            property: error.property,
-            constraints: error.constraints,
-          });
+          if (error.constraints) {
+            message.push({
+              field: error.property,
+              message: Object.values(error.constraints).join('\n'),
+            });
+          } else {
+            for (const childrenError of error.children) {
+              if (childrenError.children.length) {
+                for (const error of childrenError.children) {
+                  message.push({
+                    field: error.property,
+                    message: Object.values(error.constraints).join('\n'),
+                  });
+                }
+              } else {
+                message.push({
+                  field: error.property,
+                  message: Object.values(childrenError.constraints).join('\n'),
+                });
+              }
+            }
+          }
         }
-        throw new BadRequestException(message);
+        throw new BadRequestException({
+          statusCode: 400,
+          message,
+          error: 'Bad Request',
+        });
       },
     }),
   );
