@@ -74,11 +74,11 @@ export class AuthService {
   }
 
   async refreshToken(oldRefreshToken: string) {
-    const data = await this.tokenService.decodeAccessTokenByRefreshToken(oldRefreshToken);
-    if (!data.id) {
+    const payload = await this.tokenService.decodeAccessTokenByRefreshToken(oldRefreshToken);
+    if (!payload.id) {
       throw new BadRequestException(ERROR_CODE.INVALID_DECODED_ACCESS_TOKEN);
     }
-    const user = await this.userRepository.findOne({ id: data.id });
+    const user = await this.userRepository.findOne({ id: payload.id });
     this.checkUser(user);
     await this.tokenService.deleteRefreshToken(oldRefreshToken);
     return this.tokenService.createToken({ id: user.id, username: user.username, role: user.role });
