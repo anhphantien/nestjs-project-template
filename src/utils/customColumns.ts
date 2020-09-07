@@ -64,11 +64,11 @@ export const ColumnDateTime = () => Column({
   nullable: true,
 });
 
-export const ColumnDecimal = () => Column({
+export const ColumnDecimal = (option = { scale: 2 }) => Column({
   type: 'double',
   nullable: true,
-  precision: 255,
-  scale: 2,
+  precision: 255, // max: 255
+  scale: option.scale, // max: 30
 });
 
 export const ColumnJsonText = () => Column({
