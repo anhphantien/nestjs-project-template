@@ -1,4 +1,4 @@
-import { Catch, ArgumentsHost, HttpStatus } from '@nestjs/common';
+import { Catch, ArgumentsHost, HttpException, HttpStatus } from '@nestjs/common';
 import { BaseExceptionFilter } from '@nestjs/core';
 
 @Catch()
@@ -7,9 +7,8 @@ export class AllExceptionsFilter extends BaseExceptionFilter {
     const ctx = host.switchToHttp();
     const res = ctx.getResponse();
 
-    const { response, status } = exception;
-    if (exception.response && exception.status) {
-      res.status(status).json(response);
+    if (exception instanceof HttpException) {
+      res.status(exception.getStatus()).json(exception.getResponse());
     } else {
       res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
         statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
