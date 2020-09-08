@@ -53,12 +53,14 @@ const bootstrap = async () => {
     }),
   );
 
-  const options = new DocumentBuilder()
-    .setTitle('Standard Project Template')
-    .addBearerAuth() // tạo ô nhập bearer token
-    .build();
-  const document = SwaggerModule.createDocument(app, options);
-  SwaggerModule.setup('api', app, document);
+  if (config.NODE_ENV === 'production') {
+    const options = new DocumentBuilder()
+      .setTitle('Standard Project Template')
+      .addBearerAuth() // tạo ô nhập bearer token
+      .build();
+    const document = SwaggerModule.createDocument(app, options);
+    SwaggerModule.setup('api', app, document);
+  }
 
   await app.listen(config.PORT);
 }
