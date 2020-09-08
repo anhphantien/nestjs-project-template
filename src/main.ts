@@ -1,13 +1,18 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import sentry = require('@sentry/node');
+import config from './config';
+import { SentryInterceptor } from './common/interceptors';
 import { ValidationPipe, ValidationError, BadRequestException } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import config from './config';
 
 const bootstrap = async () => {
   const app = await NestFactory.create(AppModule);
 
   app.enableCors(); // cho phép gọi API từ một địa chỉ URL khác
+
+  sentry.init({ dsn: config.SENTRY_DSN });
+  app.useGlobalInterceptors(new SentryInterceptor());
 
   app.useGlobalPipes(
     new ValidationPipe({
