@@ -5,7 +5,7 @@ import { OtpService } from '../../common/modules/otp/otp.service';
 import { NotificationService } from '../../common/modules/notification/notification.service';
 import { User } from '../../entities';
 import bcrypt = require('bcrypt');
-import { ERROR_CODE } from '../../constants/error';
+import { ERROR_CODE } from '../../constants';
 import { USER } from '../../constants';
 import config from '../../config';
 import passwordGenerator = require('generate-password');
