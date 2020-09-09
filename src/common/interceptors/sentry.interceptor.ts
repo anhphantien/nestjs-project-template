@@ -9,7 +9,7 @@ export class SentryInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     return next.handle().pipe(
       tap(null, (exception) => {
-        if (config.NODE_ENV === 'production' && !(exception instanceof HttpException)) {
+        if (['development', 'production'].includes(config.NODE_ENV) && !(exception instanceof HttpException)) {
           const { query, params, user, body, url, method } = context.switchToHttp().getRequest();
           exception.request = { query, params, user, body, url, method };
           sentry.addBreadcrumb({ message: JSON.stringify(exception) });
