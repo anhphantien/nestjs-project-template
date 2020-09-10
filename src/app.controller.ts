@@ -1,6 +1,8 @@
+import { ApiTags } from '@nestjs/swagger';
 import { Controller, Get, Res } from '@nestjs/common';
 import { Response } from 'express';
 
+@ApiTags('healthcheck')
 @Controller()
 export class AppController {
 
