@@ -940,10 +940,10 @@
   dependencies:
     "@types/node" "*"
 
-"@types/node@*", "@types/node@^14.6.4":
-  version "14.6.4"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.6.4.tgz#a145cc0bb14ef9c4777361b7bbafa5cf8e3acb5a"
-  integrity sha512-Wk7nG1JSaMfMpoMJDKUsWYugliB2Vy55pdjLpmLixeyMi7HizW2I/9QoxsPCkXl3dO+ZOVqPumKaDUv5zJu2uQ==
+"@types/node@*", "@types/node@^14.10.0":
+  version "14.10.0"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.10.0.tgz#15815dff82c8dc30827f6b1286f865902945095a"
+  integrity sha512-SOIyrdADB4cq6eY1F+9iU48iIomFAPltu11LCvA9PKcyEwHadjCFzNVPotAR+oEJA0bCP4Xvvgy+vwu1ZjVh8g==
 
 "@types/nodemailer@^6.4.0":
   version "6.4.0"
@@ -2739,11 +2739,6 @@ domexception@^2.0.1:
   dependencies:
     webidl-conversions "^5.0.0"
 
-dotenv@^6.2.0:
-  version "6.2.0"
-  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-6.2.0.tgz#941c0410535d942c8becf28d3f357dbd9d476064"
-  integrity sha512-HygQCKUBSFl8wKQZBSemMywRWcEDNidvNbjGVyZu3nbZ8qq9ubiPoGLMdRDpfSrpkkm9BXYFkpKxxFX38o/76w==
-
 dotenv@^8.2.0:
   version "8.2.0"
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.2.0.tgz#97e619259ada750eea3e4ea3e26bceea5424b16a"
@@ -4073,9 +4068,9 @@ is-buffer@^1.1.5:
   integrity sha512-NcdALwpXkTm5Zvvbk7owOUSvVvBKDgKP5/ewfXEznmQFfs4ZRmanOeKBTjRVjka3QFoN6XJ+9F3USqfHqTaU5w==
 
 is-callable@^1.1.4, is-callable@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/is-callable/-/is-callable-1.2.0.tgz#83336560b54a38e35e3a2df7afd0454d691468bb"
-  integrity sha512-pyVD9AaGLxtg6srb2Ng6ynWJqkHU9bEM087AKck0w8QwDarTfNcpIYoU8x8Hv2Icm8u6kFJM18Dag8lyqGkviw==
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/is-callable/-/is-callable-1.2.1.tgz#4d1e21a4f437509d25ce55f8184350771421c96d"
+  integrity sha512-wliAfSzx6V+6WfMOmus1xy0XvSgf/dlStkvTfq7F0g4bOIW0PSUbnyse3NhDwdyYS1ozfUtAAySqTws3z9Eqgg==
 
 is-ci@^2.0.0:
   version "2.0.0"
@@ -7236,9 +7231,9 @@ supports-hyperlinks@^2.0.0:
     supports-color "^7.0.0"
 
 swagger-ui-dist@^3.18.1:
-  version "3.32.5"
-  resolved "https://registry.yarnpkg.com/swagger-ui-dist/-/swagger-ui-dist-3.32.5.tgz#52fc8b714db113c0b5a0cf9ad12ad039fe5b87df"
-  integrity sha512-3SKHv8UVqsKKknivtACHbFDGcn297jkoZN2h6zAZ7b2yoaJNMaRadQpC3qFw3GobZTGzqHCgHph4ZH9NkaCjrQ==
+  version "3.33.0"
+  resolved "https://registry.yarnpkg.com/swagger-ui-dist/-/swagger-ui-dist-3.33.0.tgz#a34b5b7b6ce22dee28f7cbe6a60e0ba7e47750b6"
+  integrity sha512-IIF2OFr2+nFNDvQtQ/ZxC+qVQhFguV7UztD6nzdfkN4P7nOuM0amEa/8er7MKSFArc4rKGH4WkihUQczbBfUag==
 
 swagger-ui-express@^4.1.4:
   version "4.1.4"
@@ -7622,17 +7617,17 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typeorm@^0.2.25:
-  version "0.2.25"
-  resolved "https://registry.yarnpkg.com/typeorm/-/typeorm-0.2.25.tgz#1a33513b375b78cc7740d2405202208b918d7dde"
-  integrity sha512-yzQ995fyDy5wolSLK9cmjUNcmQdixaeEm2TnXB5HN++uKbs9TiR6Y7eYAHpDlAE8s9J1uniDBgytecCZVFergQ==
+typeorm@^0.2.26:
+  version "0.2.26"
+  resolved "https://registry.yarnpkg.com/typeorm/-/typeorm-0.2.26.tgz#1027afa13f89ab98bc3d07675fe7268bbefa55a7"
+  integrity sha512-sbKxK6K9sXZPCVF0weEb74UA/z1UW0sRWfI7EoOOtQaRZaLvSEwtgHPqle9t8asxEtD+gzkUdd+NqF7yH7HtIQ==
   dependencies:
     app-root-path "^3.0.0"
     buffer "^5.1.0"
     chalk "^2.4.2"
     cli-highlight "^2.0.0"
     debug "^4.1.1"
-    dotenv "^6.2.0"
+    dotenv "^8.2.0"
     glob "^7.1.2"
     js-yaml "^3.13.1"
     mkdirp "^1.0.3"
