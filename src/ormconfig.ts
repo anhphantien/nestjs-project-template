@@ -10,7 +10,7 @@ const ormconfig: TypeOrmModuleOptions = {
   password: config.DATABASE_PASSWORD,
   database: config.DATABASE_NAME,
   entities: Object.values(entities),
-  synchronize: true, // đồng bộ CSDL mỗi khi khởi động ứng dụng
+  synchronize: config.NODE_ENV === 'production' ? false : true, // đồng bộ CSDL mỗi khi khởi động ứng dụng
   keepConnectionAlive: true, // không tạo kết nối mới mỗi khi khởi động lại ứng dụng
   logging: true, // hiển thị câu lệnh SQL được thực thi mỗi lần truy vấn
   logger: ['development', 'production'].includes(config.NODE_ENV) ? 'simple-console' : 'advanced-console',
