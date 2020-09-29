@@ -43,7 +43,7 @@ export class AuthService {
     try {
       await this.otpService.send(user, Number(config.OTP_4_DIGIT));
       return {
-        otpTimeToLive: Number(config.OTP_TIME_TO_LIVE),
+        otpTimeToLive: Number(config.OTP_TTL),
         otpTimeToResend: Number(config.OTP_TIME_TO_RESEND),
         recipient: user.email || user.phone,
         message: 'OTP has been sent!',

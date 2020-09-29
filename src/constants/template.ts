@@ -9,7 +9,7 @@ export const TEMPLATE = {
     },
     TWO_FACTOR_AUTHENTICATION: {
       OTP: '{{OTP}}',
-      OTP_TIME_TO_LIVE: '{{OTP_TIME_TO_LIVE}}',
+      OTP_TTL: '{{OTP_TTL}}',
     },
   },
 };

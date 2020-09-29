@@ -24,14 +24,14 @@ export class NotificationService {
           subject: template.subject,
           html: template.content
             .replace(TEMPLATE.KEYWORDS.TWO_FACTOR_AUTHENTICATION.OTP, otp)
-            .replace(TEMPLATE.KEYWORDS.TWO_FACTOR_AUTHENTICATION.OTP_TIME_TO_LIVE, (Number(config.OTP_TIME_TO_LIVE) / 60).toString()),
+            .replace(TEMPLATE.KEYWORDS.TWO_FACTOR_AUTHENTICATION.OTP_TTL, (Number(config.OTP_TTL) / 60).toString()),
         }
       );
     } else {
       await this.twilioService.send(phone,
         template.content
           .replace(TEMPLATE.KEYWORDS.TWO_FACTOR_AUTHENTICATION.OTP, otp)
-          .replace(TEMPLATE.KEYWORDS.TWO_FACTOR_AUTHENTICATION.OTP_TIME_TO_LIVE, (Number(config.OTP_TIME_TO_LIVE) / 60).toString()),
+          .replace(TEMPLATE.KEYWORDS.TWO_FACTOR_AUTHENTICATION.OTP_TTL, (Number(config.OTP_TTL) / 60).toString()),
       );
     }
   }
