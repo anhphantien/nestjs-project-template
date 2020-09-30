@@ -49,7 +49,7 @@ export class AuthService {
         message: 'OTP has been sent!',
       };
     } catch (error) {
-      if (error.response.message === ERROR_CODE.TEMPLATE_NOT_FOUND) {
+      if (error.response && error.response.message === ERROR_CODE.TEMPLATE_NOT_FOUND) {
         throw new NotFoundException(ERROR_CODE.TEMPLATE_NOT_FOUND);
       }
       if (error.message.includes('No recipients defined')) {
