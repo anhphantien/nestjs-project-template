@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import ormconfig = require('./ormconfig');
 
 import { AuthModule } from './components/auth/auth.module';
+import { CronjobModule } from './components/cronjob/cronjob.module';
 
 import { NodeMailerModule } from './global_modules/nodemailer/nodemailer.module';
 import { RedisModule } from './global_modules/redis/redis.module';
@@ -22,6 +23,7 @@ import { JwtStrategy } from './common/strategies';
 
     // components
     AuthModule,
+    CronjobModule, // cronjob
 
     // global modules
     NodeMailerModule,
