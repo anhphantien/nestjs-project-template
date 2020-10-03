@@ -5568,10 +5568,10 @@ node-pre-gyp@0.15.0:
     semver "^5.3.0"
     tar "^4.4.2"
 
-nodemailer@^6.4.12:
-  version "6.4.12"
-  resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-6.4.12.tgz#efb3946f3e5c5afad50af8090e070957cea1c43d"
-  integrity sha512-c/WplZp24Lxc+hn0w/kweNxcYGpaqtH1iecfGKTbXVmp5qx+ILApKsmCAucWWIIQiYKKH4ZA/ffSNOsai6xJGA==
+nodemailer@^6.4.13:
+  version "6.4.13"
+  resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-6.4.13.tgz#40e67cf5a32f2052258822a9394e190ea9714801"
+  integrity sha512-XmtiiKza2Cqtr+ZRMchMZn9s2nmwQDeakbf+yL0ODsIXOv58UZgk/MKPOkDKqY+mvxHs87PrJK7Nf/tcpKHqYQ==
 
 nopt@^4.0.1:
   version "4.0.3"
@@ -7270,9 +7270,9 @@ supports-hyperlinks@^2.0.0:
     supports-color "^7.0.0"
 
 swagger-ui-dist@^3.18.1:
-  version "3.34.0"
-  resolved "https://registry.yarnpkg.com/swagger-ui-dist/-/swagger-ui-dist-3.34.0.tgz#af34bd8f1761f85287dff915e069f983c7f1eb83"
-  integrity sha512-xk5CMbwoQVI53rTq9o/iMojAqXP5NT4/+TMeTP4uXWDIH18pB9AXgO5Olqt0RXuf3jH032DA4DS4qzem6XdXAw==
+  version "3.35.0"
+  resolved "https://registry.yarnpkg.com/swagger-ui-dist/-/swagger-ui-dist-3.35.0.tgz#af68c2164aba18847d951e6bee19f5b1e3aca98f"
+  integrity sha512-VdjOd7Lpj3LU6V/SG9BHZHTJ5cTk+uoyHBrGAeEP70SYf7GflLYqw7USUNxoraEx72vIA1wqogMv4GiRqMr8lA==
 
 swagger-ui-express@^4.1.4:
   version "4.1.4"
@@ -8083,9 +8083,9 @@ y18n@^4.0.0:
   integrity sha512-r9S/ZyXu/Xu9q1tYlpsLIsa3EeLXXk0VwlxqTcFRfg9EhMW+17kbt9G0NrgCmhGb5vT2hyhJZLfDGx+7+5Uj/w==
 
 y18n@^5.0.1:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/y18n/-/y18n-5.0.1.tgz#1ad2a7eddfa8bce7caa2e1f6b5da96c39d99d571"
-  integrity sha512-/jJ831jEs4vGDbYPQp4yGKDYPSCCEQ45uZWJHE1AoYBzqdZi8+LDWas0z4HrmJXmKdpFsTiowSHXdxyFhpmdMg==
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/y18n/-/y18n-5.0.2.tgz#48218df5da2731b4403115c39a1af709c873f829"
+  integrity sha512-CkwaeZw6dQgqgPGeTWKMXCRmMcBgETFlTml1+ZOO+q7kGst8NREJ+eWwFNPVUQ4QGdAaklbqCZHH6Zuep1RjiA==
 
 yallist@^3.0.0, yallist@^3.0.2, yallist@^3.0.3:
   version "3.1.1"
@@ -8107,9 +8107,9 @@ yargonaut@^1.1.2:
     parent-require "^1.0.0"
 
 yargs-parser@20.x, yargs-parser@^20.0.0:
-  version "20.2.0"
-  resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-20.2.0.tgz#944791ca2be2e08ddadd3d87e9de4c6484338605"
-  integrity sha512-2agPoRFPoIcFzOIp6656gcvsg2ohtscpw2OINr/q46+Sq41xz2OYLqx5HRHabmFU1OARIPAYH5uteICE7mn/5A==
+  version "20.2.1"
+  resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-20.2.1.tgz#28f3773c546cdd8a69ddae68116b48a5da328e77"
+  integrity sha512-yYsjuSkjbLMBp16eaOt7/siKTjNVjMm3SoJnIg3sEh/JsvqVVDyjRKmaJV4cl+lNIgq6QEco2i3gDebJl7/vLA==
 
 yargs-parser@^18.1.2:
   version "18.1.3"
