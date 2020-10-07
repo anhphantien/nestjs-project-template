@@ -1,7 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import sentry = require('@sentry/node');
-import config from './config';
 import { SentryInterceptor } from './common/interceptors';
 import { ValidationPipe, ValidationError, BadRequestException } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
@@ -11,7 +10,7 @@ const bootstrap = async () => {
 
   app.enableCors(); // cho phép gọi API từ một địa chỉ URL khác
 
-  sentry.init({ dsn: config.SENTRY_DSN });
+  sentry.init({ dsn: process.env.SENTRY_DSN });
   app.useGlobalInterceptors(new SentryInterceptor());
 
   app.useGlobalPipes(
@@ -53,7 +52,7 @@ const bootstrap = async () => {
     }),
   );
 
-  if (config.NODE_ENV === 'production') {
+  if (process.env.NODE_ENV === 'production') {
     const options = new DocumentBuilder()
       .setTitle('Standard Project Template')
       .addBearerAuth() // tạo ô nhập bearer token
@@ -62,6 +61,6 @@ const bootstrap = async () => {
     SwaggerModule.setup('api', app, document);
   }
 
-  await app.listen(config.PORT);
+  await app.listen(process.env.PORT);
 }
 bootstrap();

@@ -3,7 +3,6 @@ import { JwtService } from '@nestjs/jwt';
 import { RedisService } from '../../global_modules/redis/redis.service';
 import { IUser } from '../../common/interfaces';
 import { v4 as uuidv4 } from 'uuid';
-import config from '../../config';
 import { ERROR_CODE } from '../../constants';
 
 @Injectable()
@@ -24,7 +23,7 @@ export class TokenService {
       accessToken,
       'EX', // lưu trữ với thời gian giảm dần là giây
       // 'PX', // lưu trữ với thời gian giảm dần là mili giây
-      Number(config.REFRESH_TOKEN_TTL),
+      Number(process.env.REFRESH_TOKEN_TTL),
     );
     return { accessToken, refreshToken };
   }

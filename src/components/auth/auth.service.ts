@@ -7,7 +7,6 @@ import { User } from '../../entities';
 import bcrypt = require('bcrypt');
 import { ERROR_CODE } from '../../constants';
 import { USER } from '../../constants';
-import config from '../../config';
 import passwordGenerator = require('generate-password');
 
 @Injectable()
@@ -41,10 +40,10 @@ export class AuthService {
       }, 429);
     }
     try {
-      await this.otpService.send(user, Number(config.OTP_4_DIGIT));
+      await this.otpService.send(user, Number(process.env.OTP_4_DIGIT));
       return {
-        otpTimeToLive: Number(config.OTP_TTL),
-        otpTimeToResend: Number(config.OTP_TIME_TO_RESEND),
+        otpTimeToLive: Number(process.env.OTP_TTL),
+        otpTimeToResend: Number(process.env.OTP_TIME_TO_RESEND),
         recipient: user.email || user.phone,
         message: 'OTP has been sent!',
       };

@@ -1,5 +1,7 @@
 import { Module } from '@nestjs/common';
 
+import { ConfigModule } from '@nestjs/config';
+
 import { PassportModule } from '@nestjs/passport';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import ormconfig = require('./ormconfig');
@@ -18,6 +20,8 @@ import { JwtStrategy } from './common/strategies';
 
 @Module({
   imports: [
+    ConfigModule.forRoot(), // use environment variables
+
     PassportModule, // exports AuthGuard
     TypeOrmModule.forRoot(ormconfig),
 

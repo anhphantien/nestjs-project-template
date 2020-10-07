@@ -3,7 +3,6 @@ import { TemplateRepository } from '../../../repositories';
 import { NodemailerService } from '../../../global_modules/nodemailer/nodemailer.service';
 import { TwilioService } from '../../../global_modules/twilio/twilio.service';
 import { TEMPLATE, ERROR_CODE } from '../../../constants';
-import config from '../../../config';
 
 @Injectable()
 export class NotificationService {
@@ -24,14 +23,14 @@ export class NotificationService {
           subject: template.subject,
           html: template.content
             .replace(TEMPLATE.KEYWORDS.TWO_FACTOR_AUTHENTICATION.OTP, otp)
-            .replace(TEMPLATE.KEYWORDS.TWO_FACTOR_AUTHENTICATION.OTP_TTL, (Number(config.OTP_TTL) / 60).toString()),
+            .replace(TEMPLATE.KEYWORDS.TWO_FACTOR_AUTHENTICATION.OTP_TTL, (Number(process.env.OTP_TTL) / 60).toString()),
         }
       );
     } else {
       await this.twilioService.send(phone,
         template.content
           .replace(TEMPLATE.KEYWORDS.TWO_FACTOR_AUTHENTICATION.OTP, otp)
-          .replace(TEMPLATE.KEYWORDS.TWO_FACTOR_AUTHENTICATION.OTP_TTL, (Number(config.OTP_TTL) / 60).toString()),
+          .replace(TEMPLATE.KEYWORDS.TWO_FACTOR_AUTHENTICATION.OTP_TTL, (Number(process.env.OTP_TTL) / 60).toString()),
       );
     }
   }
