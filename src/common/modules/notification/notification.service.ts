@@ -3,6 +3,7 @@ import { TemplateRepository } from '../../../repositories';
 import { NodemailerService } from '../../../global_modules/nodemailer/nodemailer.service';
 import { TwilioService } from '../../../global_modules/twilio/twilio.service';
 import { TEMPLATE, ERROR_CODE } from '../../../constants';
+require('dotenv').config();
 
 @Injectable()
 export class NotificationService {

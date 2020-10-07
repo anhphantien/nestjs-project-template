@@ -3,6 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { RedisService } from '../../global_modules/redis/redis.service';
 import { IUser } from '../../common/interfaces';
 import { v4 as uuidv4 } from 'uuid';
+require('dotenv').config();
 import { ERROR_CODE } from '../../constants';
 
 @Injectable()

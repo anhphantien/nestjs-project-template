@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import sentry = require('@sentry/node');
+require('dotenv').config();
 import { SentryInterceptor } from './common/interceptors';
 import { ValidationPipe, ValidationError, BadRequestException } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';

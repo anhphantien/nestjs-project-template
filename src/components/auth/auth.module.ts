@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
+require('dotenv').config();
 import { NotificationModule } from '../../common/modules/notification/notification.module';
 import { OtpModule } from '../../common/modules/otp/otp.module';
 import { AuthController } from './auth.controller';
@@ -18,5 +19,4 @@ import { TokenService } from './token.service';
   controllers: [AuthController],
   providers: [AuthService, TokenService],
 })
-
 export class AuthModule { }

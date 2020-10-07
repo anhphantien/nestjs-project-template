@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import twilio = require('twilio');
+require('dotenv').config();
 
 @Injectable()
 export class TwilioService {

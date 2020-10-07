@@ -1,4 +1,5 @@
 import nodemailer = require('nodemailer');
+require('dotenv').config();
 import { Attachment } from 'nodemailer/lib/mailer';
 
 export class NodemailerService {

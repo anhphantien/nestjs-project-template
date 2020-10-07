@@ -7,6 +7,7 @@ import { User } from '../../entities';
 import bcrypt = require('bcrypt');
 import { ERROR_CODE } from '../../constants';
 import { USER } from '../../constants';
+require('dotenv').config();
 import passwordGenerator = require('generate-password');
 
 @Injectable()
