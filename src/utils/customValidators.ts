@@ -17,7 +17,7 @@ export class isCurrency implements ValidatorConstraintInterface {
 export class isDate implements ValidatorConstraintInterface {
   validate(value: any) {
     if (typeof value === 'string') {
-      return Boolean(value.match(/[1-9]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/g) && moment(value).isValid());
+      return Boolean(value.match(/[1-9]\d*-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/g) && moment(value, 'YYYY-MM-DD').isValid());
     }
   }
 
