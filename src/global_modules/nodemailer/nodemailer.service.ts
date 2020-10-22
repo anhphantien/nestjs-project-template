@@ -6,12 +6,12 @@ export class NodemailerService {
   private transporter: nodemailer.Transporter;
   constructor() {
     this.transporter = nodemailer.createTransport({
-      host: process.env.NODE_MAILER_HOST,
-      port: Number(process.env.NODE_MAILER_PORT),
-      secure: JSON.parse(process.env.NODE_MAILER_SECURE),
+      host: process.env.NODEMAILER_HOST,
+      port: Number(process.env.NODEMAILER_PORT),
+      secure: JSON.parse(process.env.NODEMAILER_SECURE),
       auth: {
-        user: process.env.NODE_MAILER_USER,
-        pass: process.env.NODE_MAILER_PASS,
+        user: process.env.NODEMAILER_USER,
+        pass: process.env.NODEMAILER_PASS,
       },
     });
   }
