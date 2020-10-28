@@ -36,7 +36,7 @@ export class AuthService {
     if (!canSendOtp) {
       throw new HttpException({
         statusCode: 429,
-        error: ERROR_CODE.TOO_MANY_REQUESTS,
+        error: 'Too Many Requests',
         message: ERROR_CODE.TOO_MANY_REQUESTS_TO_RECEIVE_OTP,
       }, 429);
     }

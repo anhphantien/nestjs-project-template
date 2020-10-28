@@ -9,7 +9,6 @@ export enum ERROR_CODE {
   INVALID_PHONE_NUMBER = 'Invalid phone number',
   INVALID_REFRESH_TOKEN = 'Invalid refresh token',
   TEMPLATE_NOT_FOUND = 'Template not found',
-  TOO_MANY_REQUESTS = 'Too Many Requests',
   TOO_MANY_REQUESTS_TO_RECEIVE_OTP = 'Too many requests to receive OTP',
   USER_NOT_FOUND = 'User not found',
 }

@@ -1,7 +1,9 @@
+import { Injectable } from '@nestjs/common';
 import nodemailer = require('nodemailer');
 require('dotenv').config();
 import { Attachment } from 'nodemailer/lib/mailer';
 
+@Injectable()
 export class NodemailerService {
   private transporter: nodemailer.Transporter;
   constructor() {

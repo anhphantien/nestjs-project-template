@@ -12,8 +12,8 @@ export class OtpService {
   ) { }
 
   async canSend(recipient: string) {
-    const currentTimeToLive = await this.redisService.ttlAsync(recipient); // thời gian tồn tại còn lại
-    if (Number(process.env.OTP_TTL) - currentTimeToLive > Number(process.env.OTP_TIME_TO_RESEND)) {
+    const currentTtl = await this.redisService.ttlAsync(recipient); // thời gian tồn tại còn lại
+    if (Number(process.env.OTP_TTL) - currentTtl > Number(process.env.OTP_TIME_TO_RESEND)) {
       return true;
     }
     return false;
