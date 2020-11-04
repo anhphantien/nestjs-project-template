@@ -10,7 +10,12 @@ export const TransformIntoNumber = () => Transform(value => Number(value));
 
 export const TransformIntoBoolean = () => Transform(value => JSON.parse(value));
 
-export const TransformIntoArray = () => Transform(value => value.split(','));
+export const TransformIntoArray = () => Transform(value => {
+  if (!value) {
+    return [];
+  }
+  return value.split(',');
+});
 
 export const Trim = () => Transform(value => {
   if (typeof value === 'string') {
