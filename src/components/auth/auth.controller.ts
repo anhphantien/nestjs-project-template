@@ -28,8 +28,8 @@ export class AuthController {
 
   @Post('forgotPassword')
   async forgotPassword(@Body() body: ForgotPasswordBody) {
-    const { emailOrPhone } = body;
-    return this.authService.forgotPassword(emailOrPhone);
+    const { email } = body;
+    return this.authService.forgotPassword(email);
   }
 
   @Post('resetPassword')

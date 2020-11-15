@@ -21,7 +21,7 @@ export class AuthService {
 
   async login(usernameOrEmail: string, password: string) {
     const user = await this.userRepository.findOne({
-      select: ['id', 'username', 'passwordHash', 'status', 'role', 'email', 'phone'],
+      select: ['id', 'username', 'passwordHash', 'status', 'role', 'email'],
       where: [{ username: usernameOrEmail }, { email: usernameOrEmail }],
     });
     this.checkUser(user);
@@ -32,7 +32,7 @@ export class AuthService {
     if (user.role === USER.ROLE.SUPER_ADMIN) {
       return this.tokenService.createToken({ id: user.id, username: user.username, role: user.role });
     }
-    const canSendOtp = await this.otpService.canSend(user.email || user.phone);
+    const canSendOtp = await this.otpService.canSend(user.email);
     if (!canSendOtp) {
       throw new HttpException({
         statusCode: 429,
@@ -40,25 +40,8 @@ export class AuthService {
         message: ERROR_CODE.TOO_MANY_REQUESTS_TO_RECEIVE_OTP,
       }, 429);
     }
-    try {
-      await this.otpService.send(user, Number(process.env.OTP_4_DIGIT));
-      return {
-        otpTimeToLive: Number(process.env.OTP_TTL),
-        otpTimeToResend: Number(process.env.OTP_TIME_TO_RESEND),
-        recipient: user.email || user.phone,
-        message: 'OTP has been sent!',
-      };
-    } catch (error) {
-      if (error.response && error.response.message === ERROR_CODE.TEMPLATE_NOT_FOUND) {
-        throw new NotFoundException(ERROR_CODE.TEMPLATE_NOT_FOUND);
-      }
-      if (error.message.includes('No recipients defined')) {
-        throw new BadRequestException(ERROR_CODE.INVALID_EMAIL_ADDRESS);
-      }
-      if (error.message.includes('not a valid phone number')) {
-        throw new BadRequestException(ERROR_CODE.INVALID_PHONE_NUMBER);
-      }
-    }
+    await this.otpService.send(user.email, Number(process.env.OTP_4_DIGIT));
+    return { message: 'OTP has been sent!' };
   }
 
   async otpVerification(usernameOrEmail: string, otp: string) {
@@ -66,7 +49,7 @@ export class AuthService {
       where: [{ username: usernameOrEmail }, { email: usernameOrEmail }],
     });
     this.checkUser(user);
-    const validOtp = await this.otpService.verify(user.email || user.phone, otp);
+    const validOtp = await this.otpService.verify(user.email, otp);
     if (!validOtp) {
       throw new BadRequestException(ERROR_CODE.INVALID_OTP);
     }
@@ -84,30 +67,13 @@ export class AuthService {
     return this.tokenService.createToken({ id: user.id, username: user.username, role: user.role });
   }
 
-  async forgotPassword(emailOrPhone: string) {
-    const user = await this.userRepository.findOne({
-      where: [{ email: emailOrPhone }, { phone: emailOrPhone }],
-    });
+  async forgotPassword(email: string) {
+    const user = await this.userRepository.findOne({ email });
     this.checkUser(user);
     const newPassword = passwordGenerator.generate({ length: 10, numbers: true });
-    try {
-      await this.notificationService.newPasswordNotification({ email: user.email, phone: user.phone }, newPassword);
-      await this.userRepository.update({ id: user.id }, { passwordHash: bcrypt.hashSync(newPassword, 10) });
-      return {
-        recipient: emailOrPhone,
-        message: 'New password has been sent!',
-      };
-    } catch (error) {
-      if (error.response.message === ERROR_CODE.TEMPLATE_NOT_FOUND) {
-        throw new NotFoundException(ERROR_CODE.TEMPLATE_NOT_FOUND);
-      }
-      if (error.message.includes('No recipients defined')) {
-        throw new BadRequestException(ERROR_CODE.INVALID_EMAIL_ADDRESS);
-      }
-      if (error.message.includes('not a valid phone number')) {
-        throw new BadRequestException(ERROR_CODE.INVALID_PHONE_NUMBER);
-      }
-    }
+    await this.notificationService.newPasswordNotification(email, newPassword);
+    await this.userRepository.update({ id: user.id }, { passwordHash: bcrypt.hashSync(newPassword, 10) });
+    return { message: 'New password has been sent!' };
   }
 
   async resetPassword(usernameOrEmail: string, currentPassword: string, newPassword: string) {
@@ -128,8 +94,8 @@ export class AuthService {
     if (!user) {
       throw new NotFoundException(ERROR_CODE.USER_NOT_FOUND);
     }
-    if (user.status === USER.STATUS.INACTIVE) {
-      throw new UnauthorizedException(ERROR_CODE.INACTIVE_USER);
+    if (user.status === USER.STATUS.NOT_ACTIVATED) {
+      throw new UnauthorizedException(ERROR_CODE.USER_NOT_ACTIVATED);
     }
   }
 }

@@ -23,10 +23,6 @@ export class User {
   @Index('email', { unique: true })
   email: string;
 
-  @Column32Char()
-  @Index('phone', { unique: true })
-  phone: string;
-
   @CreatedAt()
   createdAt: Date;
 

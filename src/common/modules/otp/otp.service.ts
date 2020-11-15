@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { RedisService } from '../../../global_modules/redis/redis.service';
 import { NotificationService } from '../notification/notification.service';
 require('dotenv').config();
-import { User } from '../../../entities';
 
 @Injectable()
 export class OtpService {
@@ -11,25 +10,24 @@ export class OtpService {
     private readonly notificationService: NotificationService,
   ) { }
 
-  async canSend(recipient: string) {
-    const currentTtl = await this.redisService.ttlAsync(recipient); // thời gian tồn tại còn lại
+  async canSend(email: string) {
+    const currentTtl = await this.redisService.ttlAsync(email); // thời gian tồn tại còn lại
     if (Number(process.env.OTP_TTL) - currentTtl > Number(process.env.OTP_TIME_TO_RESEND)) {
       return true;
     }
     return false;
   }
 
-  async send(user: User, initValue: number) {
+  async send(email: string, initValue: number) {
     const otp = (Math.trunc(Math.random() * initValue * 9) + initValue).toString(); // tạo otp
-    const recipient = user.email ? user.email : user.phone;
-    await this.notificationService.otpNotification({ email: user.email, phone: user.phone }, otp);
-    await this.redisService.setAsync(recipient, otp, 'EX', Number(process.env.OTP_TTL));
+    await this.notificationService.otpNotification(email, otp);
+    await this.redisService.setAsync(email, otp, 'EX', Number(process.env.OTP_TTL));
   }
 
-  async verify(recipient: string, otp: string) {
-    const storedOtp = await this.redisService.getAsync(recipient);
+  async verify(email: string, otp: string) {
+    const storedOtp = await this.redisService.getAsync(email);
     if (storedOtp === otp) {
-      await this.redisService.delAsync(recipient);
+      await this.redisService.delAsync(email);
       return true;
     }
     return false;
