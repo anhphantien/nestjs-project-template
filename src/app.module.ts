@@ -20,11 +20,11 @@ import { JwtStrategy } from './common/strategies';
     PassportModule, // exports AuthGuard
     TypeOrmModule.forRoot(ormconfig),
 
-    // components
+    // component(s)
     AuthModule,
     CronjobModule, // cronjob
 
-    // global modules
+    // global module(s)
     NodeMailerModule,
     RedisModule,
     RepositoryModule,
