@@ -1,18 +1,6 @@
 /* tslint:disable: class-name */
 import { ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator';
-// import currencyCodes = require('currency-codes');
 import moment = require('moment');
-
-/* @ValidatorConstraint()
-export class isCurrency implements ValidatorConstraintInterface {
-  validate(value: any) {
-    return currencyCodes.codes().includes(value);
-  }
-
-  defaultMessage({ property }) {
-    return `${property} must be a currency`;
-  }
-} */
 
 @ValidatorConstraint()
 export class isDate implements ValidatorConstraintInterface {
