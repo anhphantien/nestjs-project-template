@@ -1,14 +1,34 @@
 {
   "rules": {
+    "arrow-return-shorthand": true,
+    "callable-types": true,
+    "class-name": true,
+    "comment-format": [
+      true,
+      "check-space"
+    ],
     "curly": true,
     "eofline": true,
-    "no-unused-expression": true,
+    "forin": true,
+    "import-blacklist": [
+      true
+    ],
+    "import-spacing": true,
+    "indent": [
+      true,
+      "spaces"
+    ],
+    "interface-over-type-literal": true,
+    "label-position": true,
     "max-line-length": false,
+    "no-arg": true,
+    "no-bitwise": true,
+    "no-consecutive-blank-lines": true,
     "no-console": true,
     "no-construct": true,
     "no-debugger": true,
     "no-duplicate-super": true,
-    "no-empty": false,
+    "no-empty": true,
     "no-empty-interface": true,
     "no-eval": true,
     "no-inferrable-types": [
@@ -21,6 +41,7 @@
     "no-string-throw": true,
     "no-trailing-whitespace": true,
     "no-unnecessary-initializer": true,
+    "no-unused-expression": true,
     "no-var-keyword": true,
     "object-literal-shorthand": true,
     "one-line": [

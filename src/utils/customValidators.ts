@@ -1,3 +1,4 @@
+/* tslint:disable: class-name */
 import { ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator';
 // import currencyCodes = require('currency-codes');
 import moment = require('moment');
