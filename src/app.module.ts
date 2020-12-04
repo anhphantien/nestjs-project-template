@@ -4,8 +4,8 @@ import { PassportModule } from '@nestjs/passport';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import ormconfig = require('./ormconfig');
 
-import { AuthModule } from './components/auth/auth.module';
-import { CronjobModule } from './components/cronjob/cronjob.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { CronjobModule } from './modules/cronjob/cronjob.module';
 
 import { NodeMailerModule } from './global_modules/nodemailer/nodemailer.module';
 import { RedisModule } from './global_modules/redis/redis.module';
@@ -20,7 +20,7 @@ import { JwtStrategy } from './common/strategies';
     PassportModule, // exports AuthGuard
     TypeOrmModule.forRoot(ormconfig),
 
-    // component(s)
+    // module(s)
     AuthModule,
     CronjobModule, // cronjob
 
