@@ -3,6 +3,22 @@ import { ValidatorConstraint, ValidatorConstraintInterface } from 'class-validat
 import moment = require('moment');
 
 @ValidatorConstraint()
+export class isArrayOfIntegers implements ValidatorConstraintInterface {
+  validate(values: any[]) {
+    for (const value of values) {
+      if (!Number.isInteger(Number(value))) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  defaultMessage({ property }) {
+    return `${property} must be an array of integers`;
+  }
+}
+
+@ValidatorConstraint()
 export class isDate implements ValidatorConstraintInterface {
   validate(value: any) {
     if (typeof value === 'string') {
@@ -29,18 +45,15 @@ export class isDateTime implements ValidatorConstraintInterface {
 }
 
 @ValidatorConstraint()
-export class isIntegerArray implements ValidatorConstraintInterface {
-  validate(arr: any[]) {
-    for (const ele of arr) {
-      if (!Number.isInteger(Number(ele))) {
-        return false;
-      }
+export class isPassword implements ValidatorConstraintInterface {
+  validate(value: any) {
+    if (typeof value === 'string') {
+      return Boolean(value.length >= 6);
     }
-    return true;
   }
 
   defaultMessage({ property }) {
-    return `${property} must be an integer array`;
+    return `${property} must be at least 6 characters long`;
   }
 }
 
@@ -53,6 +66,6 @@ export class isUsername implements ValidatorConstraintInterface {
   }
 
   defaultMessage({ property }) {
-    return `${property} must be a string conforming to the specified constraints`;
+    return `${property} must contain only lowercase letters, numbers, underscores, dots and be between 4 and 32 characters long`;
   }
 }

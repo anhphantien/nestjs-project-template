@@ -108,6 +108,14 @@ export const ColumnUnsignedPrimaryKey = () => PrimaryGeneratedColumn({
   unsigned: true,
 });
 
+export const ColumnUuid = (option = { select: true }) => Column({
+  type: 'varchar',
+  generated: 'uuid',
+  length: 36,
+  nullable: true,
+  select: option.select,
+});
+
 export const CreatedAt = (option = { select: false }) => CreateDateColumn({
   type: 'datetime',
   nullable: true,

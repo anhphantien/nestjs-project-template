@@ -25,8 +25,7 @@ export class AuthService {
       where: [{ username: usernameOrEmail }, { email: usernameOrEmail }],
     });
     this.checkUser(user);
-    const validPassword = bcrypt.compareSync(password, user.passwordHash);
-    if (!validPassword) {
+    if (!bcrypt.compareSync(password, user.passwordHash)) {
       throw new UnauthorizedException(ERROR_CODE.INVALID_PASSWORD);
     }
     if (user.role === USER.ROLE.SUPER_ADMIN) {
@@ -82,8 +81,7 @@ export class AuthService {
       where: [{ username: usernameOrEmail }, { email: usernameOrEmail }],
     });
     this.checkUser(user);
-    const validPassword = bcrypt.compareSync(currentPassword, user.passwordHash);
-    if (!validPassword) {
+    if (!bcrypt.compareSync(currentPassword, user.passwordHash)) {
       throw new UnauthorizedException(ERROR_CODE.INVALID_PASSWORD);
     }
     await this.userRepository.update({ id: user.id }, { passwordHash: bcrypt.hashSync(newPassword, 10) });
