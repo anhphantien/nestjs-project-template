@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
-require('dotenv').config();
 import { NotificationModule } from '../notification/notification.module';
 import { OtpModule } from '../otp/otp.module';
 import { AuthController } from './auth.controller';

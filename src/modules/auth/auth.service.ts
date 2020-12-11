@@ -7,7 +7,7 @@ import { User } from '../../entities';
 import bcrypt = require('bcrypt');
 import { ERROR_CODE } from '../../constants';
 import { USER } from '../../constants';
-require('dotenv').config();
+import { IUser } from '../../common/interfaces';
 import passwordGenerator = require('generate-password');
 
 @Injectable()
@@ -56,8 +56,8 @@ export class AuthService {
   }
 
   async refreshToken(oldRefreshToken: string) {
-    const payload = await this.tokenService.decodeAccessTokenByRefreshToken(oldRefreshToken);
-    if (!payload.id) {
+    const payload: IUser = await this.tokenService.decodeAccessTokenByRefreshToken(oldRefreshToken);
+    if (!payload || !payload.id) {
       throw new BadRequestException(ERROR_CODE.INVALID_DECODED_ACCESS_TOKEN);
     }
     const user = await this.userRepository.findOne({ id: payload.id });

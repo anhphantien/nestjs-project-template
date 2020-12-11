@@ -3,7 +3,6 @@ import { JwtService } from '@nestjs/jwt';
 import { RedisService } from '../../global_modules/redis/redis.service';
 import { IUser } from '../../common/interfaces';
 import { v4 as uuidv4 } from 'uuid';
-require('dotenv').config();
 import { ERROR_CODE } from '../../constants';
 
 @Injectable()
@@ -36,7 +35,11 @@ export class TokenService {
     if (!accessToken) {
       throw new BadRequestException(ERROR_CODE.INVALID_REFRESH_TOKEN);
     }
-    return this.jwtService.verify(accessToken, { ignoreExpiration: true });
+    try {
+      return await this.jwtService.verify(accessToken, { ignoreExpiration: true });
+    } catch (error) {
+      throw new BadRequestException(error.message);
+    }
   }
 
   async deleteRefreshToken(refreshToken: string) {

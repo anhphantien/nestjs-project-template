@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { RedisService } from '../../global_modules/redis/redis.service';
 import { NotificationService } from '../notification/notification.service';
-require('dotenv').config();
 
 @Injectable()
 export class OtpService {

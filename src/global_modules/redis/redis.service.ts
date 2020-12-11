@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import bluebird = require('bluebird');
 import redis = require('redis');
-require('dotenv').config();
 
 bluebird.promisifyAll(redis.RedisClient.prototype);
 bluebird.promisifyAll(redis.Multi.prototype);
