@@ -43,7 +43,7 @@ export class AuthService {
     return { message: 'OTP has been sent!' };
   }
 
-  async otpVerification(usernameOrEmail: string, otp: string) {
+  async verifyOtp(usernameOrEmail: string, otp: string) {
     const user = await this.userRepository.findOne({
       where: [{ username: usernameOrEmail }, { email: usernameOrEmail }],
     });

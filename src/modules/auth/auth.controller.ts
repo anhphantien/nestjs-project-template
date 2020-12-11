@@ -1,7 +1,7 @@
 import { ApiTags } from '@nestjs/swagger';
 import { Controller, Post, Body } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { LoginBody, OtpVerificationBody, RefreshTokenBody, ForgotPasswordBody, ResetPasswordBody } from './auth.dto';
+import { LoginBody, VerifyOtpBody, RefreshTokenBody, ForgotPasswordBody, ResetPasswordBody } from './auth.dto';
 
 @ApiTags('auth')
 @Controller('api/auth')
@@ -14,10 +14,10 @@ export class AuthController {
     return this.authService.login(usernameOrEmail, password);
   }
 
-  @Post('otpVerification')
-  async otpVerification(@Body() body: OtpVerificationBody) {
+  @Post('verifyOtp')
+  async verifyOtp(@Body() body: VerifyOtpBody) {
     const { usernameOrEmail, otp } = body;
-    return this.authService.otpVerification(usernameOrEmail, otp);
+    return this.authService.verifyOtp(usernameOrEmail, otp);
   }
 
   @Post('refreshToken')
