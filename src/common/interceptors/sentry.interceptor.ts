@@ -2,6 +2,7 @@ import { CallHandler, ExecutionContext, HttpException, Injectable, NestIntercept
 import sentry = require('@sentry/minimal');
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+require('dotenv').config();
 
 @Injectable()
 export class SentryInterceptor implements NestInterceptor {

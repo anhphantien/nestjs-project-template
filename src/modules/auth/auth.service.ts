@@ -9,6 +9,7 @@ import { ERROR_CODE } from '../../constants';
 import { USER } from '../../constants';
 import { IUser } from '../../common/interfaces';
 import passwordGenerator = require('generate-password');
+require('dotenv').config();
 
 @Injectable()
 export class AuthService {

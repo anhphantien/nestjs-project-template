@@ -4,6 +4,7 @@ import { RedisService } from '../../global_modules/redis/redis.service';
 import { IUser } from '../../common/interfaces';
 import { v4 as uuidv4 } from 'uuid';
 import { ERROR_CODE } from '../../constants';
+require('dotenv').config();
 
 @Injectable()
 export class TokenService {

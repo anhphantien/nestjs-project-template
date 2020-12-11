@@ -2,6 +2,7 @@ import { BadRequestException, Injectable, NotFoundException } from '@nestjs/comm
 import { TemplateRepository } from '../../repositories';
 import { NodemailerService } from '../../global_modules/nodemailer/nodemailer.service';
 import { TEMPLATE, ERROR_CODE } from '../../constants';
+require('dotenv').config();
 
 @Injectable()
 export class NotificationService {
