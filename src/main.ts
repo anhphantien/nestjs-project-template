@@ -54,7 +54,7 @@ const bootstrap = async () => {
     }),
   );
 
-  if (process.env.NODE_ENV === 'production') {
+  if (process.env.NODE_ENV !== 'production') {
     const options = new DocumentBuilder()
       .setTitle('Standard Project Template')
       .addBearerAuth() // tạo ô nhập bearer token
