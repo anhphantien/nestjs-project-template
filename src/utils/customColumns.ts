@@ -1,4 +1,4 @@
-import { Column, PrimaryGeneratedColumn, ValueTransformer, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Column, CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn, ValueTransformer } from 'typeorm';
 
 export const Column4Char = () => Column({
   type: 'varchar',

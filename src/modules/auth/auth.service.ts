@@ -1,14 +1,14 @@
-import { Injectable, NotFoundException, UnauthorizedException, HttpException, BadRequestException } from '@nestjs/common';
-import { UserRepository } from '../../repositories';
-import { TokenService } from './token.service';
-import { OtpService } from '../otp/otp.service';
-import { NotificationService } from '../notification/notification.service';
-import { User } from '../../entities';
+import { IUser } from '@/common/interfaces';
+import { ERROR_CODE, USER } from '@/constants';
+import { User } from '@/entities';
+import { UserRepository } from '@/repositories';
+import { BadRequestException, HttpException, HttpStatus, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import bcrypt = require('bcrypt');
-import { ERROR_CODE } from '../../constants';
-import { USER } from '../../constants';
-import { IUser } from '../../common/interfaces';
 import passwordGenerator = require('generate-password');
+import { NotificationService } from '../notification/notification.service';
+import { OtpService } from '../otp/otp.service';
+import { TokenService } from './token.service';
+
 require('dotenv').config();
 
 @Injectable()
@@ -29,16 +29,16 @@ export class AuthService {
     if (!bcrypt.compareSync(password, user.passwordHash)) {
       throw new UnauthorizedException(ERROR_CODE.INVALID_PASSWORD);
     }
-    if (user.role === USER.ROLE.SUPER_ADMIN) {
+    if (user.role === USER.ROLE.ADMIN) {
       return this.tokenService.createToken({ id: user.id, username: user.username, role: user.role });
     }
-    const canSendOtp = await this.otpService.canSend(user.email);
-    if (!canSendOtp) {
+    const allowSend = await this.otpService.checkBeforeSend(user.email);
+    if (!allowSend) {
       throw new HttpException({
-        statusCode: 429,
+        statusCode: HttpStatus.TOO_MANY_REQUESTS,
         error: 'Too Many Requests',
         message: ERROR_CODE.TOO_MANY_REQUESTS_TO_RECEIVE_OTP,
-      }, 429);
+      }, HttpStatus.TOO_MANY_REQUESTS);
     }
     await this.otpService.send(user.email, Number(process.env.OTP_4_DIGIT));
     return { message: 'OTP has been sent!' };
@@ -71,7 +71,7 @@ export class AuthService {
     const user = await this.userRepository.findOne({ email });
     this.checkUser(user);
     const newPassword = passwordGenerator.generate({ length: 10, numbers: true });
-    await this.notificationService.newPasswordNotification(email, newPassword);
+    await this.notificationService.sendNewPassword(email, newPassword);
     await this.userRepository.update({ id: user.id }, { passwordHash: bcrypt.hashSync(newPassword, 10) });
     return { message: 'New password has been sent!' };
   }

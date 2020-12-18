@@ -1,7 +1,7 @@
 export const USER = {
   ROLE: {
-    SUPER_ADMIN: 0,
     ADMIN: 1,
+    CUSTOMER: 2,
   },
   STATUS: {
     NOT_ACTIVATED: 0,

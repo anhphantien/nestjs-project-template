@@ -1,7 +1,8 @@
 import { CallHandler, ExecutionContext, HttpException, Injectable, NestInterceptor } from '@nestjs/common';
-import sentry = require('@sentry/minimal');
+import sentry = require('@sentry/node');
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+
 require('dotenv').config();
 
 @Injectable()

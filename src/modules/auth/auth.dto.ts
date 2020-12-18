@@ -1,7 +1,6 @@
-import { IsString, IsNotEmpty, IsEmail, Validate } from 'class-validator';
-import { Trim } from '../../utils/customTransformers';
+import { isPassword, Trim } from '@/utils';
 import { ApiProperty } from '@nestjs/swagger';
-import { isPassword } from '../../utils';
+import { IsEmail, IsNotEmpty, IsString, Validate } from 'class-validator';
 
 export class LoginBody {
   @IsString()

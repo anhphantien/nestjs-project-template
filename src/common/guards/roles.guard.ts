@@ -1,6 +1,6 @@
-import { Injectable, CanActivate, ExecutionContext, ForbiddenException } from '@nestjs/common';
+import { ERROR_CODE } from '@/constants';
+import { CanActivate, ExecutionContext, ForbiddenException, Injectable } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { ERROR_CODE } from '../../constants';
 
 @Injectable()
 export class RolesGuard implements CanActivate {

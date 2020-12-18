@@ -4,7 +4,10 @@ module.exports = {
     project: 'tsconfig.json',
     sourceType: 'module',
   },
-  plugins: ['@typescript-eslint/eslint-plugin'],
+  plugins: [
+    '@typescript-eslint/eslint-plugin',
+    'import',
+  ],
   extends: [
     'plugin:@typescript-eslint/recommended',
     'prettier/@typescript-eslint',
@@ -21,5 +24,6 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/ban-types': 'off',
+    'import/newline-after-import': ['error', { count: 1 }],
   },
 };

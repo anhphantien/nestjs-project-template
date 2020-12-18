@@ -1,7 +1,8 @@
+import { ERROR_CODE, TEMPLATE } from '@/constants';
+import { NodemailerService } from '@/global_modules/nodemailer/nodemailer.service';
+import { TemplateRepository } from '@/repositories';
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
-import { TemplateRepository } from '../../repositories';
-import { NodemailerService } from '../../global_modules/nodemailer/nodemailer.service';
-import { TEMPLATE, ERROR_CODE } from '../../constants';
+
 require('dotenv').config();
 
 @Injectable()
@@ -11,7 +12,7 @@ export class NotificationService {
     private readonly nodemailerService: NodemailerService,
   ) { }
 
-  async otpNotification(email: string, otp: string) {
+  async sendOtp(email: string, otp: string) {
     const template = await this.templateRepository.findOne({ templateCode: TEMPLATE.CODE.TWO_FACTOR_AUTHENTICATION });
     if (!template) {
       throw new NotFoundException(ERROR_CODE.TEMPLATE_NOT_FOUND);
@@ -33,7 +34,7 @@ export class NotificationService {
     }
   }
 
-  async newPasswordNotification(email: string, newPassword: string) {
+  async sendNewPassword(email: string, newPassword: string) {
     const template = await this.templateRepository.findOne({ templateCode: TEMPLATE.CODE.FORGOT_PASSWORD });
     if (!template) {
       throw new NotFoundException(ERROR_CODE.TEMPLATE_NOT_FOUND);

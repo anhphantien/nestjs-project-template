@@ -1,9 +1,10 @@
-import { Injectable, BadRequestException } from '@nestjs/common';
+import { IUser } from '@/common/interfaces';
+import { ERROR_CODE } from '@/constants';
+import { RedisService } from '@/global_modules/redis/redis.service';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { RedisService } from '../../global_modules/redis/redis.service';
-import { IUser } from '../../common/interfaces';
 import { v4 as uuidv4 } from 'uuid';
-import { ERROR_CODE } from '../../constants';
+
 require('dotenv').config();
 
 @Injectable()

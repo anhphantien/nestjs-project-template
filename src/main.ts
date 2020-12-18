@@ -1,10 +1,11 @@
+import { BadRequestException, ValidationError, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import sentry = require('@sentry/node');
-require('dotenv').config();
-import { SentryInterceptor } from './common/interceptors';
-import { ValidationPipe, ValidationError, BadRequestException } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import sentry = require('@sentry/node');
+import { AppModule } from './app.module';
+import { SentryInterceptor } from './common/interceptors';
+
+require('dotenv').config();
 
 const bootstrap = async () => {
   const app = await NestFactory.create(AppModule);
