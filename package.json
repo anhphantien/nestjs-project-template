@@ -1,7 +1,7 @@
 {
   "name": "nestjs-project-template",
   "version": "1.0.0",
-  "description": "NestJS Project Template",
+  "description": "A project template for NestJS",
   "author": "Anh T. Phan",
   "license": "MIT",
   "scripts": {
