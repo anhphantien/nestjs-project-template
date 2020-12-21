@@ -3,11 +3,11 @@ import { PassportModule } from '@nestjs/passport';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { JwtStrategy } from './common/strategies';
-import { NodeMailerModule } from './global_modules/nodemailer/nodemailer.module';
-import { RedisModule } from './global_modules/redis/redis.module';
-import { RepositoryModule } from './global_modules/repository/repository.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { CronjobModule } from './modules/cronjob/cronjob.module';
+import { NodeMailerModule } from './modules/nodemailer/nodemailer.module';
+import { RedisModule } from './modules/redis/redis.module';
+import { RepositoryModule } from './modules/repository/repository.module';
 import ormconfig = require('./ormconfig');
 
 @Module({
@@ -18,8 +18,6 @@ import ormconfig = require('./ormconfig');
     // module(s)
     AuthModule,
     CronjobModule, // cronjob
-
-    // global module(s)
     NodeMailerModule,
     RedisModule,
     RepositoryModule,

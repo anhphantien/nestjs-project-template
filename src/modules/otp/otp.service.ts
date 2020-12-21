@@ -1,6 +1,6 @@
-import { RedisService } from '@/global_modules/redis/redis.service';
 import { Injectable } from '@nestjs/common';
 import { NotificationService } from '../notification/notification.service';
+import { RedisService } from '../redis/redis.service';
 
 require('dotenv').config();
 

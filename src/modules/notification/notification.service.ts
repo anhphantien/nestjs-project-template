@@ -1,7 +1,7 @@
 import { ERROR_CODE, TEMPLATE } from '@/constants';
-import { NodemailerService } from '@/global_modules/nodemailer/nodemailer.service';
 import { TemplateRepository } from '@/repositories';
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import { NodemailerService } from '../nodemailer/nodemailer.service';
 
 require('dotenv').config();
 

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-types */
 import { ApiQuery } from '@nestjs/swagger';
 
 export const ApiPagination = () => <T>(target: Object, propertyKey: string | symbol, descriptor: TypedPropertyDescriptor<T>) => {
