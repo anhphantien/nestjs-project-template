@@ -56,7 +56,7 @@ const bootstrap = async () => {
 
   if (process.env.NODE_ENV !== 'production') {
     const options = new DocumentBuilder()
-      .setTitle('NestJS Project Template')
+      .setTitle('NestJS project template')
       .addBearerAuth() // tạo ô nhập bearer token
       .build();
     const document = SwaggerModule.createDocument(app, options);
