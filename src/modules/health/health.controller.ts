@@ -1,9 +1,11 @@
 import { Controller, Get } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { DNSHealthIndicator, HealthCheck, HealthCheckService, TypeOrmHealthIndicator } from '@nestjs/terminus';
 // import { createConnection } from 'typeorm';
 
 require('dotenv').config();
 
+@ApiTags('health')
 @Controller('health')
 export class HealthController {
   constructor(
