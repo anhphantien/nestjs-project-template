@@ -31,6 +31,7 @@
     "@nestjs/platform-express": "^7.6.4",
     "@nestjs/schedule": "^0.4.1",
     "@nestjs/swagger": "^4.7.8",
+    "@nestjs/terminus": "^7.0.1",
     "@nestjs/typeorm": "^7.1.5",
     "@sentry/node": "^5.29.2",
     "bcrypt": "^5.0.0",
