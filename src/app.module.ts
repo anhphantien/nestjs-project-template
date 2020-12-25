@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { PassportModule } from '@nestjs/passport';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
+import { AppGateway } from './app.gateway';
 import { JwtStrategy } from './common/strategies';
 import { AuthModule } from './modules/auth/auth.module';
 import { CronjobModule } from './modules/cronjob/cronjob.module';
@@ -29,6 +30,7 @@ import ormconfig = require('./ormconfig');
   ],
   providers: [
     JwtStrategy, // extends JwtGuard
+    AppGateway, // websockets
   ],
 })
 export class AppModule { }
