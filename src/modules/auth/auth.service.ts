@@ -59,7 +59,7 @@ export class AuthService {
   async refreshToken(oldRefreshToken: string) {
     const payload: IUser = await this.tokenService.decodeAccessTokenByRefreshToken(oldRefreshToken);
     if (!payload || !payload.id) {
-      throw new BadRequestException(ERROR_CODE.INVALID_DECODED_ACCESS_TOKEN);
+      throw new BadRequestException(ERROR_CODE.INVALID_PAYLOAD);
     }
     const user = await this.userRepository.findOne({ id: payload.id });
     this.checkUser(user);

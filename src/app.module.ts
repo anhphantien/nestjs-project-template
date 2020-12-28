@@ -2,14 +2,14 @@ import { Module } from '@nestjs/common';
 import { PassportModule } from '@nestjs/passport';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
-import { AppGateway } from './app.gateway';
 import { JwtStrategy } from './common/strategies';
 import { AuthModule } from './modules/auth/auth.module';
-import { CronjobModule } from './modules/cronjob/cronjob.module';
+import { CronJobModule } from './modules/cronJob/cronJob.module';
 import { HealthModule } from './modules/health/health.module';
-import { NodeMailerModule } from './modules/nodemailer/nodemailer.module';
+import { NodemailerModule } from './modules/nodemailer/nodemailer.module';
 import { RedisModule } from './modules/redis/redis.module';
 import { RepositoryModule } from './modules/repository/repository.module';
+import { SocketModule } from './modules/socket/socket.module';
 import ormconfig = require('./ormconfig');
 
 @Module({
@@ -19,18 +19,18 @@ import ormconfig = require('./ormconfig');
 
     // module(s)
     AuthModule,
-    CronjobModule, // cronjob
+    CronJobModule, // cron job
     HealthModule,
-    NodeMailerModule,
+    NodemailerModule,
     RedisModule,
     RepositoryModule,
+    SocketModule, // WebSockets
   ],
   controllers: [
     AppController,
   ],
   providers: [
     JwtStrategy, // extends JwtGuard
-    AppGateway, // websockets
   ],
 })
 export class AppModule { }
