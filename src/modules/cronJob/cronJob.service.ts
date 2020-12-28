@@ -18,7 +18,7 @@ export class CronJobService {
     }
   }
 
-  @Cron(CronExpression.EVERY_MINUTE)
+  @Cron(CronExpression.EVERY_10_SECONDS)
   handleNewNotifications(room: string, data: any) {
     this.socketGateway.handleNewNotifications(room, data);
   }
