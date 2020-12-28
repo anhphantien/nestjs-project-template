@@ -19,7 +19,7 @@ export class CronJobService {
   }
 
   @Cron(CronExpression.EVERY_MINUTE)
-  handleNewNotifications() {
-    this.socketGateway.handleNewNotifications('1', 'Ối dồi ôi');
+  handleNewNotifications(room: string, data: any) {
+    this.socketGateway.handleNewNotifications(room, data);
   }
 }

@@ -1,8 +1,8 @@
+import { ERROR_CODE } from '@/constants';
 import { BadRequestException, UnauthorizedException } from '@nestjs/common';
 import { ConnectedSocket, MessageBody, SubscribeMessage, WebSocketGateway, WebSocketServer } from '@nestjs/websockets';
 import jwt = require('jsonwebtoken');
 import { Server, Socket } from 'socket.io';
-import { ERROR_CODE } from '../../constants';
 
 require('dotenv').config();
 
@@ -30,6 +30,6 @@ export class SocketGateway {
 
   @SubscribeMessage('newNotifications')
   handleNewNotifications(room: string, data: any) {
-    this.server.to(room).emit('message', data);
+    this.server.to(room).emit('newNotifications', data);
   }
 }
