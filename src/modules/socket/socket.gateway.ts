@@ -12,7 +12,7 @@ export class SocketGateway {
   server: Server;
 
   @SubscribeMessage('addUser')
-  async handleAddUser(@ConnectedSocket() socket: Socket, @MessageBody() token: string) {
+  handleAddUser(@ConnectedSocket() socket: Socket, @MessageBody() token: string) {
     try {
       const payload: any = jwt.verify(token, process.env.JWT_SECRET_KEY, { ignoreExpiration: true });
       if (!payload || !payload.id) {
