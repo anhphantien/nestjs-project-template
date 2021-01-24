@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn, ValueTransformer } from 'typeorm';
+import { Column, CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
 export const Column4Char = () => Column({
   type: 'varchar',
@@ -36,21 +36,22 @@ export const Column128Char = () => Column({
   nullable: true,
 });
 
-export const Column255Char = (option = { select: true }) => Column({
+export const Column255Char = (options = { select: true }) => Column({
   type: 'varchar',
   length: 255,
   nullable: true,
-  select: option.select,
+  select: options.select,
 });
 
 export const ColumnBlob = () => Column({
-  type: 'mediumblob',
+  type: 'blob',
   nullable: true,
 });
 
-export const ColumnBoolean = () => Column({
+export const ColumnBoolean = (options = { default: null }) => Column({
   type: 'boolean',
   nullable: true,
+  default: options.default,
 });
 
 export const ColumnDate = () => Column({
@@ -64,27 +65,25 @@ export const ColumnDateTime = () => Column({
   nullable: true,
 });
 
-export const ColumnDecimal = (option = { scale: 2 }) => Column({
+export const ColumnDecimal = (options = { precision: 255, scale: 2 }) => Column({
   type: 'double',
   nullable: true,
-  precision: 255, // max: 255
-  scale: option.scale, // max: 30
+  precision: options.precision, // max: 255
+  scale: options.scale, // max: 30
 });
 
-export const ColumnJsonText = () => Column({
-  type: 'text',
+export const ColumnInt = () => Column({
+  type: 'int',
   nullable: true,
-  transformer: StringObject,
 });
 
-export const ColumnJsonVarchar = () => Column({
-  type: 'varchar',
+export const ColumnSimpleArray = () => Column({
+  type: 'simple-array',
   nullable: true,
-  transformer: StringObject,
 });
 
-export const ColumnSmallInt = () => Column({
-  type: 'smallint',
+export const ColumnSimpleJson = () => Column({
+  type: 'simple-json',
   nullable: true,
 });
 
@@ -93,10 +92,10 @@ export const ColumnText = () => Column({
   nullable: true,
 });
 
-export const ColumnTinyInt = (option = { default: null }) => Column({
+export const ColumnTinyInt = (options = { default: null }) => Column({
   type: 'tinyint',
   nullable: true,
-  default: option.default,
+  default: options.default,
 });
 
 export const ColumnUnsignedForeignKey = () => Column({
@@ -108,40 +107,24 @@ export const ColumnUnsignedPrimaryKey = () => PrimaryGeneratedColumn({
   unsigned: true,
 });
 
-export const ColumnUuid = (option = { select: true }) => Column({
+export const ColumnUuid = (options = { select: true }) => Column({
   type: 'varchar',
   generated: 'uuid',
   length: 36,
   nullable: true,
-  select: option.select,
+  select: options.select,
 });
 
-export const CreatedAt = (option = { select: false }) => CreateDateColumn({
+export const CreatedAt = (options = { select: false }) => CreateDateColumn({
   type: 'datetime',
   nullable: true,
   precision: 0,
-  select: option.select,
+  select: options.select,
 });
 
-export const UpdatedAt = (option = { select: false }) => UpdateDateColumn({
+export const UpdatedAt = (options = { select: false }) => UpdateDateColumn({
   type: 'datetime',
   nullable: true,
   precision: 0,
-  select: option.select,
+  select: options.select,
 });
-
-export const StringObject: ValueTransformer = {
-  to: (value: string) => {
-    if (value) {
-      if (typeof value === 'string') {
-        return JSON.stringify(JSON.parse(value));
-      }
-      return JSON.stringify(value);
-    }
-  },
-  from: (value: string) => {
-    if (value) {
-      return JSON.parse(value);
-    }
-  },
-};

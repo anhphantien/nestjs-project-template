@@ -1,5 +1,5 @@
+import { Column255Char, Column64Char, Column8Char, ColumnText, ColumnUnsignedPrimaryKey, CreatedAt, UpdatedAt } from '@/utils';
 import { Entity, Index } from 'typeorm';
-import { ColumnUnsignedPrimaryKey, Column8Char, Column64Char, Column255Char, ColumnText, CreatedAt, UpdatedAt } from '../utils';
 
 @Entity('Template')
 export class Template {
