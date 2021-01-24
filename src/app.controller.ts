@@ -1,13 +1,13 @@
-import { Controller, Get, Res } from '@nestjs/common';
+import { Controller, Get, HttpStatus, Res } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
 
-@ApiTags('healthcheck')
+@ApiTags('')
 @Controller()
 export class AppController {
 
   @Get('healthcheck')
   healthcheck(@Res() res: Response) {
-    res.sendStatus(200);
+    res.sendStatus(HttpStatus.OK);
   }
 }

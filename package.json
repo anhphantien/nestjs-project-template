@@ -64,6 +64,7 @@
     "@types/express": "^4.17.11",
     "@types/jest": "^26.0.20",
     "@types/lodash": "^4.14.168",
+    "@types/multer": "^1.4.5",
     "@types/mysql": "^2.15.17",
     "@types/node": "^14.14.22",
     "@types/nodemailer": "^6.4.0",

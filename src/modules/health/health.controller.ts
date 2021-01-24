@@ -16,11 +16,11 @@ export class HealthController {
 
   @Get()
   @HealthCheck()
-  async check() {
+  check() {
     return this.healthCheckService.check([
       () => this.dnsHealthIndicator.pingCheck('NestJS project template', process.env.HEALTHCHECK_URL),
-      () => this.typeormHealthIndicator.pingCheck('database'),
-      // async () => this.typeormHealthIndicator.pingCheck('database', {
+      () => this.typeormHealthIndicator.pingCheck('db'),
+      // async () => this.typeormHealthIndicator.pingCheck('db', {
       //   connection: await createConnection({
       //     name: 'test',
       //     type: 'mysql',

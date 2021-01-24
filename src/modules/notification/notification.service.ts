@@ -28,9 +28,6 @@ export class NotificationService {
       if (error.message.includes('No recipients defined')) {
         throw new BadRequestException(ERROR_CODE.INVALID_EMAIL_ADDRESS);
       }
-      // if (error.message.includes('not a valid phone number')) {
-      //   throw new BadRequestException(ERROR_CODE.INVALID_PHONE_NUMBER);
-      // }
     }
   }
 
@@ -48,9 +45,6 @@ export class NotificationService {
       if (error.message.includes('No recipients defined')) {
         throw new BadRequestException(ERROR_CODE.INVALID_EMAIL_ADDRESS);
       }
-      // if (error.message.includes('not a valid phone number')) {
-      //   throw new BadRequestException(ERROR_CODE.INVALID_PHONE_NUMBER);
-      // }
     }
   }
 }

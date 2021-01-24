@@ -57,7 +57,7 @@ export class AuthService {
   }
 
   async refreshToken(oldRefreshToken: string) {
-    const payload: IUser = await this.tokenService.decodeAccessTokenByRefreshToken(oldRefreshToken);
+    const payload: IUser = await this.tokenService.decodeAccessToken(oldRefreshToken);
     if (!payload || !payload.id) {
       throw new BadRequestException(ERROR_CODE.INVALID_PAYLOAD);
     }

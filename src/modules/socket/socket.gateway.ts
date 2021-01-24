@@ -24,7 +24,7 @@ export class SocketGateway {
       socket.join(`${payload.id}`);
       return 'User has joined the room!';
     } catch (error) {
-      throw new BadRequestException(error.message);
+      throw new BadRequestException(error);
     }
   }
 

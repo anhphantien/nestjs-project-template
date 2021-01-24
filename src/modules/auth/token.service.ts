@@ -30,17 +30,15 @@ export class TokenService {
     return { accessToken, refreshToken };
   }
 
-  async decodeAccessTokenByRefreshToken(refreshToken: string) {
-    const accessToken = await this.redisService.getAsync(
-      refreshToken,
-    );
-    if (!accessToken) {
-      throw new BadRequestException(ERROR_CODE.INVALID_REFRESH_TOKEN);
-    }
+  async decodeAccessToken(refreshToken: string) {
     try {
-      return await this.jwtService.verify(accessToken, { ignoreExpiration: true });
+      const accessToken = await this.redisService.getAsync(refreshToken);
+      if (!accessToken) {
+        throw new BadRequestException(ERROR_CODE.INVALID_REFRESH_TOKEN);
+      }
+      return this.jwtService.verify(accessToken, { ignoreExpiration: true });
     } catch (error) {
-      throw new BadRequestException(error.message);
+      throw new BadRequestException(error);
     }
   }
 

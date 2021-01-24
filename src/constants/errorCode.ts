@@ -5,7 +5,6 @@ export enum ERROR_CODE {
   INVALID_OTP = 'Invalid OTP',
   INVALID_PASSWORD = 'Invalid password',
   INVALID_PAYLOAD = 'Invalid payload',
-  // INVALID_PHONE_NUMBER = 'Invalid phone number',
   INVALID_REFRESH_TOKEN = 'Invalid refresh token',
   TEMPLATE_NOT_FOUND = 'Template not found',
   TOO_MANY_REQUESTS_TO_RECEIVE_OTP = 'Too many requests to receive OTP',
