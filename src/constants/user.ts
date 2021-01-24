@@ -5,7 +5,7 @@ export const USER = {
   },
   STATUS: {
     NOT_ACTIVATED: 1,
-    ACTIVATED: 2,
-    DISABLED_USER: 3,
+    ACTIVE: 2,
+    DISABLED: 3,
   },
 };
