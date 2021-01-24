@@ -7,6 +7,7 @@ require('dotenv').config();
 @Injectable()
 export class NodemailerService {
   private transporter: nodemailer.Transporter;
+
   constructor() {
     this.transporter = nodemailer.createTransport({
       host: process.env.NODEMAILER_HOST,

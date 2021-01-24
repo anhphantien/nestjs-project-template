@@ -1,5 +1,6 @@
 export enum ERROR_CODE {
   ACCESS_DENIED = 'Access is denied',
+  DISABLED_USER = 'User has been disabled',
   EXPIRED_TOKEN = 'Token has expired',
   INVALID_EMAIL_ADDRESS = 'Invalid email address',
   INVALID_OTP = 'Invalid OTP',

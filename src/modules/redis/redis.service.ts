@@ -10,6 +10,7 @@ bluebird.promisifyAll(redis.Multi.prototype);
 @Injectable()
 export class RedisService {
   private client: redis.RedisClient | any;
+
   constructor() {
     this.client = redis.createClient({
       host: process.env.REDIS_HOST,
