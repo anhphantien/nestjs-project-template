@@ -1,4 +1,4 @@
-export * from './customColumns';
-export * from './customTransformers';
-export * from './customValidators';
+export * from './columns';
 export * from './paginate';
+export * from './transformers';
+export * from './validators';
