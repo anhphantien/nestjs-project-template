@@ -2,7 +2,7 @@ import { IUser } from '@/common/interfaces';
 import { ERROR_CODE, USER } from '@/constants';
 import { User } from '@/entities';
 import { UserRepository } from '@/repositories';
-import { BadRequestException, HttpException, HttpStatus, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, ForbiddenException, HttpException, HttpStatus, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import bcrypt = require('bcrypt');
 import passwordGenerator = require('generate-password');
 import { NotificationService } from '../notification/notification.service';
@@ -27,7 +27,7 @@ export class AuthService {
     });
     this.checkUser(user);
     if (!bcrypt.compareSync(password, user.passwordHash)) {
-      throw new UnauthorizedException(ERROR_CODE.INVALID_PASSWORD);
+      throw new BadRequestException(ERROR_CODE.INVALID_PASSWORD);
     }
     if (user.role === USER.ROLE.ADMIN) {
       return this.tokenService.createToken({ id: user.id, username: user.username, role: user.role });
@@ -83,7 +83,7 @@ export class AuthService {
     });
     this.checkUser(user);
     if (!bcrypt.compareSync(currentPassword, user.passwordHash)) {
-      throw new UnauthorizedException(ERROR_CODE.INVALID_PASSWORD);
+      throw new BadRequestException(ERROR_CODE.INVALID_PASSWORD);
     }
     await this.userRepository.update({ id: user.id }, { passwordHash: bcrypt.hashSync(newPassword, 10) });
     return { message: 'Password has been reset successfully!' };
@@ -95,6 +95,9 @@ export class AuthService {
     }
     if (user.status === USER.STATUS.NOT_ACTIVATED) {
       throw new UnauthorizedException(ERROR_CODE.USER_NOT_ACTIVATED);
+    }
+    if (user.status === USER.STATUS.DISABLED) {
+      throw new ForbiddenException(ERROR_CODE.DISABLED_USER);
     }
   }
 }

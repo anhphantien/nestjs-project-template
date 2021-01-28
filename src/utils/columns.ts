@@ -61,8 +61,8 @@ export const ColumnDate = () => Column({
 
 export const ColumnDateTime = () => Column({
   type: 'datetime',
-  precision: 0,
   nullable: true,
+  precision: 0,
 });
 
 export const ColumnDecimal = (options = { precision: 255, scale: 2 }) => Column({

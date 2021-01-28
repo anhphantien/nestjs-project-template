@@ -1,6 +1,6 @@
 import { ERROR_CODE, USER } from '@/constants';
 import { UserRepository } from '@/repositories';
-import { BadRequestException, ForbiddenException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { ForbiddenException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { IUser } from '../interfaces';
@@ -28,7 +28,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       throw new NotFoundException(ERROR_CODE.USER_NOT_FOUND);
     }
     if (user.status === USER.STATUS.NOT_ACTIVATED) {
-      throw new BadRequestException(ERROR_CODE.USER_NOT_ACTIVATED);
+      throw new UnauthorizedException(ERROR_CODE.USER_NOT_ACTIVATED);
     }
     if (user.status === USER.STATUS.DISABLED) {
       throw new ForbiddenException(ERROR_CODE.DISABLED_USER);

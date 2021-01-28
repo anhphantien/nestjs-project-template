@@ -5,11 +5,11 @@ export const TEMPLATE = {
   },
   KEYWORDS: {
     FORGOT_PASSWORD: {
-      NEW_PASSWORD: '{{NEW_PASSWORD}}',
+      NEW_PASSWORD: '{{{NEW_PASSWORD}}}',
     },
     TWO_FACTOR_AUTHENTICATION: {
-      OTP: '{{OTP}}',
-      OTP_TTL: '{{OTP_TTL}}',
+      OTP: '{{{OTP}}}',
+      OTP_TTL: '{{{OTP_TTL}}}',
     },
   },
 };
