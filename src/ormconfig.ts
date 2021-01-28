@@ -20,5 +20,6 @@ const ormconfig: TypeOrmModuleOptions = {
   cli: {
     migrationsDir: 'migrations',
   },
+  bigNumberStrings: false,
 };
 export = ormconfig;

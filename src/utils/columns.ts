@@ -72,9 +72,18 @@ export const ColumnDecimal = (options = { precision: 255, scale: 2 }) => Column(
   scale: options.scale, // max: 30
 });
 
+export const ColumnForeignKey = () => Column({
+  type: 'bigint',
+  nullable: true,
+});
+
 export const ColumnInt = () => Column({
   type: 'int',
   nullable: true,
+});
+
+export const ColumnPrimaryKey = () => PrimaryGeneratedColumn({
+  type: 'bigint',
 });
 
 export const ColumnSimpleArray = () => Column({
@@ -96,15 +105,6 @@ export const ColumnTinyInt = (options = { default: null }) => Column({
   type: 'tinyint',
   nullable: true,
   default: options.default,
-});
-
-export const ColumnUnsignedForeignKey = () => Column({
-  unsigned: true,
-  nullable: true,
-});
-
-export const ColumnUnsignedPrimaryKey = () => PrimaryGeneratedColumn({
-  unsigned: true,
 });
 
 export const ColumnUuid = (options = { select: true }) => Column({
