@@ -25,31 +25,27 @@ const bootstrap = async () => {
           if (error.constraints) {
             message.push({
               field: error.property,
-              message: Object.values(error.constraints).join('\n'),
+              message: Object.values(error.constraints).join('; '),
             });
           } else {
-            for (const childrenError of error.children) {
-              if (childrenError.children.length) {
-                for (const error of childrenError.children) {
-                  message.push({
-                    field: error.property,
-                    message: Object.values(error.constraints).join('\n'),
-                  });
-                }
-              } else {
+            for (const childError of error.children) {
+              if (childError.constraints) {
                 message.push({
                   field: error.property,
-                  message: Object.values(childrenError.constraints).join('\n'),
+                  message: Object.values(childError.constraints).join('; '),
                 });
+              } else {
+                for (const grandChildError of childError.children) {
+                  message.push({
+                    field: grandChildError.property,
+                    message: Object.values(grandChildError.constraints).join('; '),
+                  });
+                }
               }
             }
           }
         }
-        throw new BadRequestException({
-          statusCode: 400,
-          message,
-          error: 'Bad Request',
-        });
+        throw new BadRequestException(message);
       },
     }),
   );
