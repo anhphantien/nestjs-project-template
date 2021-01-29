@@ -9,9 +9,9 @@ require('dotenv').config();
 @Controller('health')
 export class HealthController {
   constructor(
-    private healthCheckService: HealthCheckService,
-    private dnsHealthIndicator: DNSHealthIndicator,
-    private typeormHealthIndicator: TypeOrmHealthIndicator,
+    private readonly healthCheckService: HealthCheckService,
+    private readonly dnsHealthIndicator: DNSHealthIndicator,
+    private readonly typeormHealthIndicator: TypeOrmHealthIndicator,
   ) { }
 
   @Get()

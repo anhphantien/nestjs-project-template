@@ -12,7 +12,7 @@ export class isDate implements ValidatorConstraintInterface {
   }
 
   defaultMessage({ property }) {
-    return `${property} must be a valid date (YYYY-MM-DD)`;
+    return `${property} must be a valid date (Required format: YYYY-MM-DD)`;
   }
 }
 
