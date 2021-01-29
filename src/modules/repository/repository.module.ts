@@ -2,12 +2,9 @@ import { Global, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import repositories = require('../../repositories');
 
-const repositoryModule = TypeOrmModule.forFeature(Object.values(repositories));
-
 @Global()
 @Module({
-  imports: [repositoryModule],
-  providers: repositoryModule.providers,
-  exports: repositoryModule.exports,
+  providers: TypeOrmModule.forFeature(Object.values(repositories)).providers,
+  exports: TypeOrmModule.forFeature(Object.values(repositories)).exports,
 })
 export class RepositoryModule { }
