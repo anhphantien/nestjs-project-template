@@ -72,18 +72,9 @@ export const ColumnDecimal = (options = { precision: 255, scale: 2 }) => Column(
   scale: options.scale, // max: 30
 });
 
-export const ColumnForeignKey = () => Column({
-  type: 'bigint',
-  nullable: true,
-});
-
 export const ColumnInt = () => Column({
   type: 'int',
   nullable: true,
-});
-
-export const ColumnPrimaryKey = () => PrimaryGeneratedColumn({
-  type: 'bigint',
 });
 
 export const ColumnSimpleArray = () => Column({
@@ -120,6 +111,17 @@ export const CreatedAt = (options = { select: false }) => CreateDateColumn({
   nullable: true,
   precision: 0,
   select: options.select,
+});
+
+export const ForeignKeyColumn = () => Column({
+  type: 'bigint',
+  unsigned: true,
+  nullable: true,
+});
+
+export const PrimaryKeyColumn = () => PrimaryGeneratedColumn({
+  type: 'bigint',
+  unsigned: true,
 });
 
 export const UpdatedAt = (options = { select: false }) => UpdateDateColumn({

@@ -1,9 +1,9 @@
-import { Column255Char, Column32Char, Column64Char, ColumnTinyInt, ColumnPrimaryKey, CreatedAt, UpdatedAt } from '@/utils';
+import { Column255Char, Column32Char, Column64Char, ColumnTinyInt, CreatedAt, PrimaryKeyColumn, UpdatedAt } from '@/utils';
 import { Entity, Index } from 'typeorm';
 
 @Entity('User')
 export class User {
-  @ColumnPrimaryKey()
+  @PrimaryKeyColumn()
   id: number;
 
   @Column32Char()

@@ -1,9 +1,9 @@
-import { Column255Char, Column64Char, Column8Char, ColumnText, ColumnPrimaryKey, CreatedAt, UpdatedAt } from '@/utils';
+import { Column255Char, Column64Char, Column8Char, ColumnText, CreatedAt, PrimaryKeyColumn, UpdatedAt } from '@/utils';
 import { Entity, Index } from 'typeorm';
 
 @Entity('Template')
 export class Template {
-  @ColumnPrimaryKey()
+  @PrimaryKeyColumn()
   id: number;
 
   @Column8Char()
