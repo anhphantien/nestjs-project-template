@@ -63,7 +63,7 @@ export class AuthService {
     }
     const user = await this.userRepository.findOne({ id: payload.id });
     this.checkUser(user);
-    await this.tokenService.deleteRefreshToken(oldRefreshToken);
+    this.tokenService.deleteRefreshToken(oldRefreshToken);
     return this.tokenService.createToken({ id: user.id, username: user.username, role: user.role });
   }
 

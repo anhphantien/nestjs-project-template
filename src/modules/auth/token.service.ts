@@ -14,13 +14,13 @@ export class TokenService {
     private readonly redisService: RedisService,
   ) { }
 
-  async createToken(payload: IUser, requireRefreshToken = true) {
+  createToken(payload: IUser, requireRefreshToken = true) {
     const accessToken = this.jwtService.sign(payload);
     if (!requireRefreshToken) {
       return { accessToken };
     }
     const refreshToken = uuidv4();
-    await this.redisService.setAsync(
+    this.redisService.set(
       refreshToken,
       accessToken,
       'EX', // lưu trữ với thời gian giảm dần là giây
@@ -32,7 +32,7 @@ export class TokenService {
 
   async decodeAccessToken(refreshToken: string) {
     try {
-      const accessToken = await this.redisService.getAsync(refreshToken);
+      const accessToken = await this.redisService.get(refreshToken);
       if (!accessToken) {
         throw new BadRequestException(ERROR_CODE.INVALID_REFRESH_TOKEN);
       }
@@ -42,7 +42,7 @@ export class TokenService {
     }
   }
 
-  async deleteRefreshToken(refreshToken: string) {
-    return this.redisService.delAsync(refreshToken);
+  deleteRefreshToken(refreshToken: string) {
+    return this.redisService.del(refreshToken);
   }
 }
