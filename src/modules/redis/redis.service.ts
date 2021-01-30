@@ -1,11 +1,14 @@
 import { Injectable } from '@nestjs/common';
+import { promisifyAll } from 'bluebird';
 import redis = require('redis');
 
 require('dotenv').config();
 
+promisifyAll(redis);
+
 @Injectable()
 export class RedisService {
-  private client: redis.RedisClient;
+  private client: redis.RedisClient | any;
 
   constructor() {
     this.client = redis.createClient({
@@ -14,27 +17,19 @@ export class RedisService {
     });
   }
 
-  set(key: string, value: string, mode: 'EX' | 'PX', duration: number) {
-    return this.client.set(key, value, mode, duration);
+  setAsync(key: string, value: string, mode: 'EX' | 'PX', duration: number) {
+    return this.client.setAsync(key, value, mode, duration);
   }
 
-  get(key: string): Promise<string | null> {
-    return new Promise(resolve => {
-      this.client.get(key, (_, data) => {
-        resolve(data);
-      });
-    });
+  getAsync(key: string) {
+    return this.client.getAsync(key);
   }
 
-  del(key: string) {
-    return this.client.del(key);
+  delAsync(key: string) {
+    return this.client.delAsync(key);
   }
 
-  ttl(key: string): Promise<number> {
-    return new Promise(resolve => {
-      this.client.ttl(key, (_, data) => {
-        resolve(data);
-      });
-    });
+  ttlAsync(key: string) {
+    return this.client.ttlAsync(key);
   }
 }

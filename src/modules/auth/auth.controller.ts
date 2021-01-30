@@ -10,14 +10,14 @@ export class AuthController {
 
   @Post('login')
   async login(@Body() body: LoginBody) {
-    const { usernameOrEmail, password } = body;
-    return this.authService.login(usernameOrEmail, password);
+    const { username, password } = body;
+    return this.authService.login(username, password);
   }
 
   @Post('verifyOtp')
   async verifyOtp(@Body() body: VerifyOtpBody) {
-    const { usernameOrEmail, otp } = body;
-    return this.authService.verifyOtp(usernameOrEmail, otp);
+    const { username, otp } = body;
+    return this.authService.verifyOtp(username, otp);
   }
 
   @Post('refreshToken')
@@ -34,7 +34,7 @@ export class AuthController {
 
   @Post('resetPassword')
   async resetPassword(@Body() body: ResetPasswordBody) {
-    const { usernameOrEmail, currentPassword, newPassword } = body;
-    return this.authService.resetPassword(usernameOrEmail, currentPassword, newPassword);
+    const { username, currentPassword, newPassword } = body;
+    return this.authService.resetPassword(username, currentPassword, newPassword);
   }
 }

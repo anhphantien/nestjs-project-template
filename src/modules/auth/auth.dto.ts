@@ -7,7 +7,7 @@ export class LoginBody {
   @IsNotEmpty()
   @Trim()
   @ApiProperty({ example: 'superadmin' })
-  usernameOrEmail: string;
+  username: string;
 
   @IsString()
   @IsNotEmpty()
@@ -20,7 +20,7 @@ export class VerifyOtpBody {
   @IsNotEmpty()
   @Trim()
   @ApiProperty({ example: 'superadmin' })
-  usernameOrEmail: string;
+  username: string;
 
   @IsString()
   @IsNotEmpty()
@@ -49,7 +49,7 @@ export class ResetPasswordBody {
   @IsNotEmpty()
   @Trim()
   @ApiProperty({ example: '' })
-  usernameOrEmail: string;
+  username: string;
 
   @IsString()
   @IsNotEmpty()

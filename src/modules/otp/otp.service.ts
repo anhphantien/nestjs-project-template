@@ -12,7 +12,7 @@ export class OtpService {
   ) { }
 
   async checkBeforeSend(email: string) {
-    const currentTtl = await this.redisService.ttl(email); // thời gian tồn tại còn lại
+    const currentTtl = await this.redisService.ttlAsync(email); // thời gian tồn tại còn lại
     if (Number(process.env.OTP_TTL) - currentTtl > Number(process.env.OTP_TIME_TO_RESEND)) {
       return true;
     }
@@ -22,13 +22,13 @@ export class OtpService {
   async send(email: string, initValue: number) {
     const otp = (Math.trunc(Math.random() * initValue * 9) + initValue).toString(); // tạo otp
     await this.notificationService.sendOtp(email, otp);
-    this.redisService.set(email, otp, 'EX', Number(process.env.OTP_TTL));
+    await this.redisService.setAsync(email, otp, 'EX', Number(process.env.OTP_TTL));
   }
 
   async verify(email: string, otp: string) {
-    const storedOtp = await this.redisService.get(email);
+    const storedOtp = await this.redisService.getAsync(email);
     if (storedOtp === otp) {
-      this.redisService.del(email);
+      await this.redisService.delAsync(email);
       return true;
     }
     return false;

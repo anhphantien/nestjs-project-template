@@ -20,10 +20,10 @@ export class AuthService {
     private readonly notificationService: NotificationService,
   ) { }
 
-  async login(usernameOrEmail: string, password: string) {
+  async login(username: string, password: string) {
     const user = await this.userRepository.findOne({
       select: ['id', 'username', 'passwordHash', 'status', 'role', 'email'],
-      where: [{ username: usernameOrEmail }, { email: usernameOrEmail }],
+      where: [{ username }, { email: username }],
     });
     this.checkUser(user);
     if (!bcrypt.compareSync(password, user.passwordHash)) {
@@ -44,9 +44,9 @@ export class AuthService {
     return { message: 'OTP has been sent!' };
   }
 
-  async verifyOtp(usernameOrEmail: string, otp: string) {
+  async verifyOtp(username: string, otp: string) {
     const user = await this.userRepository.findOne({
-      where: [{ username: usernameOrEmail }, { email: usernameOrEmail }],
+      where: [{ username }, { email: username }],
     });
     this.checkUser(user);
     const validOtp = await this.otpService.verify(user.email, otp);
@@ -63,7 +63,7 @@ export class AuthService {
     }
     const user = await this.userRepository.findOne({ id: payload.id });
     this.checkUser(user);
-    this.tokenService.deleteRefreshToken(oldRefreshToken);
+    await this.tokenService.deleteRefreshToken(oldRefreshToken);
     return this.tokenService.createToken({ id: user.id, username: user.username, role: user.role });
   }
 
@@ -76,10 +76,10 @@ export class AuthService {
     return { message: 'New password has been sent!' };
   }
 
-  async resetPassword(usernameOrEmail: string, currentPassword: string, newPassword: string) {
+  async resetPassword(username: string, currentPassword: string, newPassword: string) {
     const user = await this.userRepository.findOne({
       select: ['id', 'passwordHash', 'status'],
-      where: [{ username: usernameOrEmail }, { email: usernameOrEmail }],
+      where: [{ username }, { email: username }],
     });
     this.checkUser(user);
     if (!bcrypt.compareSync(currentPassword, user.passwordHash)) {
