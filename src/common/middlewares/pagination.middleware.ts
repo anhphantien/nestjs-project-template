@@ -7,7 +7,7 @@ export const PaginationMiddleware = (config: {
   filterFields?: string[];
   sortFields: string[];
   defaultSort: { field: string, order: 'ASC' | 'DESC' };
-}) => (req: Request | any, res: Response | any, next: NextFunction) => {
+}) => (req: Request | any, res: Response, next: NextFunction) => {
   const defaultConfig = { defaultSize: 10, maxSize: 100, filterFields: [] };
   const { defaultSize, maxSize, filterFields, sortFields, defaultSort } = { ...defaultConfig, ...config };
 
