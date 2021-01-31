@@ -76,19 +76,6 @@ export class AuthService {
     return { message: 'New password has been sent!' };
   }
 
-  async resetPassword(username: string, currentPassword: string, newPassword: string) {
-    const user = await this.userRepository.findOne({
-      select: ['id', 'passwordHash', 'status'],
-      where: [{ username }, { email: username }],
-    });
-    this.checkUser(user);
-    if (!bcrypt.compareSync(currentPassword, user.passwordHash)) {
-      throw new BadRequestException(ERROR_CODE.INVALID_PASSWORD);
-    }
-    await this.userRepository.update({ id: user.id }, { passwordHash: bcrypt.hashSync(newPassword, 10) });
-    return { message: 'Password has been reset successfully!' };
-  }
-
   private checkUser(user: User) {
     if (!user) {
       throw new NotFoundException(ERROR_CODE.USER_NOT_FOUND);

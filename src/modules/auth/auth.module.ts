@@ -1,5 +1,7 @@
+import { JwtStrategy } from '@/common/strategies';
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
+import { PassportModule } from '@nestjs/passport';
 import { NotificationModule } from '../notification/notification.module';
 import { OtpModule } from '../otp/otp.module';
 import { AuthController } from './auth.controller';
@@ -10,6 +12,7 @@ require('dotenv').config();
 
 @Module({
   imports: [
+    PassportModule,
     JwtModule.register({
       secret: process.env.JWT_SECRET_KEY,
       signOptions: { expiresIn: Number(process.env.JWT_EXP_TIME) },
@@ -18,6 +21,6 @@ require('dotenv').config();
     OtpModule,
   ],
   controllers: [AuthController],
-  providers: [AuthService, TokenService],
+  providers: [AuthService, TokenService, JwtStrategy],
 })
 export class AuthModule { }
