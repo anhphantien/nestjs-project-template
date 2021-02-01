@@ -10,18 +10,18 @@ export class User {
   @Index('username', { unique: true })
   username: string;
 
+  @Column64Char()
+  @Index('email', { unique: true })
+  email: string;
+
   @Column255Char({ select: false })
   passwordHash: string;
 
   @ColumnTinyInt()
-  status: number;
-
-  @ColumnTinyInt()
   role: number;
 
-  @Column64Char()
-  @Index('email', { unique: true })
-  email: string;
+  @ColumnTinyInt()
+  status: number;
 
   @CreatedAt()
   createdAt: Date;
