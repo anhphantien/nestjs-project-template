@@ -20,8 +20,9 @@ export class isDate implements ValidatorConstraintInterface {
 export class isPassword implements ValidatorConstraintInterface {
   validate(value: any) {
     if (typeof value === 'string') {
-      return Boolean(value.length >= 6);
+      return value.length >= 6;
     }
+    return false;
   }
 
   defaultMessage({ property }) {
@@ -33,11 +34,12 @@ export class isPassword implements ValidatorConstraintInterface {
 export class isUsername implements ValidatorConstraintInterface {
   validate(value: any) {
     if (typeof value === 'string') {
-      return Boolean(value.match(/[a-z0-9_.]{4,32}$/g));
+      return /^[a-z\d]{4,32}$/.test(value);
     }
+    return false;
   }
 
   defaultMessage({ property }) {
-    return `${property} must contain only lowercase letters, numbers, underscores, dots and be between 4 and 32 characters long`;
+    return `${property} can only contain lowercase letters, numbers and must be between 4 and 32 characters long`;
   }
 }
