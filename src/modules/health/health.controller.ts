@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { DNSHealthIndicator, HealthCheck, HealthCheckService, TypeOrmHealthIndicator } from '@nestjs/terminus';
+import { HealthCheck, HealthCheckService, HttpHealthIndicator, TypeOrmHealthIndicator } from '@nestjs/terminus';
 // import { createConnection } from 'typeorm';
 
 require('dotenv').config();
@@ -10,7 +10,7 @@ require('dotenv').config();
 export class HealthController {
   constructor(
     private readonly healthCheckService: HealthCheckService,
-    private readonly dnsHealthIndicator: DNSHealthIndicator,
+    private readonly httpHealthIndicator: HttpHealthIndicator,
     private readonly typeormHealthIndicator: TypeOrmHealthIndicator,
   ) { }
 
@@ -18,7 +18,7 @@ export class HealthController {
   @HealthCheck()
   check() {
     return this.healthCheckService.check([
-      () => this.dnsHealthIndicator.pingCheck('NestJS project template', process.env.HEALTHCHECK_URL),
+      () => this.httpHealthIndicator.pingCheck('NestJS project template', process.env.HEALTHCHECK_URL),
       () => this.typeormHealthIndicator.pingCheck('db'),
       // async () => this.typeormHealthIndicator.pingCheck('db', {
       //   connection: await createConnection({

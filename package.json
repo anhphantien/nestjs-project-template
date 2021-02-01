@@ -29,7 +29,7 @@
     "@nestjs/platform-socket.io": "^7.6.7",
     "@nestjs/schedule": "^0.4.2",
     "@nestjs/swagger": "^4.7.12",
-    "@nestjs/terminus": "^7.0.1",
+    "@nestjs/terminus": "^7.1.0",
     "@nestjs/typeorm": "^7.1.5",
     "@nestjs/websockets": "^7.6.7",
     "@sentry/node": "^6.0.3",
