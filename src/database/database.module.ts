@@ -1,4 +1,4 @@
-import ormconfig = require('@/ormconfig');
+import { ormconfig } from '@/ormconfig';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 

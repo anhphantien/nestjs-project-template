@@ -9,7 +9,7 @@ import { NodemailerModule } from './modules/nodemailer/nodemailer.module';
 import { RedisModule } from './modules/redis/redis.module';
 import { RepositoryModule } from './modules/repository/repository.module';
 import { SocketModule } from './modules/socket/socket.module';
-import ormconfig = require('./ormconfig');
+import { ormconfig } from './ormconfig';
 
 @Module({
   imports: [
