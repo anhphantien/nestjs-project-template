@@ -2,11 +2,11 @@ import { IUser } from '@/common/interfaces';
 import { ERROR_CODE, USER } from '@/constants';
 import { User } from '@/entities';
 import { UserRepository } from '@/repositories';
-import { BadRequestException, ForbiddenException, HttpException, HttpStatus, Injectable, InternalServerErrorException, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, ForbiddenException, Injectable, InternalServerErrorException, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import bcrypt = require('bcrypt');
 import passwordGenerator = require('generate-password');
 import { NotificationService } from '../notification/notification.service';
-import { OtpService } from '../otp/otp.service';
+import { OtpService } from './otp.service';
 import { TokenService } from './token.service';
 
 require('dotenv').config();
@@ -35,16 +35,7 @@ export class AuthService {
     if (user.role === USER.ROLE.ADMIN) {
       return this.tokenService.createToken({ id: user.id, username: user.username, role: user.role });
     }
-    const allowSend = await this.otpService.checkBeforeSend(user.email);
-    if (!allowSend) {
-      throw new HttpException({
-        statusCode: HttpStatus.TOO_MANY_REQUESTS,
-        error: 'Too Many Requests',
-        message: ERROR_CODE.TOO_MANY_REQUESTS_TO_RECEIVE_OTP,
-      }, HttpStatus.TOO_MANY_REQUESTS);
-    }
-    await this.otpService.send(user.email, Number(process.env.OTP_4_DIGIT));
-    return { message: 'OTP has been sent!' };
+    return this.otpService.send(user.email, Number(process.env.OTP_4_DIGIT));
   }
 
   async verifyOtp(username: string, otp: string) {
@@ -52,10 +43,7 @@ export class AuthService {
       where: [{ username }, { email: username }],
     });
     this.validateUser(user);
-    const validOtp = await this.otpService.verify(user.email, otp);
-    if (!validOtp) {
-      throw new BadRequestException(ERROR_CODE.INVALID_OTP);
-    }
+    await this.otpService.verify(user.email, otp);
     return this.tokenService.createToken({ id: user.id, username: user.username, role: user.role });
   }
 
