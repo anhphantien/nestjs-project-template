@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
 import { ScheduleModule } from '@nestjs/schedule';
 import { SocketModule } from '../socket/socket.module';
-import { CronJobService } from './cronJob.service';
+import { CronService } from './cron.service';
 
 @Module({
   imports: [
     ScheduleModule.forRoot(),
     SocketModule,
   ],
-  providers: [CronJobService],
+  providers: [CronService],
 })
-export class CronJobModule { }
+export class CronModule { }

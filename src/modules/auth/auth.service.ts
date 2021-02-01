@@ -2,7 +2,7 @@ import { IUser } from '@/common/interfaces';
 import { ERROR_CODE, USER } from '@/constants';
 import { User } from '@/entities';
 import { UserRepository } from '@/repositories';
-import { BadRequestException, ForbiddenException, HttpException, HttpStatus, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, ForbiddenException, HttpException, HttpStatus, Injectable, InternalServerErrorException, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import bcrypt = require('bcrypt');
 import passwordGenerator = require('generate-password');
 import { NotificationService } from '../notification/notification.service';
@@ -26,6 +26,9 @@ export class AuthService {
       where: [{ username }, { email: username }],
     });
     this.checkUser(user);
+    if (!user.passwordHash) {
+      throw new InternalServerErrorException(ERROR_CODE.PASSWORD_HASH_NOT_FOUND);
+    }
     if (!bcrypt.compareSync(password, user.passwordHash)) {
       throw new BadRequestException(ERROR_CODE.INVALID_PASSWORD);
     }

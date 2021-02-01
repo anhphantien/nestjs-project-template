@@ -7,7 +7,7 @@ import { SocketGateway } from '../socket/socket.gateway';
 require('dotenv').config();
 
 @Injectable()
-export class CronJobService {
+export class CronService {
   constructor(private readonly socketGateway: SocketGateway) { }
 
   @Cron(CronExpression.EVERY_DAY_AT_MIDNIGHT)

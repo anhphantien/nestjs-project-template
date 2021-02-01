@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AuthModule } from './modules/auth/auth.module';
-import { CronJobModule } from './modules/cronJob/cronJob.module';
+import { CronModule } from './modules/cron/cron.module';
 import { HealthModule } from './modules/health/health.module';
 import { MeModule } from './modules/me/me.module';
 import { NodemailerModule } from './modules/nodemailer/nodemailer.module';
@@ -17,13 +17,13 @@ import ormconfig = require('./ormconfig');
 
     // module(s)
     AuthModule,
-    CronJobModule,
+    CronModule,
     HealthModule,
     MeModule,
     NodemailerModule,
     RedisModule,
     RepositoryModule,
-    SocketModule, // WebSockets
+    SocketModule,
   ],
   controllers: [
     AppController,
