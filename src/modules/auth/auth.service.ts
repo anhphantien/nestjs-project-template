@@ -25,7 +25,7 @@ export class AuthService {
       select: ['id', 'username', 'passwordHash', 'status', 'role', 'email'],
       where: [{ username }, { email: username }],
     });
-    this.checkUser(user);
+    this.validateUser(user);
     if (!user.passwordHash) {
       throw new InternalServerErrorException(ERROR_CODE.PASSWORD_HASH_NOT_FOUND);
     }
@@ -51,7 +51,7 @@ export class AuthService {
     const user = await this.userRepository.findOne({
       where: [{ username }, { email: username }],
     });
-    this.checkUser(user);
+    this.validateUser(user);
     const validOtp = await this.otpService.verify(user.email, otp);
     if (!validOtp) {
       throw new BadRequestException(ERROR_CODE.INVALID_OTP);
@@ -65,21 +65,21 @@ export class AuthService {
       throw new BadRequestException(ERROR_CODE.INVALID_PAYLOAD);
     }
     const user = await this.userRepository.findOne({ id: payload.id });
-    this.checkUser(user);
+    this.validateUser(user);
     await this.tokenService.deleteRefreshToken(oldRefreshToken);
     return this.tokenService.createToken({ id: user.id, username: user.username, role: user.role });
   }
 
   async forgotPassword(email: string) {
     const user = await this.userRepository.findOne({ email });
-    this.checkUser(user);
+    this.validateUser(user);
     const newPassword = passwordGenerator.generate({ length: 10, numbers: true });
     await this.notificationService.sendNewPassword(email, newPassword);
     await this.userRepository.update({ id: user.id }, { passwordHash: bcrypt.hashSync(newPassword, 10) });
     return { message: 'New password has been sent!' };
   }
 
-  private checkUser(user: User) {
+  private validateUser(user: User) {
     if (!user) {
       throw new NotFoundException(ERROR_CODE.USER_NOT_FOUND);
     }
