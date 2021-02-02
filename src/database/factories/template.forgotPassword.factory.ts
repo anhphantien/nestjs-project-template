@@ -4,12 +4,12 @@ import { define } from 'typeorm-seeding';
 
 require('dotenv').config();
 
-const { USERNAME, OTP, OTP_TTL } = TEMPLATE.KEYWORDS.TWO_FACTOR_AUTHENTICATION;
+const { USERNAME, NEW_PASSWORD } = TEMPLATE.KEYWORDS.FORGOT_PASSWORD;
 
 define(Template, () => {
   const template = new Template();
-  template.templateCode = TEMPLATE.CODE.TWO_FACTOR_AUTHENTICATION;
+  template.templateCode = TEMPLATE.CODE.FORGOT_PASSWORD;
   template.subject = process.env.APP_NAME;
-  template.content = `Hi, ${USERNAME}! Your OTP is: <strong>${OTP}</strong>. The OTP is valid for ${OTP_TTL} minute(s).`;
+  template.content = `Hi, ${USERNAME}! Your new password is: <strong>${NEW_PASSWORD}</strong>. Please change your password again after next login.`;
   return template;
 });
