@@ -21,6 +21,10 @@
     "interface-over-type-literal": true,
     "label-position": true,
     "max-line-length": false,
+    "member-access": [
+      true,
+      "no-public"
+    ],
     "no-arg": true,
     "no-bitwise": true,
     "no-consecutive-blank-lines": true,
