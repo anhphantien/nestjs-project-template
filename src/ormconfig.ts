@@ -3,7 +3,7 @@ import entities = require('./entities');
 
 require('dotenv').config();
 
-export const ormconfig: TypeOrmModuleOptions = {
+const ormconfig: TypeOrmModuleOptions = {
   type: 'mysql',
   host: process.env.DB_HOST,
   port: Number(process.env.DB_PORT),
@@ -20,3 +20,5 @@ export const ormconfig: TypeOrmModuleOptions = {
     migrationsDir: 'migrations',
   },
 };
+
+export default ormconfig;
