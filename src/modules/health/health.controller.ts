@@ -18,7 +18,7 @@ export class HealthController {
   @HealthCheck()
   check() {
     return this.healthCheckService.check([
-      () => this.httpHealthIndicator.pingCheck('NestJS project template', process.env.HEALTHCHECK_URL),
+      () => this.httpHealthIndicator.pingCheck(process.env.APP_NAME, process.env.HEALTHCHECK_URL),
       () => this.typeormHealthIndicator.pingCheck('db'),
       // async () => this.typeormHealthIndicator.pingCheck('db', {
       //   connection: await createConnection({
