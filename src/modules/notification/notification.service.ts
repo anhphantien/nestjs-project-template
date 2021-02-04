@@ -28,6 +28,7 @@ export class NotificationService {
       if (error.message.includes('No recipients defined')) {
         throw new BadRequestException(ERROR_CODE.INVALID_EMAIL_ADDRESS);
       }
+      throw new BadRequestException(error);
     }
   }
 
@@ -45,6 +46,7 @@ export class NotificationService {
       if (error.message.includes('No recipients defined')) {
         throw new BadRequestException(ERROR_CODE.INVALID_EMAIL_ADDRESS);
       }
+      throw new BadRequestException(error);
     }
   }
 }
