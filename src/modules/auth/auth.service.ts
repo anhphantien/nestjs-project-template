@@ -35,7 +35,7 @@ export class AuthService {
     if (user.role === USER.ROLE.ADMIN) {
       return this.tokenService.createToken({ id: user.id, username: user.username, role: user.role });
     }
-    return this.otpService.send(user.email, Number(process.env.OTP_4_DIGIT));
+    return this.otpService.send(user.email);
   }
 
   async verifyOtp(username: string, otp: string) {

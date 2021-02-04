@@ -12,7 +12,7 @@ export class OtpService {
     private readonly notificationService: NotificationService,
   ) { }
 
-  async send(email: string, initValue: number) {
+  async send(email: string) {
     const remainingTtl = await this.redisService.ttlAsync(email); // thời gian tồn tại còn lại
     if (Number(process.env.OTP_TTL) - remainingTtl <= Number(process.env.OTP_TIME_TO_RESEND)) {
       throw new HttpException({
@@ -21,7 +21,7 @@ export class OtpService {
         message: ERROR_CODE.TOO_MANY_REQUESTS_TO_RECEIVE_OTP,
       }, HttpStatus.TOO_MANY_REQUESTS);
     }
-    const otp = (Math.trunc(Math.random() * initValue * 9) + initValue).toString();
+    const otp = Math.random().toString().slice(2, 2 + Number(process.env.OTP_LENGTH));
     await this.notificationService.sendOtp(email, otp);
     await this.redisService.setAsync(email, otp, 'EX', Number(process.env.OTP_TTL));
     return { message: 'OTP has been sent!' };
