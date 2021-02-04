@@ -1,6 +1,6 @@
-import { ERROR_CODE } from '@/constants';
+import { ERROR_CODE, USER } from '@/constants';
 import { UserRepository } from '@/repositories';
-import { BadRequestException, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, ForbiddenException, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { ConnectedSocket, MessageBody, SubscribeMessage, WebSocketGateway, WebSocketServer } from '@nestjs/websockets';
 import jwt = require('jsonwebtoken');
 import { Server, Socket } from 'socket.io';
@@ -15,9 +15,9 @@ export class SocketGateway {
   server: Server;
 
   @SubscribeMessage('addUser')
-  async handleAddUser(@ConnectedSocket() socket: Socket, @MessageBody() token: string) {
+  async handleAddUser(@ConnectedSocket() socket: Socket, @MessageBody() data: string) {
     try {
-      const payload: any = jwt.verify(token, process.env.JWT_SECRET_KEY, { ignoreExpiration: true });
+      const payload: any = jwt.verify(data, process.env.JWT_SECRET_KEY, { ignoreExpiration: true });
       if (!payload || !payload.id) {
         throw new BadRequestException(ERROR_CODE.INVALID_PAYLOAD);
       }
@@ -28,8 +28,14 @@ export class SocketGateway {
       if (!user) {
         throw new NotFoundException(ERROR_CODE.USER_NOT_FOUND);
       }
+      if (user.status === USER.STATUS.NOT_ACTIVATED) {
+        throw new UnauthorizedException(ERROR_CODE.USER_NOT_ACTIVATED);
+      }
+      if (user.status === USER.STATUS.DISABLED) {
+        throw new ForbiddenException(ERROR_CODE.DISABLED_USER);
+      }
       socket.join(`${user.id}`);
-      return 'User has joined the room!';
+      return `${user.username} joined!`;
     } catch (error) {
       throw new BadRequestException(error);
     }
