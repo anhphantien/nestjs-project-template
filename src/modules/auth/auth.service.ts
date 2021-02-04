@@ -22,7 +22,7 @@ export class AuthService {
 
   async login(username: string, password: string) {
     const user = await this.userRepository.findOne({
-      select: ['id', 'username', 'passwordHash', 'status', 'role', 'email'],
+      select: ['id', 'username', 'passwordHash', 'role', 'status', 'email'],
       where: [{ username }, { email: username }],
     });
     this.validateUser(user);
