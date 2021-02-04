@@ -15,7 +15,7 @@ export class SocketGateway {
   server: Server;
 
   @SubscribeMessage('addUser')
-  async handleAddUser(@ConnectedSocket() socket: Socket, @MessageBody() data: string) {
+  async handleAddUser(@ConnectedSocket() socket: Socket, @MessageBody() data: string | any) {
     try {
       const payload: any = jwt.verify(data, process.env.JWT_SECRET_KEY, { ignoreExpiration: true });
       if (!payload || !payload.id) {
@@ -41,8 +41,7 @@ export class SocketGateway {
     }
   }
 
-  @SubscribeMessage('newNotifications')
-  handleNewNotifications(room: string, data: any) {
-    this.server.to(room).emit('newNotifications', data);
+  handleNewNotification(room: string, data: any) {
+    this.server.to(room).emit('newNotification', data);
   }
 }
