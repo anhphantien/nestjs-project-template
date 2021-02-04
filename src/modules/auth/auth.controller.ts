@@ -9,25 +9,25 @@ export class AuthController {
   constructor(private readonly authService: AuthService) { }
 
   @Post('login')
-  async login(@Body() body: LoginBody) {
+  login(@Body() body: LoginBody) {
     const { username, password } = body;
     return this.authService.login(username, password);
   }
 
   @Post('verifyOtp')
-  async verifyOtp(@Body() body: VerifyOtpBody) {
+  verifyOtp(@Body() body: VerifyOtpBody) {
     const { username, otp } = body;
     return this.authService.verifyOtp(username, otp);
   }
 
   @Post('refreshToken')
-  async refreshToken(@Body() body: RefreshTokenBody) {
+  refreshToken(@Body() body: RefreshTokenBody) {
     const { refreshToken } = body;
     return this.authService.refreshToken(refreshToken);
   }
 
   @Post('forgotPassword')
-  async forgotPassword(@Body() body: ForgotPasswordBody) {
+  forgotPassword(@Body() body: ForgotPasswordBody) {
     const { email } = body;
     return this.authService.forgotPassword(email);
   }

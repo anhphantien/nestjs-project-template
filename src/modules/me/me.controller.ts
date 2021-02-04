@@ -14,12 +14,12 @@ export class MeController {
   constructor(private readonly meService: MeService) { }
 
   @Get()
-  async getMe(@CurrentUser() user: IUser) {
+  getMe(@CurrentUser() user: IUser) {
     return this.meService.getMe(user.id);
   }
 
   @Post('changePassword')
-  async changePassword(@CurrentUser() user: IUser, @Body() body: ChangePasswordBody) {
+  changePassword(@CurrentUser() user: IUser, @Body() body: ChangePasswordBody) {
     const { currentPassword, newPassword } = body;
     return this.meService.changePassword(user.id, currentPassword, newPassword);
   }
