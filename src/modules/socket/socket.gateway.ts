@@ -1,15 +1,17 @@
+import { IUser } from '@/common/interfaces';
 import { ERROR_CODE, USER } from '@/constants';
 import { UserRepository } from '@/repositories';
 import { BadRequestException, ForbiddenException, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 import { ConnectedSocket, MessageBody, SubscribeMessage, WebSocketGateway, WebSocketServer } from '@nestjs/websockets';
-import jwt = require('jsonwebtoken');
 import { Server, Socket } from 'socket.io';
-
-require('dotenv').config();
 
 @WebSocketGateway()
 export class SocketGateway {
-  constructor(private readonly userRepository: UserRepository) { }
+  constructor(
+    private readonly jwtService: JwtService,
+    private readonly userRepository: UserRepository,
+  ) { }
 
   @WebSocketServer()
   server: Server;
@@ -17,7 +19,7 @@ export class SocketGateway {
   @SubscribeMessage('addUser')
   async handleAddUser(@ConnectedSocket() socket: Socket, @MessageBody() data: string | any) {
     try {
-      const payload: any = jwt.verify(data, process.env.JWT_SECRET_KEY, { ignoreExpiration: true });
+      const payload: IUser = this.jwtService.verify(data, { ignoreExpiration: true });
       if (!payload || !payload.id) {
         throw new BadRequestException(ERROR_CODE.INVALID_PAYLOAD);
       }

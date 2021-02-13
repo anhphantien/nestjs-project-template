@@ -9,8 +9,6 @@ import { NotificationService } from '../notification/notification.service';
 import { OtpService } from './otp.service';
 import { TokenService } from './token.service';
 
-require('dotenv').config();
-
 @Injectable()
 export class AuthService {
   constructor(
