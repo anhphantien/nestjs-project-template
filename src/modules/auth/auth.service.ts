@@ -74,7 +74,7 @@ export class AuthService {
     if (user.status === USER.STATUS.NOT_ACTIVATED) {
       throw new UnauthorizedException(ERROR_CODE.USER_NOT_ACTIVATED);
     }
-    if (user.status === USER.STATUS.DISABLED) {
+    if (user.status === USER.STATUS.IS_DISABLED) {
       throw new ForbiddenException(ERROR_CODE.DISABLED_USER);
     }
   }

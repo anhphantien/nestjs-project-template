@@ -40,6 +40,6 @@ export class isUsername implements ValidatorConstraintInterface {
   }
 
   defaultMessage({ property }) {
-    return `${property} can only contain lowercase letters, numbers and must be between 4 and 32 characters long`;
+    return `${property} can only contain lowercase letters, numbers and must be 4-32 characters long`;
   }
 }

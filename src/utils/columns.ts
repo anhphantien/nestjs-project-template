@@ -109,7 +109,7 @@ export const ColumnUuid = (options = { select: true }) => Column({
 export const CreatedAt = (options = { select: false }) => CreateDateColumn({
   type: 'datetime',
   nullable: true,
-  precision: 0,
+  // precision: 0,
   select: options.select,
 });
 
@@ -127,6 +127,6 @@ export const PrimaryKeyColumn = () => PrimaryGeneratedColumn({
 export const UpdatedAt = (options = { select: false }) => UpdateDateColumn({
   type: 'datetime',
   nullable: true,
-  precision: 0,
+  // precision: 0,
   select: options.select,
 });

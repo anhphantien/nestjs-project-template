@@ -6,6 +6,6 @@ export const USER = {
   STATUS: {
     NOT_ACTIVATED: 1,
     ACTIVE: 2,
-    DISABLED: 3,
+    IS_DISABLED: 3,
   },
 };

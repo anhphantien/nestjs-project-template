@@ -7,7 +7,7 @@ require('dotenv').config();
 
 const { TWO_FACTOR_AUTHENTICATION, FORGOT_PASSWORD } = TEMPLATE.KEYWORDS;
 
-const templates: Partial<Template>[] = [
+const defaultTemplates: Partial<Template>[] = [
   {
     templateCode: TEMPLATE.CODE.TWO_FACTOR_AUTHENTICATION,
     subject: process.env.APP_NAME,
@@ -22,6 +22,10 @@ const templates: Partial<Template>[] = [
 
 export default class CreateTemplates implements Seeder {
   async run() {
-    await getRepository(Template).save(templates);
+    const templates = await getRepository(Template).find({
+      where: defaultTemplates.map(({ templateCode }) => ({ templateCode })),
+      order: { id: 'ASC' },
+    });
+    await getRepository(Template).save(defaultTemplates.map((defaultTemplate, i) => ({ ...templates[i], ...defaultTemplate })));
   }
 }
