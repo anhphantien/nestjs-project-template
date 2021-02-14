@@ -1,9 +1,8 @@
 import { BadRequestException, ValidationError, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import sentry = require('@sentry/node');
 import { AppModule } from './app.module';
-import { SentryInterceptor } from './common/interceptors';
+import { AllExceptionsFilter } from './common/filters';
 
 require('dotenv').config();
 
@@ -12,8 +11,7 @@ const bootstrap = async () => {
 
   app.enableCors(); // cho phép gọi API từ một địa chỉ URL khác
 
-  sentry.init({ dsn: process.env.SENTRY_DSN });
-  app.useGlobalInterceptors(new SentryInterceptor());
+  app.useGlobalFilters(new AllExceptionsFilter());
 
   app.useGlobalPipes(
     new ValidationPipe({
