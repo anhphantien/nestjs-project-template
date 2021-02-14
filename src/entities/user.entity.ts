@@ -10,11 +10,11 @@ export class User {
   @Index('username', { unique: true })
   username: string;
 
-  @Column64Char()
+  @Column255Char()
   @Index('email', { unique: true })
   email: string;
 
-  @Column255Char({ select: false })
+  @Column64Char({ select: false })
   passwordHash: string;
 
   @ColumnTinyInt()
