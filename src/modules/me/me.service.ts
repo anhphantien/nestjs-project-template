@@ -1,6 +1,6 @@
 import { ERROR_CODE } from '@/constants';
 import { UserRepository } from '@/repositories';
-import { BadRequestException, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import bcrypt = require('bcrypt');
 
 @Injectable()
@@ -27,9 +27,6 @@ export class MeService {
     });
     if (!user) {
       throw new NotFoundException(ERROR_CODE.USER_NOT_FOUND);
-    }
-    if (!user.passwordHash) {
-      throw new InternalServerErrorException(ERROR_CODE.PASSWORD_HASH_NOT_FOUND);
     }
     if (!bcrypt.compareSync(currentPassword, user.passwordHash)) {
       throw new BadRequestException(ERROR_CODE.INVALID_PASSWORD);

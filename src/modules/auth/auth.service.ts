@@ -2,7 +2,7 @@ import { IUser } from '@/common/interfaces';
 import { ERROR_CODE, USER } from '@/constants';
 import { User } from '@/entities';
 import { UserRepository } from '@/repositories';
-import { BadRequestException, ForbiddenException, Injectable, InternalServerErrorException, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, ForbiddenException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import bcrypt = require('bcrypt');
 import passwordGenerator = require('generate-password');
 import { NotificationService } from '../notification/notification.service';
@@ -20,13 +20,10 @@ export class AuthService {
 
   async login(username: string, password: string) {
     const user = await this.userRepository.findOne({
-      select: ['id', 'username', 'passwordHash', 'role', 'status', 'email'],
+      select: ['id', 'username', 'role', 'status', 'email'],
       where: [{ username }, { email: username }],
     });
     this.validateUser(user);
-    if (!user.passwordHash) {
-      throw new InternalServerErrorException(ERROR_CODE.PASSWORD_HASH_NOT_FOUND);
-    }
     if (!bcrypt.compareSync(password, user.passwordHash)) {
       throw new BadRequestException(ERROR_CODE.INVALID_PASSWORD);
     }

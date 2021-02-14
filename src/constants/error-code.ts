@@ -7,7 +7,6 @@ export enum ERROR_CODE {
   INVALID_PAYLOAD = 'Invalid payload',
   INVALID_REFRESH_TOKEN = 'Invalid refresh token',
   NEW_PASSWORD_MUST_BE_DIFFERENT_FROM_CURRENT_PASSWORD = 'The new password must be different from the current password',
-  PASSWORD_HASH_NOT_FOUND = 'Password hash not found',
   PERMISSION_DENIED = 'Permission denied',
   TEMPLATE_NOT_FOUND = 'Template not found',
   TOO_MANY_REQUESTS_TO_RECEIVE_OTP = 'Too many requests to receive OTP',
