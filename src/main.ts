@@ -54,7 +54,7 @@ const bootstrap = async () => {
       .addBearerAuth() // tạo ô nhập token
       .build();
     const document = SwaggerModule.createDocument(app, options);
-    SwaggerModule.setup('api', app, document);
+    SwaggerModule.setup('api-docs', app, document);
   }
 
   await app.listen(process.env.PORT);
