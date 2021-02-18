@@ -8,7 +8,6 @@ import { MeModule } from './modules/me/me.module';
 import { NodemailerModule } from './modules/nodemailer/nodemailer.module';
 import { RedisModule } from './modules/redis/redis.module';
 import { RepositoryModule } from './modules/repository/repository.module';
-import { SocketModule } from './modules/socket/socket.module';
 import ormconfig from './ormconfig';
 
 @Module({
@@ -23,7 +22,6 @@ import ormconfig from './ormconfig';
     NodemailerModule,
     RedisModule,
     RepositoryModule,
-    SocketModule,
   ],
   controllers: [
     AppController,
