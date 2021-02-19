@@ -12,7 +12,7 @@ export class OtpService {
     private readonly notificationService: NotificationService,
   ) { }
 
-  async send(email: string) {
+  async send(email: string, data: { username: string }) {
     const remainingTtl = await this.redisService.ttlAsync(email); // thời gian tồn tại còn lại
     if (Number(process.env.OTP_TTL) - remainingTtl <= Number(process.env.OTP_TIME_TO_RESEND)) {
       throw new HttpException({
@@ -22,7 +22,7 @@ export class OtpService {
       }, HttpStatus.TOO_MANY_REQUESTS);
     }
     const otp = Math.random().toString().slice(2, 2 + Number(process.env.OTP_LENGTH));
-    await this.notificationService.sendOtp(email, otp);
+    await this.notificationService.sendOtp(email, { username: data.username, otp });
     await this.redisService.setAsync(email, otp, 'EX', Number(process.env.OTP_TTL));
     return { message: 'OTP has been sent!' };
   }

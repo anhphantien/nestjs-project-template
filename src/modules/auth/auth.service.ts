@@ -30,7 +30,7 @@ export class AuthService {
     if (user.role === USER.ROLE.ADMIN) {
       return this.tokenService.createToken({ id: user.id, username: user.username, role: user.role });
     }
-    return this.otpService.send(user.email);
+    return this.otpService.send(user.email, { username: user.username });
   }
 
   async verifyOtp(username: string, otp: string) {
@@ -57,7 +57,7 @@ export class AuthService {
     const user = await this.userRepository.findOne({ email });
     this.validateUser(user);
     const newPassword = passwordGenerator.generate({ length: 10, numbers: true });
-    await this.notificationService.sendNewPassword(email, newPassword);
+    await this.notificationService.sendNewPassword(email, { username: user.username, newPassword });
     await this.userRepository.update({ id: user.id }, { passwordHash: bcrypt.hashSync(newPassword, 10) });
     return { message: 'New password has been sent!' };
   }

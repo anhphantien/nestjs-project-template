@@ -12,7 +12,7 @@ export class NotificationService {
     private readonly nodemailerService: NodemailerService,
   ) { }
 
-  async sendOtp(email: string, otp: string) {
+  async sendOtp(email: string, data: { username: string, otp: string }) {
     const template = await this.templateRepository.findOne({ templateCode: TEMPLATE.CODE.TWO_FACTOR_AUTHENTICATION });
     if (!template) {
       throw new NotFoundException(ERROR_CODE.TEMPLATE_NOT_FOUND);
@@ -21,7 +21,8 @@ export class NotificationService {
       await this.nodemailerService.send(email, {
         subject: template.subject,
         html: template.content
-          .replace(TEMPLATE.KEYWORDS.TWO_FACTOR_AUTHENTICATION.OTP, otp)
+          .replace(TEMPLATE.KEYWORDS.TWO_FACTOR_AUTHENTICATION.USERNAME, data.username)
+          .replace(TEMPLATE.KEYWORDS.TWO_FACTOR_AUTHENTICATION.OTP, data.otp)
           .replace(TEMPLATE.KEYWORDS.TWO_FACTOR_AUTHENTICATION.OTP_TTL, (Number(process.env.OTP_TTL) / 60).toString()),
       });
     } catch (error) {
@@ -32,7 +33,7 @@ export class NotificationService {
     }
   }
 
-  async sendNewPassword(email: string, newPassword: string) {
+  async sendNewPassword(email: string, data: { username: string, newPassword: string }) {
     const template = await this.templateRepository.findOne({ templateCode: TEMPLATE.CODE.FORGOT_PASSWORD });
     if (!template) {
       throw new NotFoundException(ERROR_CODE.TEMPLATE_NOT_FOUND);
@@ -40,7 +41,9 @@ export class NotificationService {
     try {
       await this.nodemailerService.send(email, {
         subject: template.subject,
-        html: template.content.replace(TEMPLATE.KEYWORDS.FORGOT_PASSWORD.NEW_PASSWORD, newPassword),
+        html: template.content
+          .replace(TEMPLATE.KEYWORDS.FORGOT_PASSWORD.USERNAME, data.username)
+          .replace(TEMPLATE.KEYWORDS.FORGOT_PASSWORD.NEW_PASSWORD, data.newPassword),
       });
     } catch (error) {
       if (error.message.includes('No recipients defined')) {
