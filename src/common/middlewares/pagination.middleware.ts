@@ -13,10 +13,10 @@ export const PaginationMiddleware = (config: {
 
   const pagination: any = {};
 
-  const size = Math.trunc(req.query.size) || defaultSize;
+  const size = Math.abs(Math.trunc(req.query.size)) || defaultSize;
   pagination.limit = Math.min(size, maxSize);
 
-  const page = Math.trunc(req.query.page) || 1;
+  const page = Math.abs(Math.trunc(req.query.page)) || 1;
   pagination.offset = pagination.limit * (page - 1);
 
   if (req.query.keyword) {
