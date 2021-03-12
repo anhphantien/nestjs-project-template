@@ -4,7 +4,7 @@ import { User } from '@/entities';
 import { UserRepository } from '@/repositories';
 import { BadRequestException, ForbiddenException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import bcrypt = require('bcrypt');
-import passwordGenerator = require('generate-password');
+import { generate } from 'generate-password';
 import { NotificationService } from '../notification/notification.service';
 import { OtpService } from './otp.service';
 import { TokenService } from './token.service';
@@ -56,7 +56,7 @@ export class AuthService {
   async forgotPassword(email: string) {
     const user = await this.userRepository.findOne({ email });
     this.validateUser(user);
-    const newPassword = passwordGenerator.generate({ length: 10, numbers: true });
+    const newPassword = generate({ length: 10, numbers: true });
     await this.notificationService.sendNewPassword(email, { username: user.username, newPassword });
     await this.userRepository.update({ id: user.id }, { passwordHash: bcrypt.hashSync(newPassword, 10) });
     return { message: 'New password has been sent!' };
