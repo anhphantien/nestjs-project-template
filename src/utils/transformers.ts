@@ -5,7 +5,7 @@ export const TransformIntoArrayOfNumbers = () => Transform(params => {
   if (!values) {
     return [];
   }
-  return values.split(',').map((value: string) => Number(value));
+  return (Array.isArray(values) ? values : values.split(',')).map((value: string) => Number(value));
 });
 
 export const TransformIntoBoolean = () => Transform(({ value }) => JSON.parse(value));
