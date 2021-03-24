@@ -1,0 +1,56 @@
+version: "3.7"
+
+services:
+  app:
+    image: nestjs-project-template:nestjs-project-template
+    ports:
+      - 3000:3000
+    env_file:
+      - .env
+    environment:
+      - PORT=${PORT}
+
+      - APP_NAME=${APP_NAME}
+
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
+
+      - HEALTHCHECK_URL=${HEALTHCHECK_URL}
+
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_EXPIRES_IN=${JWT_EXPIRES_IN}
+
+      - NODEMAILER_HOST=${NODEMAILER_HOST}
+      - NODEMAILER_PORT=${NODEMAILER_PORT}
+      - NODEMAILER_SECURE=${NODEMAILER_SECURE}
+      - NODEMAILER_USER=${NODEMAILER_USER}
+      - NODEMAILER_PASS=${NODEMAILER_PASS}
+
+      - OTP_LENGTH=${OTP_LENGTH}
+      - OTP_TTL=${OTP_TTL}
+      - OTP_TIME_TO_RESEND=${OTP_TIME_TO_RESEND}
+
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PORT=${REDIS_PORT}
+
+      - REFRESH_TOKEN_TTL=${REFRESH_TOKEN_TTL}
+
+      - SENTRY_DSN=${SENTRY_DSN}
+    # depends_on:
+    #   - db
+    #   - redis
+
+  # db:
+  #   image: mysql
+  #   environment:
+  #     - MYSQL_ROOT_PASSWORD=1
+  #   ports:
+  #     - 3308:3306
+
+  # redis:
+  #   image: redis
+  #   ports:
+  #     - 6381:6379
