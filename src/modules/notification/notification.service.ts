@@ -12,7 +12,7 @@ export class NotificationService {
     private readonly nodemailerService: NodemailerService,
   ) { }
 
-  async sendOtp(email: string, data: { username: string, otp: string }) {
+  async sendOtp(email: string, payload: { username: string, otp: string }) {
     const template = await this.templateRepository.findOne({ templateCode: TEMPLATE.CODE.TWO_FACTOR_AUTHENTICATION });
     if (!template) {
       throw new NotFoundException(ERROR_CODE.TEMPLATE_NOT_FOUND);
@@ -21,8 +21,8 @@ export class NotificationService {
       await this.nodemailerService.send(email, {
         subject: template.subject,
         html: template.content
-          .replace(TEMPLATE.KEYWORDS.TWO_FACTOR_AUTHENTICATION.USERNAME, data.username)
-          .replace(TEMPLATE.KEYWORDS.TWO_FACTOR_AUTHENTICATION.OTP, data.otp)
+          .replace(TEMPLATE.KEYWORDS.TWO_FACTOR_AUTHENTICATION.USERNAME, payload.username)
+          .replace(TEMPLATE.KEYWORDS.TWO_FACTOR_AUTHENTICATION.OTP, payload.otp)
           .replace(TEMPLATE.KEYWORDS.TWO_FACTOR_AUTHENTICATION.OTP_TTL, (Number(process.env.OTP_TTL) / 60).toString()),
       });
     } catch (error) {
@@ -33,7 +33,7 @@ export class NotificationService {
     }
   }
 
-  async sendNewPassword(email: string, data: { username: string, newPassword: string }) {
+  async sendNewPassword(email: string, payload: { username: string, newPassword: string }) {
     const template = await this.templateRepository.findOne({ templateCode: TEMPLATE.CODE.FORGOT_PASSWORD });
     if (!template) {
       throw new NotFoundException(ERROR_CODE.TEMPLATE_NOT_FOUND);
@@ -42,8 +42,8 @@ export class NotificationService {
       await this.nodemailerService.send(email, {
         subject: template.subject,
         html: template.content
-          .replace(TEMPLATE.KEYWORDS.FORGOT_PASSWORD.USERNAME, data.username)
-          .replace(TEMPLATE.KEYWORDS.FORGOT_PASSWORD.NEW_PASSWORD, data.newPassword),
+          .replace(TEMPLATE.KEYWORDS.FORGOT_PASSWORD.USERNAME, payload.username)
+          .replace(TEMPLATE.KEYWORDS.FORGOT_PASSWORD.NEW_PASSWORD, payload.newPassword),
       });
     } catch (error) {
       if (error.message.includes('No recipients defined')) {
