@@ -2,6 +2,7 @@ version: "3.7"
 
 services:
   app:
+    build: .
     image: nestjs-project-template:nestjs-project-template
     ports:
       - 3000:3000
@@ -16,6 +17,7 @@ services:
     command: --default-authentication-plugin=mysql_native_password
     environment:
       - MYSQL_ROOT_PASSWORD=1
+      - MYSQL_DATABASE=${DB_NAME}
     ports:
       - 3308:3306
 
