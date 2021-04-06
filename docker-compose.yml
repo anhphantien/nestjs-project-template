@@ -4,6 +4,8 @@ services:
   app:
     build: .
     image: nestjs-project-template:nestjs-project-template
+    volumes:
+      - ./data:/var/lib/mysql
     ports:
       - 3000:3000
     env_file:
