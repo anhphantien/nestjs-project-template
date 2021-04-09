@@ -1,5 +1,5 @@
 import { CurrentUser } from '@/common/decorators';
-import { JwtGuard } from '@/common/guards';
+import { JwtAuthGuard } from '@/common/guards';
 import { IUser } from '@/common/interfaces';
 import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
@@ -8,7 +8,7 @@ import { MeService } from './me.service';
 
 @ApiTags('me')
 @ApiBearerAuth()
-@UseGuards(JwtGuard)
+@UseGuards(JwtAuthGuard)
 @Controller('api/me')
 export class MeController {
   constructor(private readonly meService: MeService) { }

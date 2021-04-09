@@ -49,11 +49,11 @@ const bootstrap = async () => {
   );
 
   if (process.env.NODE_ENV !== 'production') {
-    const options = new DocumentBuilder()
+    const config = new DocumentBuilder()
       .setTitle(process.env.APP_NAME)
       .addBearerAuth() // tạo ô nhập token
       .build();
-    const document = SwaggerModule.createDocument(app, options);
+    const document = SwaggerModule.createDocument(app, config);
     SwaggerModule.setup('api', app, document);
   }
 

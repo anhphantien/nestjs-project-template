@@ -2,6 +2,7 @@ import { ArgumentsHost, Catch, HttpException, HttpStatus } from '@nestjs/common'
 import { BaseExceptionFilter } from '@nestjs/core';
 import sentry = require('@sentry/node');
 import { Request, Response } from 'express';
+// import { ServerResponse } from 'http';
 
 require('dotenv').config();
 
@@ -16,6 +17,11 @@ export class AllExceptionsFilter extends BaseExceptionFilter {
     const ctx = host.switchToHttp();
     const req = ctx.getRequest<Request>();
     const res = ctx.getResponse<Response>();
+
+    // GraphQL
+    // if (!(res instanceof ServerResponse)) {
+    //   throw exception;
+    // }
 
     if (exception instanceof HttpException) {
       res.status(exception.getStatus()).json(exception.getResponse());
