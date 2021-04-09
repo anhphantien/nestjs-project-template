@@ -62,7 +62,7 @@ export const ColumnDate = () => Column({
 export const ColumnDateTime = () => Column({
   type: 'datetime',
   nullable: true,
-  precision: 0,
+  // precision: 0, // for MariaDB
 });
 
 export const ColumnDecimal = (options = { precision: 255, scale: 2 }) => Column({
