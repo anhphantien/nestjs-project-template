@@ -1,5 +1,7 @@
 .env
 
+/db_backup
+
 /migrations
 
 # compiled output
