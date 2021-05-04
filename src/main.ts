@@ -59,4 +59,4 @@ const bootstrap = async () => {
 
   await app.listen(process.env.PORT);
 };
-bootstrap();
+void bootstrap();

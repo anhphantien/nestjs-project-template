@@ -26,7 +26,7 @@ export const PaginationMiddleware = (config: {
   try {
     const filter = JSON.parse(req.query.filter);
     pagination.filter = _.pick(filter, filterFields);
-    // tslint:disable-next-line: no-empty
+  // eslint-disable-next-line no-empty
   } catch (error) { }
 
   try {
