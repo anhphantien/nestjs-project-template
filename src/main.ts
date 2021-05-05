@@ -5,6 +5,8 @@ import { ValidationError } from 'class-validator';
 import { AppModule } from './app.module';
 import { AllExceptionsFilter } from './common/filters';
 
+require('dotenv').config();
+
 const bootstrap = async () => {
   const app = await NestFactory.create(AppModule);
 
