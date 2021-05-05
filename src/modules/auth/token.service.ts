@@ -2,10 +2,9 @@ import { IUser } from '@/common/interfaces';
 import { ERROR_CODE } from '@/constants';
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import 'dotenv/config';
 import { v4 as uuidv4 } from 'uuid';
 import { RedisService } from '../redis/redis.service';
-
-require('dotenv').config();
 
 @Injectable()
 export class TokenService {

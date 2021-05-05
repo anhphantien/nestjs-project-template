@@ -1,9 +1,8 @@
 import { TEMPLATE } from '@/constants';
 import { Template } from '@/entities';
+import 'dotenv/config';
 import { getRepository } from 'typeorm';
 import { Seeder } from 'typeorm-seeding';
-
-require('dotenv').config();
 
 const { TWO_FACTOR_AUTHENTICATION, FORGOT_PASSWORD } = TEMPLATE.KEYWORDS;
 

@@ -1,10 +1,9 @@
 import { ArgumentsHost, Catch, HttpException, HttpStatus } from '@nestjs/common';
 import { BaseExceptionFilter } from '@nestjs/core';
 import sentry = require('@sentry/node');
+import 'dotenv/config';
 import { Request, Response } from 'express';
 // import { ServerResponse } from 'http';
-
-require('dotenv').config();
 
 @Catch()
 export class AllExceptionsFilter extends BaseExceptionFilter {

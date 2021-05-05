@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
+import 'dotenv/config';
 import redis = require('redis');
 
 require('bluebird').promisifyAll(redis);
-require('dotenv').config();
 
 @Injectable()
 export class RedisService {

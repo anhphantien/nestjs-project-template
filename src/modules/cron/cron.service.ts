@@ -1,9 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import { exec } from 'child_process';
+import 'dotenv/config';
 import fs = require('fs');
-
-require('dotenv').config();
 
 @Injectable()
 export class CronService {
