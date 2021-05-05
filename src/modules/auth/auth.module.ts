@@ -2,7 +2,6 @@ import { JwtStrategy } from '@/common/strategies';
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
-import 'dotenv/config';
 import { NotificationModule } from '../notification/notification.module';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';

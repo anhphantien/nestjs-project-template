@@ -1,6 +1,5 @@
 import { ERROR_CODE } from '@/constants';
 import { BadRequestException, HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import 'dotenv/config';
 import { NotificationService } from '../notification/notification.service';
 import { RedisService } from '../redis/redis.service';
 

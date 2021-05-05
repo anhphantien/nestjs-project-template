@@ -2,7 +2,6 @@ import { BadRequestException, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationError } from 'class-validator';
-import 'dotenv/config';
 import { AppModule } from './app.module';
 import { AllExceptionsFilter } from './common/filters';
 

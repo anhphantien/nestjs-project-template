@@ -2,7 +2,6 @@ import { ERROR_CODE, USER } from '@/constants';
 import { UserRepository } from '@/repositories';
 import { ForbiddenException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
-import 'dotenv/config';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { IUser } from '../interfaces';
 

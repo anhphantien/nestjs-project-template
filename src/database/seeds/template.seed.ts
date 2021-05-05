@@ -1,6 +1,5 @@
 import { TEMPLATE } from '@/constants';
 import { Template } from '@/entities';
-import 'dotenv/config';
 import { getRepository } from 'typeorm';
 import { Seeder } from 'typeorm-seeding';
 

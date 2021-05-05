@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import 'dotenv/config';
 import nodemailer = require('nodemailer');
 import { Attachment } from 'nodemailer/lib/mailer';
 
