@@ -3,5 +3,5 @@ export class IPagination {
   offset: number;
   keyword: string;
   filter: { [field: string]: any };
-  sort: { field: string, order: 'ASC' | 'DESC' };
+  sort: { field: string; order: 'ASC' | 'DESC' };
 }

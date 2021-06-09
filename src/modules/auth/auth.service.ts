@@ -2,7 +2,13 @@ import { IUser } from '@/common/interfaces';
 import { ERROR_CODE, USER } from '@/constants';
 import { User } from '@/entities';
 import { UserRepository } from '@/repositories';
-import { BadRequestException, ForbiddenException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import {
+  BadRequestException,
+  ForbiddenException,
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import bcrypt = require('bcrypt');
 import { generate } from 'generate-password';
 import { NotificationService } from '../notification/notification.service';
@@ -16,7 +22,7 @@ export class AuthService {
     private readonly tokenService: TokenService,
     private readonly otpService: OtpService,
     private readonly notificationService: NotificationService,
-  ) { }
+  ) {}
 
   async login(username: string, password: string) {
     const user = await this.userRepository.findOne({
@@ -28,7 +34,11 @@ export class AuthService {
       throw new BadRequestException(ERROR_CODE.INVALID_PASSWORD);
     }
     if (user.role === USER.ROLE.ADMIN) {
-      return this.tokenService.createToken({ id: user.id, username: user.username, role: user.role });
+      return this.tokenService.createToken({
+        id: user.id,
+        username: user.username,
+        role: user.role,
+      });
     }
     return this.otpService.send(user.email, { username: user.username });
   }
@@ -39,26 +49,42 @@ export class AuthService {
     });
     this.validateUser(user);
     await this.otpService.verify(user.email, otp);
-    return this.tokenService.createToken({ id: user.id, username: user.username, role: user.role });
+    return this.tokenService.createToken({
+      id: user.id,
+      username: user.username,
+      role: user.role,
+    });
   }
 
   async refreshToken(oldRefreshToken: string) {
-    const payload: IUser = await this.tokenService.decodeAccessToken(oldRefreshToken);
+    const payload: IUser = await this.tokenService.decodeAccessToken(
+      oldRefreshToken,
+    );
     if (!payload || !payload.id) {
       throw new BadRequestException(ERROR_CODE.INVALID_PAYLOAD);
     }
     const user = await this.userRepository.findOne({ id: payload.id });
     this.validateUser(user);
     await this.tokenService.deleteRefreshToken(oldRefreshToken);
-    return this.tokenService.createToken({ id: user.id, username: user.username, role: user.role });
+    return this.tokenService.createToken({
+      id: user.id,
+      username: user.username,
+      role: user.role,
+    });
   }
 
   async forgotPassword(email: string) {
     const user = await this.userRepository.findOne({ email });
     this.validateUser(user);
     const newPassword = generate({ length: 10, numbers: true });
-    await this.notificationService.sendNewPassword(email, { username: user.username, newPassword });
-    await this.userRepository.update({ id: user.id }, { passwordHash: bcrypt.hashSync(newPassword, 10) });
+    await this.notificationService.sendNewPassword(email, {
+      username: user.username,
+      newPassword,
+    });
+    await this.userRepository.update(
+      { id: user.id },
+      { passwordHash: bcrypt.hashSync(newPassword, 10) },
+    );
     return { message: 'New password has been sent!' };
   }
 

@@ -10,7 +10,7 @@ export class TokenService {
   constructor(
     private readonly jwtService: JwtService,
     private readonly redisService: RedisService,
-  ) { }
+  ) {}
 
   async createToken(payload: IUser, requireRefreshToken = true) {
     const accessToken = this.jwtService.sign(payload);

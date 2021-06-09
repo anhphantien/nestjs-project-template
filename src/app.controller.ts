@@ -5,7 +5,6 @@ import { Response } from 'express';
 @ApiTags('')
 @Controller()
 export class AppController {
-
   @Get('healthcheck')
   healthcheck(@Res() res: Response) {
     res.sendStatus(HttpStatus.OK);

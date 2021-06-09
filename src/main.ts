@@ -1,4 +1,8 @@
-import { BadRequestException, ValidationError, ValidationPipe } from '@nestjs/common';
+import {
+  BadRequestException,
+  ValidationError,
+  ValidationPipe,
+} from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import 'dotenv/config';
@@ -36,7 +40,9 @@ const bootstrap = async () => {
                 for (const grandChildError of childError.children) {
                   message.push({
                     field: grandChildError.property,
-                    message: Object.values(grandChildError.constraints).join('; '),
+                    message: Object.values(grandChildError.constraints).join(
+                      '; ',
+                    ),
                   });
                 }
               }

@@ -7,4 +7,4 @@ import repositories = require('../../repositories');
   providers: TypeOrmModule.forFeature(Object.values(repositories)).providers,
   exports: TypeOrmModule.forFeature(Object.values(repositories)).exports,
 })
-export class RepositoryModule { }
+export class RepositoryModule {}

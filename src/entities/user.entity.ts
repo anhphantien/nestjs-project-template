@@ -1,4 +1,12 @@
-import { Column255Char, Column32Char, Column64Char, ColumnTinyInt, CreatedAt, PrimaryKeyColumn, UpdatedAt } from '@/utils';
+import {
+  Column255Char,
+  Column32Char,
+  Column64Char,
+  ColumnTinyInt,
+  CreatedAt,
+  PrimaryKeyColumn,
+  UpdatedAt,
+} from '@/utils';
 import { Entity, Index } from 'typeorm';
 
 @Entity('User')

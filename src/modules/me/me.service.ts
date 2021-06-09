@@ -1,13 +1,15 @@
 import { ERROR_CODE } from '@/constants';
 import { UserRepository } from '@/repositories';
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import bcrypt = require('bcrypt');
 
 @Injectable()
 export class MeService {
-  constructor(
-    private readonly userRepository: UserRepository,
-  ) { }
+  constructor(private readonly userRepository: UserRepository) {}
 
   async getMe(userId: number) {
     const user = await this.userRepository.findOne({ id: userId });
@@ -17,9 +19,15 @@ export class MeService {
     return user;
   }
 
-  async changePassword(userId: number, currentPassword: string, newPassword: string) {
+  async changePassword(
+    userId: number,
+    currentPassword: string,
+    newPassword: string,
+  ) {
     if (newPassword === currentPassword) {
-      throw new BadRequestException(ERROR_CODE.NEW_PASSWORD_MUST_BE_DIFFERENT_FROM_CURRENT_PASSWORD);
+      throw new BadRequestException(
+        ERROR_CODE.NEW_PASSWORD_MUST_BE_DIFFERENT_FROM_CURRENT_PASSWORD,
+      );
     }
     const user = await this.userRepository.findOne({
       select: ['id', 'passwordHash'],
@@ -31,7 +39,10 @@ export class MeService {
     if (!bcrypt.compareSync(currentPassword, user.passwordHash)) {
       throw new BadRequestException(ERROR_CODE.INVALID_PASSWORD);
     }
-    await this.userRepository.update({ id: user.id }, { passwordHash: bcrypt.hashSync(newPassword, 10) });
+    await this.userRepository.update(
+      { id: user.id },
+      { passwordHash: bcrypt.hashSync(newPassword, 10) },
+    );
     return { message: 'Password has been reset successfully!' };
   }
 }

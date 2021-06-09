@@ -1,6 +1,11 @@
 import { Controller, Get } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { HealthCheck, HealthCheckService, HttpHealthIndicator, TypeOrmHealthIndicator } from '@nestjs/terminus';
+import {
+  HealthCheck,
+  HealthCheckService,
+  HttpHealthIndicator,
+  TypeOrmHealthIndicator,
+} from '@nestjs/terminus';
 // import { createConnection } from 'typeorm';
 
 @ApiTags('health')
@@ -10,13 +15,17 @@ export class HealthController {
     private readonly healthCheckService: HealthCheckService,
     private readonly httpHealthIndicator: HttpHealthIndicator,
     private readonly typeormHealthIndicator: TypeOrmHealthIndicator,
-  ) { }
+  ) {}
 
   @Get()
   @HealthCheck()
   check() {
     return this.healthCheckService.check([
-      () => this.httpHealthIndicator.pingCheck(process.env.APP_NAME, process.env.HEALTHCHECK_URL),
+      () =>
+        this.httpHealthIndicator.pingCheck(
+          process.env.APP_NAME,
+          process.env.HEALTHCHECK_URL,
+        ),
       () => this.typeormHealthIndicator.pingCheck('db'),
       // async () => this.typeormHealthIndicator.pingCheck('db', {
       //   connection: await createConnection({

@@ -25,8 +25,6 @@ import ormconfig from './ormconfig';
     RedisModule,
     RepositoryModule,
   ],
-  controllers: [
-    AppController,
-  ],
+  controllers: [AppController],
 })
-export class AppModule { }
+export class AppModule {}

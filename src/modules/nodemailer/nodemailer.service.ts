@@ -18,7 +18,10 @@ export class NodemailerService {
     });
   }
 
-  send(recipient: string, content: { subject: string, html: string, attachments?: Attachment[] }) {
+  send(
+    recipient: string,
+    content: { subject: string; html: string; attachments?: Attachment[] },
+  ) {
     return this.transporter.sendMail({
       to: recipient,
       subject: content.subject,

@@ -12,7 +12,9 @@ const ormconfig: TypeOrmModuleOptions = {
   entities: Object.values(entities),
   synchronize: process.env.NODE_ENV === 'production' ? false : true,
   logging: true,
-  logger: ['development', 'production'].includes(process.env.NODE_ENV) ? 'simple-console' : 'advanced-console',
+  logger: ['development', 'production'].includes(process.env.NODE_ENV)
+    ? 'simple-console'
+    : 'advanced-console',
   migrations: ['migrations/*{.ts,.js}'],
   cli: {
     migrationsDir: 'migrations',

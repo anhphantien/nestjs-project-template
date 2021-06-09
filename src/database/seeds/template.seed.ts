@@ -23,9 +23,13 @@ export default class CreateTemplates implements Seeder {
     const templates = await getRepository(Template).find({
       where: defaultTemplates.map(({ templateCode }) => ({ templateCode })),
     });
-    await getRepository(Template).save(defaultTemplates.map(defaultTemplate => ({
-      ...templates.find(template => template.templateCode === defaultTemplate.templateCode),
-      ...defaultTemplate,
-    })));
+    await getRepository(Template).save(
+      defaultTemplates.map((defaultTemplate) => ({
+        ...templates.find(
+          (template) => template.templateCode === defaultTemplate.templateCode,
+        ),
+        ...defaultTemplate,
+      })),
+    );
   }
 }
