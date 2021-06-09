@@ -4,7 +4,7 @@ import { ForgotPasswordBody, LoginBody, RefreshTokenBody, VerifyOtpBody } from '
 import { AuthService } from './auth.service';
 
 @ApiTags('auth')
-@Controller('api/auth')
+@Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) { }
 

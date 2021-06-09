@@ -9,7 +9,7 @@ import { MeService } from './me.service';
 @ApiTags('me')
 @ApiBearerAuth()
 @UseGuards(JwtAuthGuard)
-@Controller('api/me')
+@Controller('me')
 export class MeController {
   constructor(private readonly meService: MeService) { }
 

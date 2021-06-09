@@ -7,6 +7,7 @@ import { AllExceptionsFilter } from './common/filters';
 
 const bootstrap = async () => {
   const app = await NestFactory.create(AppModule);
+  app.setGlobalPrefix('api');
 
   app.enableCors(); // cho phép gọi API từ một địa chỉ URL khác
 
