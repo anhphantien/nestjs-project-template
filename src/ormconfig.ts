@@ -20,5 +20,4 @@ const ormconfig: TypeOrmModuleOptions = {
     migrationsDir: 'migrations',
   },
 };
-
 export default ormconfig;
