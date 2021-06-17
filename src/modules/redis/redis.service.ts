@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import redis = require('redis');
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 require('bluebird').promisifyAll(redis);
 
 @Injectable()
