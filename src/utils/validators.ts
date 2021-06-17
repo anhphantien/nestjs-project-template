@@ -1,4 +1,3 @@
-/* tslint:disable: class-name */
 import {
   ValidatorConstraint,
   ValidatorConstraintInterface,
