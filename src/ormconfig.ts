@@ -1,5 +1,4 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import entities = require('./entities');
 
 const ormconfig: TypeOrmModuleOptions = {
   type: 'mysql',
@@ -9,7 +8,7 @@ const ormconfig: TypeOrmModuleOptions = {
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
   bigNumberStrings: false,
-  entities: Object.values(entities),
+  entities: [__dirname + '/**/*.entity{.ts,.js}'],
   synchronize: process.env.NODE_ENV === 'production' ? false : true,
   logging: true,
   logger: ['development', 'production'].includes(process.env.NODE_ENV)
