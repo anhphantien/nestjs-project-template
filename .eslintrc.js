@@ -31,7 +31,7 @@ module.exports = {
     '@typescript-eslint/no-unsafe-member-access': 'off',
     '@typescript-eslint/no-unsafe-return': 'off',
     '@typescript-eslint/restrict-template-expressions': 'off',
-    'import/newline-after-import': ['error', { count: 1 }],
+    'import/newline-after-import': ['error'],
     'prettier/prettier': 'warn',
   },
 };
