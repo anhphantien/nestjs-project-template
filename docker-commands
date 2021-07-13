@@ -1,10 +1,10 @@
 - Build an image:
 docker build -t <repository_name>:<tag> .
 
-- Start the containers:
-docker-compose up
+- Start containers:
+docker-compose up (add "--build" to rebuild images)
 
-- Stop the containers:
+- Stop containers:
 docker-compose down
 
 - Access to a container:
