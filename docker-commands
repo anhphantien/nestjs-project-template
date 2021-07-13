@@ -13,11 +13,17 @@ docker exec -it <container_name> sh
 - Remove an image:
 docker rmi -f <image_id>
 
-- Remove dangling images:
+- Remove all unused images:
 docker image prune
 
 - List all images:
 docker images
+
+- Remove a container:
+docker rm -f <container_id>
+
+- Remove all stopped containers:
+docker container prune
 
 - List all containers:
 docker ps
