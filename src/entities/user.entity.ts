@@ -25,6 +25,9 @@ export class User {
   @Column64Char({ select: false })
   passwordHash: string;
 
+  @Column64Char({ select: false })
+  passwordHash2: string;
+
   @ColumnTinyInt()
   role: number;
 
