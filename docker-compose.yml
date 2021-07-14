@@ -4,8 +4,6 @@ services:
   app:
     build: .
     image: nestjs-project-template:nestjs-project-template
-    volumes:
-      - ./data:/var/lib/mysql
     ports:
       - 3000:3000
     env_file:
@@ -22,8 +20,13 @@ services:
       - MYSQL_DATABASE=${DB_NAME}
     ports:
       - 3308:3306
+    volumes:
+      - ./data:/var/lib/mysql
 
   redis:
     image: redis:alpine
     ports:
       - 6381:6379
+
+volumes:
+  data:
