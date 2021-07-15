@@ -702,10 +702,10 @@
     jsonc-parser "3.0.0"
     pluralize "8.0.0"
 
-"@nestjs/swagger@^5.0.1":
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/@nestjs/swagger/-/swagger-5.0.1.tgz#be6ed9441c6c82853b20c96b96ddf1d8e36fa0da"
-  integrity sha512-cQu+0a2OGZAUmHvBE+PocQlkBYPNi51eoow1QXnmHIQz5MeOCp88PAekWGBPaTMp9YkCEMZ7EVPNBXiq+3rAXQ==
+"@nestjs/swagger@^5.0.3":
+  version "5.0.3"
+  resolved "https://registry.yarnpkg.com/@nestjs/swagger/-/swagger-5.0.3.tgz#61d199483014c7d2f5601d2d9136455914fb63ed"
+  integrity sha512-F/E0eDBMjYYkz+Tesw+UXjvxUsZYRBaDhm12KCfyPjns8yEF62SoqnFqYPstdvejhN+fd0T/E9MYVLiZtDMqRw==
   dependencies:
     "@nestjs/mapped-types" "1.0.0"
     lodash "4.17.21"
@@ -2412,9 +2412,9 @@ ee-first@1.1.1:
   integrity sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
 
 electron-to-chromium@^1.3.723:
-  version "1.3.775"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.775.tgz#046517d1f2cea753e06fff549995b9dc45e20082"
-  integrity sha512-EGuiJW4yBPOTj2NtWGZcX93ZE8IGj33HJAx4d3ouE2zOfW2trbWU+t1e0yzLr1qQIw81++txbM3BH52QwSRE6Q==
+  version "1.3.776"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.776.tgz#33f6e2423b61f1bdaa8d2a103aae78a09764a75f"
+  integrity sha512-V0w7eFSBoFPpdw4xexjVPZ770UDZIevSwkkj4W97XbE3IsCsTRFpa7/yXGZ88EOQAUEA09JMMsWK0xsw0kRAYw==
 
 emittery@^0.8.1:
   version "0.8.1"
@@ -4537,10 +4537,10 @@ node-releases@^1.1.71:
   resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-1.1.73.tgz#dd4e81ddd5277ff846b80b52bb40c49edf7a7b20"
   integrity sha512-uW7fodD6pyW2FZNZnp/Z3hvWKeEW1Y8R1+1CnErE8cXFXzl5blBOoVB41CvMer6P6Q0S5FXDwcHgFd1Wj0U9zg==
 
-nodemailer@^6.6.2:
-  version "6.6.2"
-  resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-6.6.2.tgz#e184c9ed5bee245a3e0bcabc7255866385757114"
-  integrity sha512-YSzu7TLbI+bsjCis/TZlAXBoM4y93HhlIgo0P5oiA2ua9Z4k+E2Fod//ybIzdJxOlXGRcHIh/WaeCBehvxZb/Q==
+nodemailer@^6.6.3:
+  version "6.6.3"
+  resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-6.6.3.tgz#31fb53dd4d8ae16fc088a65cb9ffa8d928a69b48"
+  integrity sha512-faZFufgTMrphYoDjvyVpbpJcYzwyFnbAMmQtj1lVBYAUSm3SOy2fIdd9+Mr4UxPosBa0JRw9bJoIwQn+nswiew==
 
 nopt@^5.0.0:
   version "5.0.0"
