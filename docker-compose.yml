@@ -11,6 +11,9 @@ services:
     depends_on:
       - db
       - redis
+    # command: yarn start:dev
+    # volumes:
+    #   - .:/root/nestjs-project-template
 
   db:
     image: mysql
