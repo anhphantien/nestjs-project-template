@@ -7,8 +7,6 @@
     "experimentalDecorators": true,
     "target": "esnext",
     "sourceMap": true,
-    // "noImplicitAny": true,
-    // "strictNullChecks": true,
     "outDir": "./dist",
     "baseUrl": "./",
     "paths": {
