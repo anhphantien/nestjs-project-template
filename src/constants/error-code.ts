@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-shadow
 export enum ERROR_CODE {
   DISABLED_USER = 'The account has been disabled',
   EXPIRED_TOKEN = 'The token has expired',
