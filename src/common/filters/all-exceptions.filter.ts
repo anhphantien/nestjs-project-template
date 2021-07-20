@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
 import { NODE, NODE_ENV, SENTRY_DSN } from '@/constants';
 import {
   ArgumentsHost,
