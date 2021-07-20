@@ -1,4 +1,4 @@
-import { ERROR_CODE, TEMPLATE } from '@/constants';
+import { ERROR_CODE, OTP_TTL, TEMPLATE } from '@/constants';
 import { TemplateRepository } from '@/repositories';
 import {
   BadRequestException,
@@ -32,7 +32,7 @@ export class NotificationService {
           .replace(TEMPLATE.KEYWORDS.TWO_FACTOR_AUTHENTICATION.OTP, payload.otp)
           .replace(
             TEMPLATE.KEYWORDS.TWO_FACTOR_AUTHENTICATION.OTP_TTL,
-            (Number(process.env.OTP_TTL) / 60).toString(),
+            (OTP_TTL / 60).toString(),
           ),
       });
     } catch (error) {

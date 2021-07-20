@@ -1,3 +1,4 @@
+import { REDIS_HOST, REDIS_PORT } from '@/constants';
 import { Injectable } from '@nestjs/common';
 import redis = require('redis');
 
@@ -10,8 +11,8 @@ export class RedisService {
 
   constructor() {
     this.client = redis.createClient({
-      host: process.env.REDIS_HOST,
-      port: Number(process.env.REDIS_PORT),
+      host: REDIS_HOST,
+      port: REDIS_PORT,
     });
   }
 

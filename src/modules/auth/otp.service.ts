@@ -1,4 +1,9 @@
-import { ERROR_CODE } from '@/constants';
+import {
+  ERROR_CODE,
+  OTP_LENGTH,
+  OTP_TIME_TO_RESEND,
+  OTP_TTL,
+} from '@/constants';
 import {
   BadRequestException,
   HttpException,
@@ -17,10 +22,7 @@ export class OtpService {
 
   async send(email: string, payload: { username: string }) {
     const remainingTtl = await this.redisService.ttlAsync(email); // thời gian tồn tại còn lại
-    if (
-      Number(process.env.OTP_TTL) - remainingTtl <=
-      Number(process.env.OTP_TIME_TO_RESEND)
-    ) {
+    if (OTP_TTL - remainingTtl <= OTP_TIME_TO_RESEND) {
       throw new HttpException(
         {
           statusCode: HttpStatus.TOO_MANY_REQUESTS,
@@ -32,17 +34,12 @@ export class OtpService {
     }
     const otp = Math.random()
       .toString()
-      .slice(2, 2 + Number(process.env.OTP_LENGTH));
+      .slice(2, 2 + OTP_LENGTH);
     await this.notificationService.sendOtp(email, {
       username: payload.username,
       otp,
     });
-    await this.redisService.setAsync(
-      email,
-      otp,
-      'EX',
-      Number(process.env.OTP_TTL),
-    );
+    await this.redisService.setAsync(email, otp, 'EX', Number(OTP_TTL));
     return { message: 'OTP has been sent!' };
   }
 

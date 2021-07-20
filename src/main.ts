@@ -8,6 +8,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import 'dotenv/config';
 import { AppModule } from './app.module';
 import { AllExceptionsFilter } from './common/filters';
+import { APP_NAME, NODE_ENV, PORT } from './constants';
 
 const bootstrap = async () => {
   const app = await NestFactory.create(AppModule);
@@ -54,15 +55,15 @@ const bootstrap = async () => {
     }),
   );
 
-  if (process.env.NODE_ENV !== 'production') {
+  if (NODE_ENV !== 'production') {
     const config = new DocumentBuilder()
-      .setTitle(process.env.APP_NAME)
+      .setTitle(APP_NAME)
       .addBearerAuth() // tạo ô nhập token
       .build();
     const document = SwaggerModule.createDocument(app, config);
     SwaggerModule.setup('api', app, document);
   }
 
-  await app.listen(process.env.PORT);
+  await app.listen(PORT);
 };
 void bootstrap();

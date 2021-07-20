@@ -1,0 +1,25 @@
+/* eslint-disable prefer-destructuring */
+export const PORT = Number(process.env.PORT);
+export const NODE_ENV = process.env.NODE_ENV;
+export const APP_NAME = process.env.APP_NAME;
+export const DB_BACKUP = process.env.DB_BACKUP;
+export const DB_HOST = process.env.DB_HOST;
+export const DB_PORT = Number(process.env.DB_PORT);
+export const DB_USERNAME = process.env.DB_USERNAME;
+export const DB_PASSWORD = process.env.DB_PASSWORD;
+export const DB_NAME = process.env.DB_NAME;
+export const HEALTHCHECK_URL = process.env.HEALTHCHECK_URL;
+export const JWT_SECRET = process.env.JWT_SECRET;
+export const JWT_EXPIRES_IN = Number(process.env.JWT_EXPIRES_IN);
+export const NODEMAILER_HOST = process.env.NODEMAILER_HOST;
+export const NODEMAILER_PORT = Number(process.env.NODEMAILER_PORT);
+export const NODEMAILER_SECURE = process.env.NODEMAILER_SECURE;
+export const NODEMAILER_USER = process.env.NODEMAILER_USER;
+export const NODEMAILER_PASS = process.env.NODEMAILER_PASS;
+export const OTP_LENGTH = Number(process.env.OTP_LENGTH);
+export const OTP_TTL = Number(process.env.OTP_TTL);
+export const OTP_TIME_TO_RESEND = Number(process.env.OTP_TIME_TO_RESEND);
+export const REDIS_HOST = process.env.REDIS_HOST;
+export const REDIS_PORT = Number(process.env.REDIS_PORT);
+export const REFRESH_TOKEN_TTL = Number(process.env.REFRESH_TOKEN_TTL);
+export const SENTRY_DSN = process.env.SENTRY_DSN;

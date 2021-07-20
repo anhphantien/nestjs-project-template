@@ -1,3 +1,4 @@
+import { APP_NAME, HEALTHCHECK_URL } from '@/constants';
 import { Controller, Get } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import {
@@ -21,21 +22,17 @@ export class HealthController {
   @HealthCheck()
   check() {
     return this.healthCheckService.check([
-      () =>
-        this.httpHealthIndicator.pingCheck(
-          process.env.APP_NAME,
-          process.env.HEALTHCHECK_URL,
-        ),
+      () => this.httpHealthIndicator.pingCheck(APP_NAME, HEALTHCHECK_URL),
       () => this.typeormHealthIndicator.pingCheck('db'),
       // async () => this.typeormHealthIndicator.pingCheck('db', {
       //   connection: await createConnection({
       //     name: 'test',
       //     type: 'mysql',
-      //     host: process.env.DB_HOST,
-      //     port: Number(process.env.DB_PORT),
-      //     username: process.env.DB_USERNAME,
-      //     password: process.env.DB_PASSWORD,
-      //     database: process.env.DB_NAME,
+      //     host: DB_HOST,
+      //     port: DB_PORT,
+      //     username: DB_USERNAME,
+      //     password: DB_PASSWORD,
+      //     database: DB_NAME,
       //   }),
       // }),
     ]);

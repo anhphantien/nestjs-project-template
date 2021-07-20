@@ -1,4 +1,4 @@
-import { ERROR_CODE, USER } from '@/constants';
+import { ERROR_CODE, JWT_SECRET, USER } from '@/constants';
 import { UserRepository } from '@/repositories';
 import {
   ForbiddenException,
@@ -16,7 +16,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: true,
-      secretOrKey: process.env.JWT_SECRET,
+      secretOrKey: JWT_SECRET,
       // passReqToCallback: true,
     });
   }

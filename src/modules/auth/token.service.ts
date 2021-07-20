@@ -1,5 +1,5 @@
 import { IUser } from '@/common/interfaces';
-import { ERROR_CODE } from '@/constants';
+import { ERROR_CODE, REFRESH_TOKEN_TTL } from '@/constants';
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { v4 as uuidv4 } from 'uuid';
@@ -23,7 +23,7 @@ export class TokenService {
       accessToken,
       'EX', // lưu trữ với thời gian giảm dần là giây
       // 'PX', // lưu trữ với thời gian giảm dần là mili giây
-      Number(process.env.REFRESH_TOKEN_TTL),
+      REFRESH_TOKEN_TTL,
     );
     return { accessToken, refreshToken };
   }

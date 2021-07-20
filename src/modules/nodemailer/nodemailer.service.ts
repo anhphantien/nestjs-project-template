@@ -1,3 +1,10 @@
+import {
+  NODEMAILER_HOST,
+  NODEMAILER_PASS,
+  NODEMAILER_PORT,
+  NODEMAILER_SECURE,
+  NODEMAILER_USER,
+} from '@/constants';
 import { Injectable } from '@nestjs/common';
 import nodemailer = require('nodemailer');
 import { Attachment } from 'nodemailer/lib/mailer';
@@ -8,12 +15,12 @@ export class NodemailerService {
 
   constructor() {
     this.transporter = nodemailer.createTransport({
-      host: process.env.NODEMAILER_HOST,
-      port: Number(process.env.NODEMAILER_PORT),
-      secure: JSON.parse(process.env.NODEMAILER_SECURE),
+      host: NODEMAILER_HOST,
+      port: NODEMAILER_PORT,
+      secure: NODEMAILER_SECURE === 'true',
       auth: {
-        user: process.env.NODEMAILER_USER,
-        pass: process.env.NODEMAILER_PASS,
+        user: NODEMAILER_USER,
+        pass: NODEMAILER_PASS,
       },
     });
   }

@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/restrict-plus-operands */
+import { NODE_ENV, SENTRY_DSN } from '@/constants';
 import {
   ArgumentsHost,
   Catch,
@@ -13,7 +13,7 @@ import { Request, Response } from 'express';
 export class AllExceptionsFilter extends BaseExceptionFilter {
   constructor() {
     super();
-    sentry.init({ dsn: process.env.SENTRY_DSN });
+    sentry.init({ dsn: SENTRY_DSN });
   }
 
   catch(exception: any, host: ArgumentsHost) {
@@ -24,7 +24,7 @@ export class AllExceptionsFilter extends BaseExceptionFilter {
     if (exception instanceof HttpException) {
       res.status(exception.getStatus()).json(exception.getResponse());
     } else {
-      if (['development', 'production'].includes(process.env.NODE_ENV)) {
+      if (['development', 'production'].includes(NODE_ENV)) {
         const { headers, query, params, user, body, originalUrl, ip, method } =
           req;
         exception.request = {
@@ -39,7 +39,7 @@ export class AllExceptionsFilter extends BaseExceptionFilter {
         sentry.addBreadcrumb({ message: JSON.stringify(exception) });
         sentry.captureException(exception);
       }
-      if (process.env.NODE_ENV !== 'production') {
+      if (NODE_ENV !== 'production') {
         res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(exception);
       } else {
         res.sendStatus(HttpStatus.INTERNAL_SERVER_ERROR);

@@ -1,4 +1,5 @@
 import { JwtStrategy } from '@/common/strategies';
+import { JWT_EXPIRES_IN, JWT_SECRET } from '@/constants';
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
@@ -13,8 +14,8 @@ import { TokenService } from './token.service';
     NotificationModule,
     PassportModule,
     JwtModule.register({
-      secret: process.env.JWT_SECRET,
-      signOptions: { expiresIn: Number(process.env.JWT_EXPIRES_IN) },
+      secret: JWT_SECRET,
+      signOptions: { expiresIn: JWT_EXPIRES_IN },
     }),
   ],
   controllers: [AuthController],
