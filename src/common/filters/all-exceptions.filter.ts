@@ -1,4 +1,4 @@
-import { NODE_ENV, SENTRY_DSN } from '@/constants';
+import { NODE, NODE_ENV, SENTRY_DSN } from '@/constants';
 import {
   ArgumentsHost,
   Catch,
@@ -24,7 +24,7 @@ export class AllExceptionsFilter extends BaseExceptionFilter {
     if (exception instanceof HttpException) {
       res.status(exception.getStatus()).json(exception.getResponse());
     } else {
-      if (['development', 'production'].includes(NODE_ENV)) {
+      if ([NODE.ENV.DEVELOPMENT, NODE.ENV.PRODUCTION].includes(NODE_ENV)) {
         const { headers, query, params, user, body, originalUrl, ip, method } =
           req;
         exception.request = {

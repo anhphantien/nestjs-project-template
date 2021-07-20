@@ -5,6 +5,7 @@ import {
   DB_PASSWORD,
   DB_PORT,
   DB_USERNAME,
+  NODE,
   NODE_ENV,
 } from './constants';
 
@@ -19,7 +20,7 @@ const ormconfig: TypeOrmModuleOptions = {
   entities: [__dirname + '/**/*.entity{.ts,.js}'],
   synchronize: NODE_ENV !== 'production',
   logging: true,
-  logger: ['development', 'production'].includes(NODE_ENV)
+  logger: [NODE.ENV.DEVELOPMENT, NODE.ENV.PRODUCTION].includes(NODE_ENV)
     ? 'simple-console'
     : 'advanced-console',
   migrations: ['migrations/*{.ts,.js}'],
