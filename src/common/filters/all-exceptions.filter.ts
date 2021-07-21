@@ -40,7 +40,7 @@ export class AllExceptionsFilter extends BaseExceptionFilter {
         sentry.addBreadcrumb({ message: JSON.stringify(exception) });
         sentry.captureException(exception);
       }
-      if (NODE_ENV !== 'production') {
+      if (NODE_ENV !== NODE.ENV.PRODUCTION) {
         res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(exception);
       } else {
         res.sendStatus(HttpStatus.INTERNAL_SERVER_ERROR);

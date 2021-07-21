@@ -18,7 +18,7 @@ const ormconfig: TypeOrmModuleOptions = {
   database: DB_NAME,
   bigNumberStrings: false,
   entities: [__dirname + '/**/*.entity{.ts,.js}'],
-  synchronize: NODE_ENV !== 'production',
+  synchronize: NODE_ENV !== NODE.ENV.PRODUCTION,
   logging: true,
   logger: [NODE.ENV.DEVELOPMENT, NODE.ENV.PRODUCTION].includes(NODE_ENV)
     ? 'simple-console'
