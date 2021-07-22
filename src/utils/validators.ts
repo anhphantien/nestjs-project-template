@@ -2,7 +2,7 @@ import {
   ValidatorConstraint,
   ValidatorConstraintInterface,
 } from 'class-validator';
-import moment = require('moment');
+import dayjs = require('dayjs');
 
 @ValidatorConstraint()
 export class isDate implements ValidatorConstraintInterface {
@@ -10,7 +10,7 @@ export class isDate implements ValidatorConstraintInterface {
     if (typeof value === 'string') {
       return (
         /^[1-9]\d*-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/.test(value) &&
-        moment(value, 'YYYY-MM-DD').isValid()
+        dayjs(value, 'YYYY-MM-DD').isValid()
       );
     }
     return false;
