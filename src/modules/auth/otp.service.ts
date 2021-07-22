@@ -39,7 +39,7 @@ export class OtpService {
       username: payload.username,
       otp,
     });
-    await this.redisService.setAsync(email, otp, 'EX', Number(OTP_TTL));
+    await this.redisService.setAsync(email, otp, 'EX', OTP_TTL);
     return { message: 'OTP has been sent!' };
   }
 
